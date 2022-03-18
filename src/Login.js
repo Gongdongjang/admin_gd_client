@@ -25,19 +25,21 @@ class LoginForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
 
-        const res = await axios.post('/api/login', {
-            id: this.state.id,
-            password: this.state.password
-        });
-        console.log(res.data);
-        cookies.set('access_token', res.data.access_token, {
-            path: '/',
-            maxAge: 36000
-        });
-        cookies.set('refresh_token', res.data.refresh_token, {
-            path: '/',
-            maxAge: 36000 * 24 * 14
-        });
+        try {
+            const res = await axios.post('/api/login', {
+                id: this.state.id,
+                password: this.state.password
+            });
+        } catch (e) {
+            try {
+                const refresh_token = cookies.get('refresh_token');
+                const res = await axios.post('/api/login/refresh', {
+                    refresh_token: refresh_token
+                });
+            } catch (e) {
+
+            }
+        }
     }
 
     render() {
