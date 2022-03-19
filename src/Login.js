@@ -1,9 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
-
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
@@ -30,15 +27,22 @@ class LoginForm extends React.Component {
                 id: this.state.id,
                 password: this.state.password
             });
-        } catch (e) {
-            try {
-                const refresh_token = cookies.get('refresh_token');
-                const res = await axios.post('/api/login/refresh', {
-                    refresh_token: refresh_token
-                });
-            } catch (e) {
-
+            console.log(res.data);
+            if (res.data.access_token === 'pwd_false') {
+                alert('비밀번호를 확인하세요');
+                document.location = '/login';
+            } else if (res.data.access_token === 'id_false') {
+                alert('아이디를 확인하세요');
+                document.location = '/login';
+            } else if (res.data.access_token === 'false') {
+                alert('모든 정보를 입력하세요');
+                document.location = '/login';
+            } else {
+                document.location = '/';
             }
+        } catch (e) {
+            alert('잠시 후 다시 시도해주세요');
+            document.location = '/login';
         }
     }
 
