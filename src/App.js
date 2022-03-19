@@ -11,6 +11,13 @@ class HomeForm extends React.Component {
         this.state = {
             id: ''
         }
+
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    async handleLogout() {
+        const res = await axios.post('/api/login/logout');
+        document.location = '/';
     }
 
     async componentDidMount() {
@@ -36,7 +43,7 @@ class HomeForm extends React.Component {
         const id = this.state.id;
         let auth;
         if (id === '') auth = <a href='/login'>로그인</a>
-        else auth = id;
+        else auth = <button onClick={this.handleLogout}>{id} + 로그아웃</button>;
         return (
             <h1>{auth}</h1>
         )
