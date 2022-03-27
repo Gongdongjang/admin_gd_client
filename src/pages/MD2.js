@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class MD2 extends React.Component{
     render(){
     return (
-        <div>
+        <div className="section">
         {/*카테고리 별 nav*/} 
          <div className='side'>
            <nav>
@@ -16,8 +16,10 @@ class MD2 extends React.Component{
            </nav>
          </div>
          {/*페이지 내용*/} 
-         <h1>MD2</h1>
-         <p>MD2 페이지입니다.</p>
+         <div>
+          <h1>MD2</h1>
+          <p>MD2 페이지입니다.</p>
+        </div>
        </div>
     );
   };
