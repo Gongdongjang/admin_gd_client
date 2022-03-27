@@ -1,0 +1,3 @@
+.headerNav ul li {list-style-type: none; float:left;margin: 0 10px; }
+.headerNav ul {float:right; }
+.headerNav {width: 1260px;height: 50px;border: 1px black solid;}
