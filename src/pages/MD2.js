@@ -1,11 +1,16 @@
 import React from "react";
+import ItemCard from './itemCard';
 import { Link } from "react-router-dom";
 
 class MD2 extends React.Component{
+
+  state = {};
+
     render(){
+      const { Itemcard } = this.props;
     return (
-        <div className="section">
-        {/*카테고리 별 nav*/} 
+        <div>
+        {/*카테고리 별 nav
          <div className='side'>
            <nav>
              <ul>
@@ -14,12 +19,22 @@ class MD2 extends React.Component{
                <li><Link to="/md2">md2</Link></li>
              </ul>
            </nav>
-         </div>
+         </div>*/} 
          {/*페이지 내용*/} 
-         <div>
-          <h1>MD2</h1>
-          <p>MD2 페이지입니다.</p>
-        </div>
+         <div className="itemList">
+         <ul className="list__itemview">
+        {Itemcard &&
+          Itemcard.map((itemdata) => {
+            return (
+              <ItemCard
+                mdName = {itemdata.md_name} 
+                price ={itemdata.md_weight}
+                farmName ={itemdata.farm_id}
+              />
+            );
+          })}
+      </ul>
+         </div>
        </div>
     );
   };
