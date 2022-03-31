@@ -1,0 +1,12 @@
+.addMDbtn {color: white;
+    background: teal;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid teal;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    float: right;}
+.md_container{width:90%;margin:5%;height: auto; }
+.item_card{width:100%;background-color: beige;border: 1px solid black;}
+.list__itemview{list-style-type: none;}
+.itemList{margin-top: 10%;}
