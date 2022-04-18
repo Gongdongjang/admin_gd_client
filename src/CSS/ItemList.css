@@ -1,0 +1,9 @@
+/*itemCard.js*/
+.itemThumbnail{width:350px;height: 200px;background-color: rgb(221, 221, 221);}
+/*itempage.js*/
+.mdPage_container{width: 80%;margin: 5% 25%;height: auto;}
+.pageContent{width: 100%;height: auto;padding: 3%;background-color: rgb(226, 228, 230);}
+.pageBtn{width: 50%;height: auto;margin: 3% 30%;background-color: rgb(226, 228, 230);}
+
+.ud_btn button{width:50%;height: 30px;border-radius:5px;background-color: rgb(158, 158, 158);color: white;}
+.return_btn button{width:100%;height: 30px;border-radius:5px;margin-top: 2%;background-color: rgb(158, 158, 158);color: white;}
