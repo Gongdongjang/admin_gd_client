@@ -3,13 +3,22 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import '../CSS/MdPost.css';
 
-class MD extends React.Component{
+class MD_post extends React.Component{
+
 
   constructor(props) {
     super(props);
     this.state = {value: ''};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+   getDateDiff = (d1, d2) => {
+    const date1 = new Date(d1);
+    const date2 = new Date(d2);
+    
+    const diffDate = date1.getTime() - date2.getTime();
+    return Math.abs(diffDate / (1000 * 3600 * 24)+1);
   }
 
   handleChange(event) {
@@ -23,21 +32,20 @@ class MD extends React.Component{
   }
 
   handleSubmit(event) {
-    //alert('A name was submitted: ' + this.state.stk_goal+this.state.pu_end);
+    
     event.preventDefault();
-
+    
     let body = {
      mdName : this.state.md_name,
      weight : this.state.md_weight,
      start : this.state.md_start,
      end : this.state.md_end,
-     dd : 10,
+     dd : this.getDateDiff(this.state.md_end,this.state.md_start),
      maxqty : this.state.md_maxqty,
      price :this.state.pay_price,
      dc : this.state.pay_dc,
      comp : this.state.pay_comp,
      paySchedule : this.state.pay_schedule,
-     farmId : 1,
      farmName : this.state.farm_name,
      goal : this.state.stk_goal,
      stkMax : this.state.stk_max,
@@ -57,19 +65,12 @@ class MD extends React.Component{
   render(){
     return (
       <div className="section">
-       {/*카테고리 별 nav*/} 
-        <div className='side'>
-          <nav>
-            <ul>
-              <li><Link to="/MD">상품 등록 / 수정</Link></li>
-              <li><Link to="/MD1">진행중인 상품리스트</Link></li>
-            </ul>
-          </nav>
-        </div>
+       
         {/*페이지 내용*/} 
-        <div className='md_container'>
+        <div className='mdPost_container'>
             <h1>상품 등록/수정하기</h1>
             <form  className='md_form' onSubmit={this.handleSubmit}>
+            <div className="formContent">
             <h3>상품 정보</h3>
             <label>
               상품이름
@@ -136,17 +137,15 @@ class MD extends React.Component{
             <label>
               픽업마감일
               <input type="date" name="pu_end" value={this.state.pu_end} onChange={this.handleChange} />
-            </label><br/>
-
-            
-            
-            
-            <input type="submit" value="Submit" />
+            </label>
+            </div>
+            <div className="mdSubmit">
+              <Link to={'/mdPost/ok'}><input type="submit" value="등록하기" /></Link>
+            </div>
           </form>
-          
         </div>
       </div>
     );
   };
 }
-  export default MD;
+  export default MD_post;
