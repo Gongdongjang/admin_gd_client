@@ -37,6 +37,90 @@ function ContentsDetail() {
     )
 }
 
+function ContentsWrite() {
+    const [title, setTitle] = useState('');
+    const [context, setContext] = useState('');
+    const [link, setLink] = useState('');
+    const [thumbnail, setThumbnail] = useState(null);
+    const [photo, setPhoto] = useState(null);
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        if (name === 'title') setTitle(value);
+        else if (name === 'context') setContext(value);
+        else setLink(value);
+    }
+
+    const handleFileChange = (event) => {
+        const name = event.target.name;
+        const file = event.target.files[0];
+
+        if (name === 'thumbnail') setThumbnail(file);
+        else if(name === 'photo') setPhoto(file);
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const data = new FormData();
+        data.append('title', title);
+        data.append('context', context);
+        data.append('photo', photo);
+        data.append('thumbnail', thumbnail);
+        data.append('link', link);
+
+        const submitter = event.nativeEvent.submitter.name;
+        if (submitter === 'upload_btn') {
+            if (title === '' || context === '' || thumbnail === null) {
+                alert('모든 입력창에 입력해야 합니다.');
+            } else {
+                data.append('is_tmp', 'false');
+                const res = await axios.post('/api/content', data);
+                document.location.replace('/contents/' + res.data.id);
+            }
+        } else {
+            data.append('is_tmp', 'true');
+            await axios.post('/api/content', data);
+            document.location.replace('/contents');
+        }
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <h3>제목</h3>
+                <input type='text' name='title' placeholder='제목을 입력하세요' onChange={handleChange} value={title}/>
+            </div>
+            <div>
+                <h3>날짜</h3>
+                <p>{new Date(Date.now()).toISOString().split('T')[0]}</p>
+            </div>
+            <div>
+                <h3>콘텐츠 이미지</h3>
+                <input type='file' name='photo' onChange={handleFileChange} />
+            </div>
+            <div>
+                <h3>추가 텍스트</h3>
+                <textarea maxLength={1000} name='context' placeholder='추가 텍스트를 입력하세요' onChange={handleChange}>{context}</textarea>
+            </div>
+            <div>
+                <h3>대표 이미지</h3>
+                <input type='file' name='thumbnail' onChange={handleFileChange} />
+            </div>
+            <div>
+                <h3>바로가기 연결</h3>
+                <input type='text' onChange={handleChange} placeholder='바로가기로 연결할 링크를 입력하세요' />
+            </div>
+            <div>
+                <input type='submit' name={'upload_btn'} value={'업로드 하기'}/>
+                <input type={'submit'} name={'tmp_btn'} value={'임시저장 하기'}/>
+            </div>
+        </form>
+    )
+}
+
 class ContentsList extends React.Component{
     constructor(props) {
         super(props);
@@ -109,7 +193,9 @@ class ContentsList extends React.Component{
                             <input type='submit' value='검색' />
                         </form>
                         <button>편집</button>
-                        <button>+ 새로운 콘텐츠 등록하기</button>
+                        <Link to={'/contents/write'} >
+                            <button>+ 새로운 콘텐츠 등록하기</button>
+                        </Link>
                     </div>
                     <h3>콘텐츠 모아보기</h3>
                     {this.state.list}
@@ -125,6 +211,7 @@ function Contents() {
             <Routes>
                 <Route path='/' element={<ContentsList />}/>
                 <Route path='/:content_id' element={<ContentsDetail />}/>
+                <Route path='/write' element={<ContentsWrite />}/>
             </Routes>
         </div>
     )
