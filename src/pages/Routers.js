@@ -16,7 +16,7 @@ class Routers extends React.Component{
                     <Route path="/home"  element={<Home />} />
                     <Route path="/partner" element={<Partner />} />
                     <Route path="/md" element={<MD />} />
-                    <Route path="/contents" element={<Contents />} />
+                    <Route path="/contents/*" element={<Contents />} />
                     <Route path="/login" element={<Login />} />
                     {/*MD */}
                     <Route path="/md1" element={<MD1 />}/>
