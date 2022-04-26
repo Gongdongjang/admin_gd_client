@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
-import {Link, Route, Routes, useParams} from "react-router-dom";
+import {Link, Route, Routes, useLocation, useParams} from "react-router-dom";
 
 const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
 
@@ -27,6 +27,11 @@ function ContentsDetail() {
 
     return (
         <div>
+            <div>
+                <Link to={'/contents/update/' + content_id}>
+                    <button>수정</button>
+                </Link>
+            </div>
             <h3>{title}</h3>
             <p>{date}</p>
             {photo &&
@@ -39,10 +44,16 @@ function ContentsDetail() {
 
 function ContentsWrite() {
     const [title, setTitle] = useState('');
+    const [date, setDate] = useState('');
     const [context, setContext] = useState('');
     const [link, setLink] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
+    const [exist_thumbnail, setExistThumbnail] = useState('');
     const [photo, setPhoto] = useState(null);
+    const [exist_photo, setExistPhoto] = useState('');
+
+    const url = useLocation();
+    const { content_id } = useParams();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -64,28 +75,64 @@ function ContentsWrite() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const is_update = url.pathname.includes('update');
         const data = new FormData();
         data.append('title', title);
         data.append('context', context);
-        data.append('photo', photo);
-        data.append('thumbnail', thumbnail);
+        if (!is_update) {
+            // 수정이 아닌 작성시 무조건 보냄
+            data.append('photo', photo);
+            data.append('thumbnail', thumbnail);
+        } else {
+            // 수정 시 새 파일이 있을 때만 보냄
+            if (photo) data.append('photo', photo);
+            if (thumbnail) data.append('thumbnail', thumbnail);
+        }
         data.append('link', link);
 
         const submitter = event.nativeEvent.submitter.name;
         if (submitter === 'upload_btn') {
-            if (title === '' || context === '' || thumbnail === null) {
-                alert('모든 입력창에 입력해야 합니다.');
+            data.append('is_tmp', 'false');
+
+            if (is_update) {
+                await axios.patch('/api/content/update/' + content_id, data);
+                document.location.replace('/contents/' + content_id);
             } else {
-                data.append('is_tmp', 'false');
-                const res = await axios.post('/api/content', data);
-                document.location.replace('/contents/' + res.data.id);
+                if (title === '' || context === '' || thumbnail === null) {
+                    alert('모든 입력창에 입력해야 합니다.');
+                }  else {
+                    const res = await axios.post('/api/content', data);
+                    document.location.replace('/contents/' + res.data.id);
+                }
             }
         } else {
             data.append('is_tmp', 'true');
-            await axios.post('/api/content', data);
-            document.location.replace('/contents');
+            if (is_update) {
+                await axios.patch('/api/content/update/' + content_id, data);
+                document.location.replace('/contents/' + content_id);
+            } else {
+                await axios.post('/api/content', data);
+                document.location.replace('/contents');
+            }
         }
     }
+
+    const getUpdateContent = useCallback(async () => {
+        const res = await axios.get('/api/content/' + content_id);
+        const content = res.data;
+        setTitle(content.content_title);
+        setContext(content.content_context);
+        setDate(content.content_date.split('T')[0]);
+        setExistPhoto(content.content_photo);
+        setExistThumbnail(content.content_thumbnail);
+    }, [content_id]);
+
+    useEffect(() => {
+        setDate(new Date(Date.now()).toISOString().split('T')[0]);
+        if (url.pathname.includes('update')) {
+            getUpdateContent();
+        }
+    }, [getUpdateContent, url]);
 
     return (
         <form onSubmit={handleSubmit}>
@@ -95,23 +142,29 @@ function ContentsWrite() {
             </div>
             <div>
                 <h3>날짜</h3>
-                <p>{new Date(Date.now()).toISOString().split('T')[0]}</p>
+                <p>{date}</p>
             </div>
             <div>
                 <h3>콘텐츠 이미지</h3>
+                {exist_photo &&
+                    <img src={img_url + exist_photo} alt={'thumbnail'} />
+                }
                 <input type='file' name='photo' onChange={handleFileChange} />
             </div>
             <div>
                 <h3>추가 텍스트</h3>
-                <textarea maxLength={1000} name='context' placeholder='추가 텍스트를 입력하세요' onChange={handleChange}>{context}</textarea>
+                <textarea maxLength={1000} name='context' placeholder='추가 텍스트를 입력하세요' onChange={handleChange} value={context} />
             </div>
             <div>
                 <h3>대표 이미지</h3>
+                {exist_thumbnail &&
+                    <img src={img_url + exist_thumbnail} alt={'thumbnail'} />
+                }
                 <input type='file' name='thumbnail' onChange={handleFileChange} />
             </div>
             <div>
                 <h3>바로가기 연결</h3>
-                <input type='text' onChange={handleChange} placeholder='바로가기로 연결할 링크를 입력하세요' />
+                <input type='text' onChange={handleChange} placeholder='바로가기로 연결할 링크를 입력하세요' value={link} />
             </div>
             <div>
                 <input type='submit' name={'upload_btn'} value={'업로드 하기'}/>
@@ -212,6 +265,7 @@ function Contents() {
                 <Route path='/' element={<ContentsList />}/>
                 <Route path='/:content_id' element={<ContentsDetail />}/>
                 <Route path='/write' element={<ContentsWrite />}/>
+                <Route path='/update/:content_id' element={<ContentsWrite />}/>
             </Routes>
         </div>
     )
