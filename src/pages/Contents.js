@@ -174,51 +174,43 @@ function ContentsWrite() {
     )
 }
 
-class ContentsList extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0,
-            list: '',
-            search_word: ''
-        };
+function ContentsList() {
+    const [count, setCount] = useState(0);
+    const [list, setList] = useState('');
+    const [search_word, setSearchWord] = useState('');
 
-        this.handleSearchChange = this.handleSearchChange.bind(this);
-        this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-    }
-
-    handleSearchChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    async componentDidMount() {
+    const getContentList = useCallback(async () => {
         const res = await axios.get('/api/content');
-        this.setState({
-            count: res.data.length,
-            list: res.data.map((content) => {
-                let src =  img_url + content.content_thumbnail;
+        setCount(res.data.length);
+        setList(res.data.map((content) => {
+              let src = img_url + content.content_thumbnail;
 
-                return [
-                    <Link to={'/contents/' + content.content_id}>
-                        <div>
-                            <img src={src} height='120' alt='thumbnail'/>
-                            <h3>{content.content_title}</h3>
-                            <p>{content.content_context}</p>
-                        </div>
-                    </Link>
-                ]
-            })
-        });
+              return [
+                  <Link to={'/contents/' + content.content_id}>
+                      <div>
+                          <img src={src} height='120' alt='thumbnail'/>
+                          <h3>{content.content_title}</h3>
+                          <p>{content.content_context}</p>
+                      </div>
+                  </Link>
+              ]
+          })
+        );
+    }, [])
+
+    useEffect(() => {
+        getContentList();
+    }, [getContentList])
+
+    const handleSearchChange = (event) => {
+        setSearchWord(event.target.value);
     }
 
-    async handleSearchSubmit(event) {
+    const handleSearchSubmit = async (event) => {
         event.preventDefault();
 
-        const res = await axios.get(`/api/content/search?title=${this.state.search_word}`);
-        this.setState({
-            list: res.data.map((content) => {
+        const res = await axios.get(`/api/content/search?title=${search_word}`);
+        setList(res.data.map((content) => {
                 let src = img_url + content.content_thumbnail;
 
                 return [
@@ -231,32 +223,114 @@ class ContentsList extends React.Component{
                     </Link>
                 ]
             })
-        });
+        );
     }
 
-    render(){
-        return (
-            <div className="section">
-                <div>
-                    <p>지금까지 업로드된 콘텐츠 수</p>
-                    <h2>{this.state.count} 개</h2>
-                    <div>
-                        <form onSubmit={this.handleSearchSubmit}>
-                            <input type="text" name="search_word" value={this.state.search_word || ''} onChange={this.handleSearchChange} />
-                            <input type='submit' value='검색' />
-                        </form>
-                        <button>편집</button>
-                        <Link to={'/contents/write'} >
-                            <button>+ 새로운 콘텐츠 등록하기</button>
-                        </Link>
-                    </div>
-                    <h3>콘텐츠 모아보기</h3>
-                    {this.state.list}
-                </div>
-            </div>
-        );
-    };
+    return (
+      <div className="section">
+          <div>
+              <p>지금까지 업로드된 콘텐츠 수22</p>
+              <h2>{count} 개</h2>
+              <div>
+                  <form onSubmit={handleSearchSubmit}>
+                      <input type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
+                      <input type='submit' value='검색' />
+                  </form>
+                  <button>편집</button>
+                  <Link to={'/contents/write'} >
+                      <button>+ 새로운 콘텐츠 등록하기</button>
+                  </Link>
+              </div>
+              <h3>콘텐츠 모아보기</h3>
+              {list}
+          </div>
+      </div>
+    )
 }
+
+// class ContentsList extends React.Component{
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             count: 0,
+//             list: '',
+//             search_word: ''
+//         };
+//
+//         this.handleSearchChange = this.handleSearchChange.bind(this);
+//         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+//     }
+//
+//     handleSearchChange(event) {
+//         this.setState({
+//             [event.target.name]: event.target.value
+//         });
+//     }
+//
+//     async componentDidMount() {
+//         const res = await axios.get('/api/content');
+//         this.setState({
+//             count: res.data.length,
+//             list: res.data.map((content) => {
+//                 let src =  img_url + content.content_thumbnail;
+//
+//                 return [
+//                     <Link to={'/contents/' + content.content_id}>
+//                         <div>
+//                             <img src={src} height='120' alt='thumbnail'/>
+//                             <h3>{content.content_title}</h3>
+//                             <p>{content.content_context}</p>
+//                         </div>
+//                     </Link>
+//                 ]
+//             })
+//         });
+//     }
+//
+//     async handleSearchSubmit(event) {
+//         event.preventDefault();
+//
+//         const res = await axios.get(`/api/content/search?title=${this.state.search_word}`);
+//         this.setState({
+//             list: res.data.map((content) => {
+//                 let src = img_url + content.content_thumbnail;
+//
+//                 return [
+//                     <Link to={'/contents/' + content.content_id}>
+//                         <div>
+//                             <img src={src} height='120' alt='thumbnail'/>
+//                             <h3>{content.content_title}</h3>
+//                             <p>{content.content_context}</p>
+//                         </div>
+//                     </Link>
+//                 ]
+//             })
+//         });
+//     }
+//
+//     render(){
+//         return (
+//             <div className="section">
+//                 <div>
+//                     <p>지금까지 업로드된 콘텐츠 수</p>
+//                     <h2>{this.state.count} 개</h2>
+//                     <div>
+//                         <form onSubmit={this.handleSearchSubmit}>
+//                             <input type="text" name="search_word" value={this.state.search_word || ''} onChange={this.handleSearchChange} />
+//                             <input type='submit' value='검색' />
+//                         </form>
+//                         <button>편집</button>
+//                         <Link to={'/contents/write'} >
+//                             <button>+ 새로운 콘텐츠 등록하기</button>
+//                         </Link>
+//                     </div>
+//                     <h3>콘텐츠 모아보기</h3>
+//                     {this.state.list}
+//                 </div>
+//             </div>
+//         );
+//     };
+// }
 
 function Contents() {
     return (
