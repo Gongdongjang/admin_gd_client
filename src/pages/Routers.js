@@ -7,6 +7,7 @@ import Contents from './Contents';
 import Login from './Login';
 import MD1 from './MD1';
 import MD2 from './MD2';
+import Notice from "./Notice";
 class Routers extends React.Component{
     render(){
         return (
@@ -17,6 +18,7 @@ class Routers extends React.Component{
                     <Route path="/partner" element={<Partner />} />
                     <Route path="/md" element={<MD />} />
                     <Route path="/contents" element={<Contents />} />
+                    <Route path={'/notice'} element={<Notice />} />
                     <Route path="/login" element={<Login />} />
                     {/*MD */}
                     <Route path="/md1" element={<MD1 />}/>
