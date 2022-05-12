@@ -1,4 +1,6 @@
 import {Link, Route, Routes} from "react-router-dom";
+import {useState} from "react";
+import axios from "axios";
 
 function NoticeList() {
   return (
@@ -9,9 +11,53 @@ function NoticeList() {
 }
 
 function NoticeWrite() {
+  const [title, setTitle] = useState('');
+  const [context, setContext] = useState('');
+  const [date, setDate] = useState(new Date(Date.now()).toISOString().split('.')[0]);
+  const [target, setTarget] = useState('');
+  const [type, setType] = useState('');
+  const [photo, setPhoto] = useState(null);
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    if (name === 'title') setTitle(value);
+    else if (name === 'context') setContext(value);
+    else if (name === 'target') setTarget(value);
+    else if (name === 'type') setType(value);
+    else setDate(value);
+  }
+
+  const handleFileChange = (event) => {
+    setPhoto(event.target.files[0]);
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (title !== '' && context !== '' && target !== '' && type !== '') {
+      let data = new FormData();
+      data.append('title', title);
+      data.append('context', context);
+      data.append('date', date);
+      data.append('target', target);
+      data.append('type', type);
+      data.append('photo', photo);
+
+      const res = await axios.post('/api/notice', data);
+      document.location.replace('/notice/' + res.data.id);
+      for (let value of data.values()) {
+        console.log(value);
+      }
+    } else {
+      alert('모든 정보를 입력하세요.');
+    }
+  }
+
   return (
-    <form>
-      <div>
+    <form onSubmit={handleSubmit}>
+      <div onChange={handleChange}>
         <label>
           대상
           <label>
@@ -31,16 +77,16 @@ function NoticeWrite() {
       <div>
         <label>
           제목
-          <input maxLength={20} type={'text'} placeholder={'제목을 입력하세요'}/>
+          <input maxLength={20} type={'text'} placeholder={'제목을 입력하세요'} name={'title'} onChange={handleChange} value={title}/>
         </label>
       </div>
       <div>
         <label>
           업로드 날짜
-          <input type={'date'} />
+          <input type={'datetime-local'} name={'date'} onChange={handleChange} value={date}/>
         </label>
       </div>
-      <div>
+      <div onChange={handleChange}>
         <label>
           발송 유형
           <label>
@@ -56,13 +102,13 @@ function NoticeWrite() {
       <div>
         <label>
           이미지
-          <input type={'file'} />
+          <input type={'file'} name={'photo'} onChange={handleFileChange}/>
         </label>
       </div>
       <div>
         <label>
           공지 텍스트
-          <textarea maxLength={1000} placeholder={'추가 텍스트를 입력하세요.'} />
+          <textarea maxLength={1000} placeholder={'추가 텍스트를 입력하세요.'} onChange={handleChange} name={'context'} value={context}/>
         </label>
       </div>
       <input type={'submit'} value={'발송 하기'} />
