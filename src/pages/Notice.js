@@ -1,12 +1,40 @@
 import {Link, Route, Routes} from "react-router-dom";
-import {useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 
 function NoticeList() {
+  const [list, setList] = useState('');
+
+  const getNoticeList = useCallback(async () => {
+    const res = await axios.get('/api/notice');
+    setList(res.data.map((notice) => {
+        return[
+          <Link to={'/notice/' + notice.notice_id}>
+            <div key={notice.notice_id}>
+              <p>{notice.notice_target}</p>
+              <h2>{notice.notice_title}</h2>
+              <p>{notice.notice_date.split('T')[0]}</p>
+            </div>
+          </Link>
+        ]
+      })
+    );
+  }, [])
+
+  useEffect(() => {
+    getNoticeList();
+  }, [getNoticeList])
+
   return (
-    <Link to={'/notice/write'}>
-      <button>+ 새로운 공지 등록하기</button>
-    </Link>
+    <div>
+      <Link to={'/notice/write'}>
+        <button>+ 새로운 공지 등록하기</button>
+      </Link>
+      <div>
+        <h1>반환 및 정책 ></h1>
+        {list}
+      </div>
+    </div>
   )
 }
 
