@@ -4,22 +4,28 @@ import axios from "axios";
 
 function NoticeList() {
   const [list, setList] = useState('');
+  const [is_detail, setIsDetail] = useState([]);
+
+  const handleClickDetail = (index) => {
+    is_detail[index] = !is_detail[index];
+    setIsDetail(is_detail);
+  }
 
   const getNoticeList = useCallback(async () => {
     const res = await axios.get('/api/notice');
     setList(res.data.map((notice) => {
         return[
-          <Link to={'/notice/' + notice.notice_id}>
-            <div key={notice.notice_id}>
+            <div key={notice.notice_id} onClick={() => handleClickDetail(notice.notice_id)}>
               <p>{notice.notice_target}</p>
               <h2>{notice.notice_title}</h2>
               <p>{notice.notice_date.split('T')[0]}</p>
+              {is_detail[notice.notice_id] && notice.notice_context}
+              <hr />
             </div>
-          </Link>
         ]
       })
     );
-  }, [])
+  }, [is_detail, handleClickDetail])
 
   useEffect(() => {
     getNoticeList();
