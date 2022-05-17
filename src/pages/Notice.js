@@ -3,6 +3,8 @@ import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 
 function NoticeList() {
+  const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
+
   const [list, setList] = useState('');
   const [is_detail, setIsDetail] = useState([]);
   const [is_delete, setIsDelete] = useState(false);
@@ -31,6 +33,7 @@ function NoticeList() {
               <p>{notice.notice_target}</p>
               <h2>{notice.notice_title}</h2>
               <p>{notice.notice_date.split('T')[0]}</p>
+              {is_detail[notice.notice_id] && notice.notice_photo && <img src={img_url + notice.notice_photo} alt={'notice photo'} />}<br />
               {is_detail[notice.notice_id] && notice.notice_context}
               {is_delete && <button onClick={(event) => handleDelete(event, notice.notice_id)}>x</button>}
               <hr />
