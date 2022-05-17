@@ -5,27 +5,40 @@ import axios from "axios";
 function NoticeList() {
   const [list, setList] = useState('');
   const [is_detail, setIsDetail] = useState([]);
+  const [is_delete, setIsDelete] = useState(false);
 
   const handleClickDetail = (index) => {
     is_detail[index] = !is_detail[index];
     setIsDetail(is_detail);
   }
 
+  const handleDelete = async (event, notice_id) => {
+    event.preventDefault();
+
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      const res = await axios.delete('/api/notice/delete/' + notice_id);
+      alert(res.data.notice_id + '를 삭제했습니다.');
+    } else {
+      alert('삭제를 취소했습니다.');
+    }
+  }
+
   const getNoticeList = useCallback(async () => {
     const res = await axios.get('/api/notice');
     setList(res.data.map((notice) => {
         return[
-            <div key={notice.notice_id} onClick={() => handleClickDetail(notice.notice_id)}>
+          <div key={notice.notice_id} onClick={() => handleClickDetail(notice.notice_id)}>
               <p>{notice.notice_target}</p>
               <h2>{notice.notice_title}</h2>
               <p>{notice.notice_date.split('T')[0]}</p>
               {is_detail[notice.notice_id] && notice.notice_context}
+              {is_delete && <button onClick={(event) => handleDelete(event, notice.notice_id)}>x</button>}
               <hr />
-            </div>
+          </div>
         ]
       })
     );
-  }, [is_detail, handleClickDetail])
+  }, [is_delete, is_detail, handleDelete, handleClickDetail])
 
   useEffect(() => {
     getNoticeList();
@@ -36,6 +49,7 @@ function NoticeList() {
       <Link to={'/notice/write'}>
         <button>+ 새로운 공지 등록하기</button>
       </Link>
+      <button onClick={() => setIsDelete(!is_delete)}>편집</button>
       <div>
         <h1>반환 및 정책 ></h1>
         {list}
