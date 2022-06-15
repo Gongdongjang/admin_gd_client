@@ -9,6 +9,7 @@ import MD_read from './MD_read';
 import MDList from './MDList';
 import ItemPage from './ItemPage';
 import MdPostOk from './MdPostOk';
+import MdEditOk from './MdEditOk';
 class Routers extends React.Component{
     render(){
         return (
@@ -17,13 +18,15 @@ class Routers extends React.Component{
                     <Route path="/" element={<Home />}/>
                     <Route path="/home"  element={<Home />} />
                     <Route path="/partner" element={<Partner />} />
-                    <Route path="/mdPost" element={<MD_post />} />
+                    <Route path="/mdPost" element={<MD_post />} exact/>
                     <Route path="/contents" element={<Contents />} />
                     <Route path="/login" element={<Login />} />
                     {/*MD */}
                     <Route path="/mdRead" element={<MD_read />}/>
                     <Route path="/mdList"  element={<MDList />} />
                     <Route path="/mdPost/ok" element={<MdPostOk />} />
+                    <Route path="/mdEdit/ok" element={<MdEditOk />} />
+                    <Route path="/mdPost/update/:md_id" element={<MD_post />}/>
                     {/*list */}
                     <Route path="/ItemPage/:md_id"  element={<ItemPage />} />
                 </Routes>

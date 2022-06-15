@@ -12,7 +12,7 @@ class Header extends React.Component{
                     <button className="topMenus"><Link to="/message">알림</Link></button>
                 </div>
                 {/*메인메뉴*/}
-                <div class="dropdown">
+                <div className="dropdown">
                     <div className="mainMenu">
                     <div><Link to="/home"><h5 id="Logo">공동장 로고</h5></Link></div>
                     <ul  id="mainMenuUl">
@@ -25,7 +25,7 @@ class Header extends React.Component{
                     </ul>
                     </div>
 
-                    <ul class="dropdown-content">
+                    <ul className="dropdown-content">
                         <div className="mdMenu">
                         <li><Link to="/mdPost">상품 등록</Link></li>
                         <li><Link to="/mdRead">진행중인 상품</Link></li>
