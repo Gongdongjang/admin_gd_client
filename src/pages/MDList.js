@@ -1,24 +1,27 @@
-import React from "react";
+import React ,{useState}from "react";
 import ItemCard from './itemCard';
-import { Link } from "react-router-dom";
+import Paging from './paging';
 import '../CSS/ItemList.css';
 
-class MDList extends React.Component{
+const MDList =({Itemcard,mdCount })=>{
 
-  state = {};
-
-    render(){
-      const { Itemcard } = this.props;
+  const [page, setPage] = useState(1);
+  const limit=12;//12개씩 보기
+  const offset =  (page- 1) *limit;
+  const handlePageChange = (page) => {
+    setPage(page);
+    console.log(page)
+  };
     return (
-        <div>
-         
+        <div className="itemList">
          {/*페이지 내용*/} 
-         <div className="itemList">
-         <ul className="list__itemview">
+         <div >
+         <ul className="list_itemview">
           {Itemcard &&
-          Itemcard.map((itemdata) => {
+          Itemcard.slice(offset, offset + limit).map((itemdata) => {
             return (
-              <ItemCard
+              <ItemCard key={itemdata.md_id}
+                body={itemdata}
                 mdId={itemdata.md_id}
                 start={itemdata.md_start}
                 end={itemdata.md_end}
@@ -30,8 +33,12 @@ class MDList extends React.Component{
           })}
           </ul>
          </div>
+         <div className="paging">
+            <Paging count={mdCount} limit={limit} page={page}  handlePageChange={ handlePageChange}/>
+          </div>
        </div>
+       
     );
-  };
+  
 }
   export default MDList;
