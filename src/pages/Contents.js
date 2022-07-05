@@ -138,6 +138,7 @@ function ContentsWrite() {
         const content = res.data;
         setTitle(content.content_title);
         setContext(content.content_context);
+        setLink(content.content_link);
         setDate(content.content_date.split('T')[0]);
         setExistPhoto(content.content_photo);
         setExistThumbnail(content.content_thumbnail);
