@@ -9,6 +9,7 @@ function ContentsDetail() {
     const [context, setContext] = useState('');
     const [date, setDate] = useState('');
     const [photo, setPhoto] = useState('');
+    const [link, setLink] = useState('');
 
     const {content_id} = useParams();
 
@@ -19,6 +20,7 @@ function ContentsDetail() {
         setContext(content.content_context);
         setDate(content.content_date.replace('T', ' ').split('.')[0]);
         setPhoto(content.content_photo);
+        setLink(content.content_link);
     }, [content_id]);
 
     const DeleteContent = async () => {
@@ -49,6 +51,9 @@ function ContentsDetail() {
                 <img src={img_url + photo} alt='content'/>
             }
             <p>{context}</p>
+            {link &&
+                <a href={link}>바로가기 링크</a>
+            }
         </div>
     )
 }
