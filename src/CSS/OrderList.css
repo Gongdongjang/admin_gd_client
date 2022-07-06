@@ -1,0 +1,12 @@
+.orderListContainer{
+    width:80%;margin: 1% 10%;height: auto;
+}
+table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }

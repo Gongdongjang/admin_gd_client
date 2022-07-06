@@ -268,7 +268,7 @@ const  getDateDiff = (d1, d2) => { //d-day
          axios
          .post("http://localhost:5000/api/post/md", body)
          .then((res) => console.log(res))
-         //.then(window.location.href = '/mdPost/ok');
+         .then(window.location.href = '/mdPost/ok');
 
          axios
          .post(`http://localhost:5000/api/post/md/imgs`, formData,config);

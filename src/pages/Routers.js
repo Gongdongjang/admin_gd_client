@@ -7,6 +7,7 @@ import Contents from './Contents';
 import Login from './Login';
 import MD_read from './MD_read';
 import MDList from './MDList';
+import OrderList from './OrderList';
 import ItemPage from './ItemPage';
 import MdPostOk from './MdPostOk';
 import MdEditOk from './MdEditOk';
@@ -29,6 +30,7 @@ class Routers extends React.Component{
                     <Route path="/mdPost/update/:md_id" element={<MD_post />}/>
                     {/*list */}
                     <Route path="/ItemPage/:md_id"  element={<ItemPage />} />
+                    <Route path="/orderList/:md_id"  element={<OrderList />} />
                 </Routes>
             </div>
             

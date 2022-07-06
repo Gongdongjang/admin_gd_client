@@ -10,6 +10,8 @@ function ItemPage  (){
   //console.log(JSON.stringify(body));
   let[farm, setFarm] = useState();
   let[store, setStore] = useState();
+  let[farm_info, setFarm_info] = useState();
+  let[store_info, setStore_info] = useState();
   let[thumbnail,setThumbnail] = useState();
   let[images,setImages] = useState([]);
   let[detail,setDetail] = useState();
@@ -37,6 +39,8 @@ function ItemPage  (){
         //console.log(data);
         setFarm(data.farm_name);
         setStore(data.store_name);
+        setFarm_info(data.farm_info);
+        setStore_info(data.store_info);
       })
       .catch(e => {  // API 호출이 실패한 경우
         console.error(e);  // 에러표시
@@ -73,6 +77,9 @@ function ItemPage  (){
     <div className="section">
       <div className='mdPage_container'>
         <h1>상품 상세페이지</h1>
+        <Link to={`/orderList/${body.md_id}`} state={{md_id : body.md_id}}>
+        <h3>픽업리스트 확인하기</h3>  
+        </Link>
         <div className="pageContent">
           
           <p>상품번호 : {body.md_id}</p>
@@ -83,6 +90,7 @@ function ItemPage  (){
           <p>상품구성 : {body.pay_comp}</p>
           <p>냉장고필요여부 : {isFridge()}</p>
           <p>진행농가 : {farm}</p>
+          <p>농가소개 : {farm_info}</p>
           <p>구매제한 : {body.md_maxqty}</p>
           <p>할인정보 : {body.pay_dc}</p>
           <p>결제예정일 : {body.pay_schedule.substr(0, 10)}</p>
@@ -92,6 +100,7 @@ function ItemPage  (){
           <p>남은수량 : {body.stk_remain}</p> 
           <p>현재구매수량 : {body.stk_total}</p>
           <p>가게이름 : {store}</p>
+          <p>가게 설명 : {store_info}</p>
           <p>픽업일 : {functions.duration(body.pu_start,body.pu_end)}</p>
           <p>썸네일</p>
 
