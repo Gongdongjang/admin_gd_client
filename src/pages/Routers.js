@@ -1,12 +1,15 @@
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
-import MD from './MD';
+import MD_post from './MD_post';
 import Partner from './Partner';
 import Contents from './Contents';
 import Login from './Login';
-import MD1 from './MD1';
-import MD2 from './MD2';
+import MD_read from './MD_read';
+import MDList from './MDList';
+import ItemPage from './ItemPage';
+import MdPostOk from './MdPostOk';
+import MdEditOk from './MdEditOk';
 class Routers extends React.Component{
     render(){
         return (
@@ -15,12 +18,17 @@ class Routers extends React.Component{
                     <Route path="/" element={<Home />}/>
                     <Route path="/home"  element={<Home />} />
                     <Route path="/partner" element={<Partner />} />
-                    <Route path="/md" element={<MD />} />
+                    <Route path="/mdPost" element={<MD_post />} exact/>
                     <Route path="/contents" element={<Contents />} />
                     <Route path="/login" element={<Login />} />
                     {/*MD */}
-                    <Route path="/md1" element={<MD1 />}/>
-                    <Route path="/md2"  element={<MD2 />} />
+                    <Route path="/mdRead" element={<MD_read />}/>
+                    <Route path="/mdList"  element={<MDList />} />
+                    <Route path="/mdPost/ok" element={<MdPostOk />} />
+                    <Route path="/mdEdit/ok" element={<MdEditOk />} />
+                    <Route path="/mdPost/update/:md_id" element={<MD_post />}/>
+                    {/*list */}
+                    <Route path="/ItemPage/:md_id"  element={<ItemPage />} />
                 </Routes>
             </div>
             
