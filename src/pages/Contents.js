@@ -186,8 +186,42 @@ function ContentsWrite() {
             <div>
                 <input type='submit' name={'upload_btn'} value={'업로드 하기'}/>
                 <input type={'submit'} name={'tmp_btn'} value={'임시저장 하기'}/>
+                <button type={"button"} onClick={(e) => { e.preventDefault(); document.location.href='/contents/tmp'; }}>임시저장 리스트</button>
             </div>
         </form>
+    )
+}
+
+function ContentsTmp() {
+    const [list, setList] = useState('');
+    const [is_delete, setIsDelete] = useState(false);
+
+    const getTmpList = useCallback(async () => {
+        const res = await axios.get('/api/content/tmp');
+        setList(res.data.map((content) => {
+                return [
+                    <Link to={'/contents/' + content.content_id}>
+                        <div>
+                            {is_delete && <button>x</button>}
+                            <p>{content.content_context}</p>
+                        </div>
+                    </Link>
+                ]
+            })
+        );
+    }, [is_delete])
+
+    useEffect(() => {
+        getTmpList();
+    }, [getTmpList])
+
+    return (
+        <div>
+            <h1>임시저장 리스트</h1>
+            <button>편집</button>
+            {list}
+            <button>취소</button>
+        </div>
     )
 }
 
@@ -376,6 +410,7 @@ function Contents() {
                 <Route path='/:content_id' element={<ContentsDetail />}/>
                 <Route path='/write' element={<ContentsWrite />}/>
                 <Route path='/update/:content_id' element={<ContentsWrite />}/>
+                <Route path='/tmp' element={<ContentsTmp />}/>
             </Routes>
         </div>
     )
