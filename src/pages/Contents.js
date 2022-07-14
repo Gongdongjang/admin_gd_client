@@ -204,8 +204,8 @@ function ContentsTmp() {
         const res = await axios.get('/api/content/tmp');
         setList(res.data.map((content) => {
                 return [
-                    <Link to={'/contents/' + content.content_id}>
-                        <div>
+                    <Link to={'/contents/update/' + content.content_id}>
+                        <div style={{backgroundColor: "gray"}}>
                             {is_delete && <button>x</button>}
                             <p>{content.content_context}</p>
                             <p>{content.content_date}</p>
