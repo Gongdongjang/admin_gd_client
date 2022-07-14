@@ -196,6 +196,10 @@ function ContentsTmp() {
     const [list, setList] = useState('');
     const [is_delete, setIsDelete] = useState(false);
 
+    const handleDeleteClick = () => {
+        setIsDelete(!is_delete);
+    }
+
     const getTmpList = useCallback(async () => {
         const res = await axios.get('/api/content/tmp');
         setList(res.data.map((content) => {
@@ -204,6 +208,7 @@ function ContentsTmp() {
                         <div>
                             {is_delete && <button>x</button>}
                             <p>{content.content_context}</p>
+                            <p>{content.content_date}</p>
                         </div>
                     </Link>
                 ]
@@ -218,7 +223,7 @@ function ContentsTmp() {
     return (
         <div>
             <h1>임시저장 리스트</h1>
-            <button>편집</button>
+            <button onClick={handleDeleteClick}>편집</button>
             {list}
             <button>취소</button>
         </div>
