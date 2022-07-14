@@ -125,7 +125,7 @@ function ContentsWrite() {
             data.append('is_tmp', 'true');
             if (is_update) {
                 await axios.patch('/api/content/update/' + content_id, data);
-                document.location.replace('/contents/' + content_id);
+                document.location.replace('/contents');
             } else {
                 await axios.post('/api/content', data);
                 document.location.replace('/contents');
