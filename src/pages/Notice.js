@@ -92,7 +92,6 @@ function NoticeWrite() {
       data.append('title', title);
       data.append('context', context);
       data.append('date', date);
-      data.append('target', target);
       data.append('type', type);
       data.append('photo', photo);
 
@@ -108,23 +107,6 @@ function NoticeWrite() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div onChange={handleChange}>
-        <label>
-          대상
-          <label>
-            <input type={'radio'} value={'소비자'} name={'target'}/>
-            소비자
-          </label>
-          <label>
-            <input type={'radio'} value={'스토어'} name={'target'}/>
-            스토어
-          </label>
-          <label>
-            <input type={'radio'} value={'농가'} name={'target'}/>
-            농가
-          </label>
-        </label>
-      </div>
       <div>
         <label>
           제목
