@@ -62,6 +62,7 @@ function ContentsWrite() {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
     const [upload_date, setUpload_date] = useState('');
+    const [upload_type, setUpload_type] = useState('');
     const [context, setContext] = useState('');
     const [link, setLink] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
@@ -78,6 +79,8 @@ function ContentsWrite() {
 
         if (name === 'title') setTitle(value);
         else if (name === 'context') setContext(value);
+        else if (name === 'upload_date') setUpload_date(value);
+        else if (name === 'upload_type') setUpload_type(value);
         else setLink(value);
     }
 
@@ -106,6 +109,8 @@ function ContentsWrite() {
             if (thumbnail) data.append('thumbnail', thumbnail);
         }
         data.append('link', link);
+        data.append('upload_type', upload_type);
+        data.append('upload_date', upload_date);
 
         const submitter = event.nativeEvent.submitter.name;
         if (submitter === 'upload_btn') {
@@ -169,13 +174,13 @@ function ContentsWrite() {
             <div>
                 <h3>발행 유형</h3>
                 <label>실시간</label>
-                <input type={"radio"} name={'upload_type'} value={'실시간'}/>
+                <input type={"radio"} name={'upload_type'} value={'실시간'} onChange={handleChange}/>
                 <label>예약</label>
-                <input type={"radio"} name={'upload_type'} value={'예약'}/>
+                <input type={"radio"} name={'upload_type'} value={'예약'} onChange={handleChange}/>
             </div>
             <div>
                 <h3>발행 날짜</h3>
-                <input type={"datetime-local"} name={'upload_date'} value={upload_date}/>
+                <input type={"datetime-local"} name={'upload_date'} value={upload_date} onChange={handleChange}/>
             </div>
             <div>
                 <h3>날짜</h3>
