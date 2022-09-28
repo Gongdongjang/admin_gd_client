@@ -61,6 +61,7 @@ function ContentsDetail() {
 function ContentsWrite() {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
+    const [upload_date, setUpload_date] = useState('');
     const [context, setContext] = useState('');
     const [link, setLink] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
@@ -158,6 +159,25 @@ function ContentsWrite() {
                 <input type='text' name='title' placeholder='제목을 입력하세요' onChange={handleChange} value={title}/>
             </div>
             <div>
+                <h3>콘텐츠 내용</h3>
+                <textarea maxLength={1000} name='context' placeholder='콘텐츠 내용을 입력하세요' onChange={handleChange} value={context} />
+            </div>
+            <div>
+                <h3>관련 URL 입력</h3>
+                <input type='text' onChange={handleChange} placeholder='http://' value={link} />
+            </div>
+            <div>
+                <h3>발행 유형</h3>
+                <label>실시간</label>
+                <input type={"radio"} name={'upload_type'} value={'실시간'}/>
+                <label>예약</label>
+                <input type={"radio"} name={'upload_type'} value={'예약'}/>
+            </div>
+            <div>
+                <h3>발행 날짜</h3>
+                <input type={"datetime-local"} name={'upload_date'} value={upload_date}/>
+            </div>
+            <div>
                 <h3>날짜</h3>
                 <p>{date}</p>
             </div>
@@ -169,19 +189,11 @@ function ContentsWrite() {
                 <input type='file' name='photo' onChange={handleFileChange} />
             </div>
             <div>
-                <h3>추가 텍스트</h3>
-                <textarea maxLength={1000} name='context' placeholder='추가 텍스트를 입력하세요' onChange={handleChange} value={context} />
-            </div>
-            <div>
                 <h3>대표 이미지</h3>
                 {exist_thumbnail &&
                     <img src={img_url + exist_thumbnail} alt={'thumbnail'} />
                 }
                 <input type='file' name='thumbnail' onChange={handleFileChange} />
-            </div>
-            <div>
-                <h3>바로가기 연결</h3>
-                <input type='text' onChange={handleChange} placeholder='바로가기로 연결할 링크를 입력하세요' value={link} />
             </div>
             <div>
                 <input type='submit' name={'upload_btn'} value={'업로드 하기'}/>
