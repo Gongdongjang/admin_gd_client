@@ -267,7 +267,7 @@ function ContentsList() {
     }
 
     const getContentList = useCallback(async () => {
-        const res = await axios.get('/api/content');
+        const res = await axios.get('/api/content?aspect=admin');
         setCount(res.data.length);
         setList(res.data.map((content) => {
               let src = img_url + content.content_thumbnail;
