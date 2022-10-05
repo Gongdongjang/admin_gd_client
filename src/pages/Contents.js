@@ -252,18 +252,25 @@ function ContentsList() {
     const [list, setList] = useState('');
     const [search_word, setSearchWord] = useState('');
     const [is_delete, setIsDelete] = useState(false);
+    const [delete_list, setDeleteList] = useState([]);
 
-    const handleDeleteContent = async (event, content_id) => {
+    // const handleDeleteContent = async (event, content_id) => {
+    //     // link 기능 제거
+    //     event.preventDefault();
+    //
+    //     // console.log(content_id);
+    //     // if (window.confirm('정말 삭제하시겠습니까?')) {
+    //     //     const res = await axios.delete('/api/content/delete/' + content_id);
+    //     //     alert(res.data.content_id + '를 삭제했습니다.');
+    //     // } else {
+    //     //     alert('삭제를 취소했습니다.');
+    //     // }
+    // }
+
+    const handleClickCheckbox = async (event, delete_list) => {
         // link 기능 제거
         event.preventDefault();
-
-        console.log(content_id);
-        if (window.confirm('정말 삭제하시겠습니까?')) {
-            const res = await axios.delete('/api/content/delete/' + content_id);
-            alert(res.data.content_id + '를 삭제했습니다.');
-        } else {
-            alert('삭제를 취소했습니다.');
-        }
+        setDeleteList([...delete_list, event.target.value]);
     }
 
     const getContentList = useCallback(async () => {
@@ -275,7 +282,8 @@ function ContentsList() {
               return [
                   <Link to={'/contents/' + content.content_id}>
                       <div>
-                          {is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}
+                          {/*{is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}*/}
+                          <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                           <img src={src} height='120' alt='thumbnail'/>
                           <h3>{content.content_title}</h3>
                           <p>{content.content_context}</p>
@@ -284,7 +292,7 @@ function ContentsList() {
               ]
           })
         );
-    }, [is_delete, handleDeleteContent])
+    }, [is_delete, handleClickCheckbox])
 
     useEffect(() => {
         getContentList();
@@ -314,8 +322,24 @@ function ContentsList() {
         );
     }
 
-    const handleDeleteClick = () => {
-        setIsDelete(!is_delete);
+    const handleDeleteClick = async (event, delete_list) => {
+        event.preventDefault();
+
+        let body = []
+        delete_list.forEach(id => {
+            body.push({
+                id: id
+            })
+        })
+
+        if (window.confirm('정말 삭제하시겠습니까?')) {
+            const res = await axios.post('/api/content/delete', {
+                content_ids: body
+            });
+            alert(res.data.content_id + '를 삭제했습니다.');
+        } else {
+            alert('삭제를 취소했습니다.');
+        }
     }
 
     return (
@@ -328,7 +352,7 @@ function ContentsList() {
                       <input type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
                       <input type='submit' value='검색' />
                   </form>
-                  <button onClick={handleDeleteClick}>편집</button>
+                  <button onClick={(event) => handleDeleteClick(event, delete_list)}>편집</button>
                   <Link to={'/contents/write'} >
                       <button>+ 새로운 콘텐츠 등록하기</button>
                   </Link>
