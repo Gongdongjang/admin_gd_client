@@ -69,6 +69,7 @@ function ContentsWrite() {
     const [exist_thumbnail, setExistThumbnail] = useState('');
     const [photo, setPhoto] = useState(null);
     const [exist_photo, setExistPhoto] = useState('');
+    const [main, setMain] = useState(null);
 
     const url = useLocation();
     const { content_id } = useParams();
@@ -90,6 +91,7 @@ function ContentsWrite() {
 
         if (name === 'thumbnail') setThumbnail(file);
         else if(name === 'photo') setPhoto(file);
+        else if(name === 'main') setMain(file);
     }
 
     const handleSubmit = async (event) => {
@@ -103,6 +105,7 @@ function ContentsWrite() {
             // 수정이 아닌 작성시 무조건 보냄
             data.append('photo', photo);
             data.append('thumbnail', thumbnail);
+            data.append('main', main);
         } else {
             // 수정 시 새 파일이 있을 때만 보냄
             if (photo) data.append('photo', photo);
@@ -199,6 +202,10 @@ function ContentsWrite() {
                     <img src={img_url + exist_thumbnail} alt={'thumbnail'} />
                 }
                 <input type='file' name='thumbnail' onChange={handleFileChange} />
+            </div>
+            <div>
+                <h3>메인 이미지</h3>
+                <input type='file' name='main' onChange={handleFileChange} />
             </div>
             <div>
                 <input type='submit' name={'upload_btn'} value={'업로드 하기'}/>
