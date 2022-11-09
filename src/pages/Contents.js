@@ -120,7 +120,7 @@ function ContentsWrite() {
             data.append('is_tmp', 'false');
 
             if (is_update) {
-                await axios.patch('/api/content/update/' + content_id, data);
+                await axios.patch('/api/content/' + content_id, data);
                 document.location.replace('/contents/' + content_id);
             } else {
                 if (title === '' || context === '' || thumbnail === null) {
@@ -133,7 +133,7 @@ function ContentsWrite() {
         } else {
             data.append('is_tmp', 'true');
             if (is_update) {
-                await axios.patch('/api/content/update/' + content_id, data);
+                await axios.patch('/api/content/' + content_id, data);
                 document.location.replace('/contents');
             } else {
                 await axios.post('/api/content', data);
