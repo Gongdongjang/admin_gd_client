@@ -70,6 +70,7 @@ function ContentsWrite() {
     const [photo, setPhoto] = useState(null);
     const [exist_photo, setExistPhoto] = useState('');
     const [main, setMain] = useState(null);
+    const [existMain, setExistMain] = useState('');
 
     const url = useLocation();
     const { content_id } = useParams();
@@ -110,6 +111,7 @@ function ContentsWrite() {
             // 수정 시 새 파일이 있을 때만 보냄
             if (photo) data.append('photo', photo);
             if (thumbnail) data.append('thumbnail', thumbnail);
+            if (main) data.append('main', main);
         }
         data.append('link', link);
         data.append('upload_type', upload_type);
@@ -151,6 +153,7 @@ function ContentsWrite() {
         setDate(content.content_date.split('T')[0]);
         setExistPhoto(content.content_photo);
         setExistThumbnail(content.content_thumbnail);
+        setExistMain(content.content_main);
     }, [content_id]);
 
     useEffect(() => {
@@ -205,6 +208,9 @@ function ContentsWrite() {
             </div>
             <div>
                 <h3>메인 이미지</h3>
+                {existMain &&
+                    <img src={img_url + existMain} onChange={handleFileChange} />
+                }
                 <input type='file' name='main' onChange={handleFileChange} />
             </div>
             <div>
