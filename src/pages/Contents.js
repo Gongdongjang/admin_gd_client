@@ -9,6 +9,7 @@ function ContentsDetail() {
     const [context, setContext] = useState('');
     const [date, setDate] = useState('');
     const [photo, setPhoto] = useState('');
+    const [main, setMain] = useState('');
     const [link, setLink] = useState('');
 
     const {content_id} = useParams();
@@ -20,6 +21,7 @@ function ContentsDetail() {
         setContext(content.content_context);
         setDate(content.content_date.replace('T', ' ').split('.')[0]);
         setPhoto(content.content_photo);
+        setMain(content.content_main);
         setLink(content.content_link);
     }, [content_id]);
 
@@ -47,6 +49,9 @@ function ContentsDetail() {
             </div>
             <h3>{title}</h3>
             <p>{date}</p>
+            {main &&
+                <img src={img_url + main} alt={'main'}/>
+            }
             {photo &&
                 <img src={img_url + photo} alt='content'/>
             }
