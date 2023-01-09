@@ -168,6 +168,7 @@ function ContentsWrite() {
         setContext(content.content_context);
         setLink(content.content_link);
         setDate(content.content_date.split('T')[0]);
+        setCategory(content.content_category);
         setExistPhoto(content.content_photo);
         setExistThumbnail(content.content_thumbnail);
         setExistMain(content.content_main);
@@ -185,10 +186,10 @@ function ContentsWrite() {
             <div>
                 <h3>콘텐츠 분류</h3>
                 <select name={'category'} onChange={handleChange}>
-                    <option value={'공동장 소식'}>공동장 소식</option>
-                    <option value={'레시피'}>레시피</option>
-                    <option value={'환경정보'}>환경정보</option>
-                    <option value={'이벤트'}>이벤트</option>
+                    <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
+                    <option value={'레시피'} selected={category === '레시피'}>레시피</option>
+                    <option value={'환경정보'} selected={category === '환경정보'}>환경정보</option>
+                    <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
                 </select>
             </div>
             <div>
