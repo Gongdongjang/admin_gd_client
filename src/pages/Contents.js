@@ -96,13 +96,6 @@ function ContentsWrite() {
             case 'category': setCategory(value); break;
             case 'link': setLink(value); break;
         }
-
-        // if (name === 'title') setTitle(value);
-        // else if (name === 'context') setContext(value);
-        // else if (name === 'upload_date') setUpload_date(value);
-        // else if (name === 'upload_type') setUpload_type(value);
-        // else if
-        // else setLink(value);
     }
 
     const handleFileChange = (event) => {
@@ -296,19 +289,6 @@ function ContentsList() {
     const [search_word, setSearchWord] = useState('');
     const [is_delete, setIsDelete] = useState(false);
     const [delete_list, setDeleteList] = useState([]);
-
-    // const handleDeleteContent = async (event, content_id) => {
-    //     // link 기능 제거
-    //     event.preventDefault();
-    //
-    //     // console.log(content_id);
-    //     // if (window.confirm('정말 삭제하시겠습니까?')) {
-    //     //     const res = await axios.delete('/api/content/delete/' + content_id);
-    //     //     alert(res.data.content_id + '를 삭제했습니다.');
-    //     // } else {
-    //     //     alert('삭제를 취소했습니다.');
-    //     // }
-    // }
 
     const handleClickCheckbox = async (event, delete_list) => {
         // link 기능 제거
