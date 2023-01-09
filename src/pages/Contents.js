@@ -184,7 +184,7 @@ function ContentsWrite() {
         <form onSubmit={handleSubmit}>
             <div>
                 <h3>콘텐츠 분류</h3>
-                <select name={'category'}>
+                <select name={'category'} onChange={handleChange}>
                     <option value={'공동장 소식'}>공동장 소식</option>
                     <option value={'레시피'}>레시피</option>
                     <option value={'환경정보'}>환경정보</option>
