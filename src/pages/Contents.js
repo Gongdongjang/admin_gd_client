@@ -70,6 +70,7 @@ function ContentsWrite() {
     const [upload_type, setUpload_type] = useState('');
     const [context, setContext] = useState('');
     const [link, setLink] = useState('');
+    const [category, setCategory] = useState('공동장을 이용해야 하는 이유')
     const [thumbnail, setThumbnail] = useState(null);
     const [exist_thumbnail, setExistThumbnail] = useState('');
     const [photo, setPhoto] = useState(null);
@@ -84,11 +85,21 @@ function ContentsWrite() {
         const name = event.target.name;
         const value = event.target.value;
 
-        if (name === 'title') setTitle(value);
-        else if (name === 'context') setContext(value);
-        else if (name === 'upload_date') setUpload_date(value);
-        else if (name === 'upload_type') setUpload_type(value);
-        else setLink(value);
+        switch (name) {
+            case 'title': setTitle(value); break;
+            case 'context': setContext(value); break;
+            case 'upload_date': setUpload_date(value); break;
+            case 'upload_type': setUpload_type(value); break;
+            case 'category': setCategory(value); break;
+            case 'link': setLink(value); break;
+        }
+
+        // if (name === 'title') setTitle(value);
+        // else if (name === 'context') setContext(value);
+        // else if (name === 'upload_date') setUpload_date(value);
+        // else if (name === 'upload_type') setUpload_type(value);
+        // else if
+        // else setLink(value);
     }
 
     const handleFileChange = (event) => {
@@ -119,6 +130,7 @@ function ContentsWrite() {
             if (main) data.append('main', main);
         }
         data.append('link', link);
+        data.append('category', category);
         data.append('upload_type', upload_type);
         data.append('upload_date', upload_date);
 
@@ -170,6 +182,15 @@ function ContentsWrite() {
 
     return (
         <form onSubmit={handleSubmit}>
+            <div>
+                <h3>콘텐츠 분류</h3>
+                <select name={'category'}>
+                    <option value={'공동장 소식'}>공동장 소식</option>
+                    <option value={'레시피'}>레시피</option>
+                    <option value={'환경정보'}>환경정보</option>
+                    <option value={'이벤트'}>이벤트</option>
+                </select>
+            </div>
             <div>
                 <h3>제목</h3>
                 <input type='text' name='title' placeholder='제목을 입력하세요' onChange={handleChange} value={title}/>
