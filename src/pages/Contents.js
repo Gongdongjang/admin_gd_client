@@ -11,6 +11,7 @@ function ContentsDetail() {
     const [photo, setPhoto] = useState('');
     const [main, setMain] = useState('');
     const [link, setLink] = useState('');
+    const [category, setCategory] = useState('');
 
     const {content_id} = useParams();
 
@@ -23,6 +24,7 @@ function ContentsDetail() {
         setPhoto(content.content_photo);
         setMain(content.content_main);
         setLink(content.content_link);
+        setCategory(content.content_category);
     }, [content_id]);
 
     const DeleteContent = async () => {
@@ -48,6 +50,7 @@ function ContentsDetail() {
                 <button onClick={DeleteContent}>삭제</button>
             </div>
             <h3>{title}</h3>
+            <p>{category}</p>
             <p>{date}</p>
             {main &&
                 <img src={img_url + main} alt={'main'}/>
