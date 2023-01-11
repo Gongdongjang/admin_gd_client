@@ -285,7 +285,7 @@ function ContentsTmp() {
 
 function ContentsList() {
     const [count, setCount] = useState(0);
-    const [list, setList] = useState('');
+    const [list, setList] = useState([]);
     const [search_word, setSearchWord] = useState('');
     const [is_delete, setIsDelete] = useState(false);
     const [delete_list, setDeleteList] = useState([]);
@@ -296,30 +296,54 @@ function ContentsList() {
         setDeleteList([...delete_list, event.target.value]);
     }
 
-    const getContentList = useCallback(async () => {
+    const fetchContentList = async () => {
         const res = await axios.get('/api/content?aspect=admin');
         setCount(res.data.length);
-        setList(res.data.map((content) => {
-              let src = img_url + content.content_thumbnail;
+        setList(res.data);
+    }
 
-              return [
-                  <Link to={'/contents/' + content.content_id}>
-                      <div>
-                          {/*{is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}*/}
-                          <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                          <img src={src} height='120' alt='thumbnail'/>
-                          <h3>{content.content_title}</h3>
-                          <p>{content.content_context}</p>
-                      </div>
-                  </Link>
-              ]
-          })
-        );
-    }, [is_delete, handleClickCheckbox])
+    const renderContentList = (list) => {
+        return list.map((content) => {
+            let src = img_url + content.content_thumbnail;
+
+            return [
+                <Link to={'/contents/' + content.content_id}>
+                    <div>
+                        {/*{is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}*/}
+                        <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
+                        <img src={src} height='120' alt='thumbnail'/>
+                        <h3>{content.content_title}</h3>
+                        <p>{content.content_context}</p>
+                    </div>
+                </Link>
+            ]
+        })
+    }
+
+    // const getContentList = useCallback(async () => {
+    //     const res = await axios.get('/api/content?aspect=admin');
+    //     setCount(res.data.length);
+    //     setList(res.data.map((content) => {
+    //           let src = img_url + content.content_thumbnail;
+    //
+    //           return [
+    //               <Link to={'/contents/' + content.content_id}>
+    //                   <div>
+    //                       {/*{is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}*/}
+    //                       <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
+    //                       <img src={src} height='120' alt='thumbnail'/>
+    //                       <h3>{content.content_title}</h3>
+    //                       <p>{content.content_context}</p>
+    //                   </div>
+    //               </Link>
+    //           ]
+    //       })
+    //     );
+    // }, [is_delete, handleClickCheckbox])
 
     useEffect(() => {
-        getContentList();
-    }, [getContentList])
+        fetchContentList()
+    }, [])
 
     const handleSearchChange = (event) => {
         setSearchWord(event.target.value);
@@ -345,7 +369,7 @@ function ContentsList() {
         );
     }
 
-    const handleDeleteClick = async (event, delete_list) => {
+    const handleDeleteClick = async (event, list, delete_list) => {
         event.preventDefault();
 
         let body = []
@@ -360,6 +384,7 @@ function ContentsList() {
                 content_ids: body
             });
             alert(res.data.content_id + '를 삭제했습니다.');
+            window.location.reload();
         } else {
             alert('삭제를 취소했습니다.');
         }
@@ -375,13 +400,13 @@ function ContentsList() {
                       <input type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
                       <input type='submit' value='검색' />
                   </form>
-                  <button onClick={(event) => handleDeleteClick(event, delete_list)}>편집</button>
+                  <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
                   <Link to={'/contents/write'} >
                       <button>+ 새로운 콘텐츠 등록하기</button>
                   </Link>
               </div>
               <h3>콘텐츠 모아보기</h3>
-              {list}
+              {renderContentList(list)}
           </div>
       </div>
     )
