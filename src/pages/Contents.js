@@ -291,9 +291,15 @@ function ContentsList() {
     const [delete_list, setDeleteList] = useState([]);
 
     const handleClickCheckbox = async (event, delete_list) => {
-        // link 기능 제거
-        event.preventDefault();
-        setDeleteList([...delete_list, event.target.value]);
+        const deleteIndex = event.target.value;
+
+        if (delete_list.includes(deleteIndex)) {
+            setDeleteList(delete_list.filter((index) => deleteIndex !== index));
+        } else {
+            setDeleteList([...delete_list, deleteIndex]);
+        }
+
+        console.log(delete_list);
     }
 
     const fetchContentList = async () => {
@@ -307,15 +313,15 @@ function ContentsList() {
             let src = img_url + content.content_thumbnail;
 
             return [
-                <Link to={'/contents/' + content.content_id}>
                     <div>
                         {/*{is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}*/}
                         <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                        <img src={src} height='120' alt='thumbnail'/>
-                        <h3>{content.content_title}</h3>
-                        <p>{content.content_context}</p>
+                        <Link to={'/contents/' + content.content_id}>
+                            <img src={src} height='120' alt='thumbnail'/>
+                            <h3>{content.content_title}</h3>
+                            <p>{content.content_context}</p>
+                        </Link>
                     </div>
-                </Link>
             ]
         })
     }
