@@ -183,8 +183,8 @@ function ContentsWrite() {
                 <h3>콘텐츠 분류</h3>
                 <select name={'category'} onChange={handleChange}>
                     <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
-                    <option value={'레시피'} selected={category === '레시피'}>레시피</option>
-                    <option value={'환경정보'} selected={category === '환경정보'}>환경정보</option>
+                    <option value={'상품 홍보'} selected={category === '상품 홍보'}>상품 홍보</option>
+                    <option value={'스토어 홍보'} selected={category === '스토어 홍보'}>스토어 홍보</option>
                     <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
                 </select>
             </div>
