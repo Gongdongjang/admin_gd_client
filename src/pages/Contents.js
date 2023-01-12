@@ -359,20 +359,7 @@ function ContentsList() {
         event.preventDefault();
 
         const res = await axios.get(`/api/content/search?title=${search_word}`);
-        setList(res.data.map((content) => {
-                let src = img_url + content.content_thumbnail;
-
-                return [
-                    <Link to={'/contents/' + content.content_id}>
-                        <div>
-                            <img src={src} height='120' alt='thumbnail'/>
-                            <h3>{content.content_title}</h3>
-                            <p>{content.content_context}</p>
-                        </div>
-                    </Link>
-                ]
-            })
-        );
+        setList(res.data);
     }
 
     const handleDeleteClick = async (event, list, delete_list) => {
