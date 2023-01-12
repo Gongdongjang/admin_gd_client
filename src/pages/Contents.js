@@ -358,7 +358,7 @@ function ContentsList() {
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
 
-        const res = await axios.get(`/api/content/search?title=${search_word}`);
+        const res = await axios.get(`/api/content/search?search=${search_word}`);
         setList(res.data);
     }
 
