@@ -314,15 +314,15 @@ function ContentsList() {
 
     const renderContentList = (list) => {
         return list.map((content) => {
-            let src = img_url + content.content_thumbnail;
-
             return [
                     <div className={"Content-detail"}>
                         <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                         <Link to={'/contents/' + content.content_id}>
-                            <img src={src} height='120' alt='thumbnail'/>
-                            <h3>{content.content_title}</h3>
-                            <p>{content.content_context}</p>
+                                <p>{content.content_id}</p>
+                                <p>{content.content_title}</p>
+                                <p>{content.content_category}</p>
+                                <p>{content.content_date}</p>
+                                <p>{content.upload_date}</p>
                         </Link>
                     </div>
             ]
@@ -335,8 +335,11 @@ function ContentsList() {
                 <div className={"Content-detail"}>
                     <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                     <Link to={'/contents/update/' + content.content_id}>
+                        <p>{content.content_id}</p>
                         <p>{content.content_title}</p>
+                        <p>{content.content_category}</p>
                         <p>{content.content_date}</p>
+                        <p>{content.upload_date}</p>
                     </Link>
                 </div>
             ]
