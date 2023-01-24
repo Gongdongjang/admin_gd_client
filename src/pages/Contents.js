@@ -179,67 +179,75 @@ function ContentsWrite() {
     }, [getUpdateContent, url]);
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <h3>콘텐츠 분류</h3>
-                <select name={'category'} onChange={handleChange}>
-                    <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
-                    <option value={'상품 홍보'} selected={category === '상품 홍보'}>상품 홍보</option>
-                    <option value={'스토어 홍보'} selected={category === '스토어 홍보'}>스토어 홍보</option>
-                    <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
-                </select>
+        <form className={"Content-container"} onSubmit={handleSubmit}>
+            <div className={"Content-content"}>
+            <div className={"Content-inputPlace"}>
+                <div className={"Content-inputText"}>
+                    <div>
+                        <p className={"Content-inputTitle"}>콘텐츠 분류</p>
+                        <select className={"Content-category"} name={'category'} onChange={handleChange}>
+                            <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
+                            <option value={'상품 홍보'} selected={category === '상품 홍보'}>상품 홍보</option>
+                            <option value={'스토어 홍보'} selected={category === '스토어 홍보'}>스토어 홍보</option>
+                            <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>제목</p>
+                        <input className={"Content-input"} type='text' name='title' placeholder='제목을 입력하세요' onChange={handleChange} value={title}/>
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>콘텐츠 내용</p>
+                        <textarea className={"Content-input"} maxLength={1000} name='context' placeholder='콘텐츠 내용을 입력하세요' onChange={handleChange} value={context} />
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>관련 URL 입력</p>
+                        <input className={"Content-input"} type='text' name={"link"} onChange={handleChange} placeholder='http://' value={link} />
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>발행 유형</p>
+                        <label>실시간</label>
+                        <input type={"radio"} name={'upload_type'} value={'실시간'} onChange={handleChange}/>
+                        <label>예약</label>
+                        <input type={"radio"} name={'upload_type'} value={'예약'} onChange={handleChange}/>
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>발행 날짜</p>
+                        <input type={"datetime-local"} name={'upload_date'} value={upload_date} onChange={handleChange}/>
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>날짜</p>
+                        <p>{date}</p>
+                    </div>
+                </div>
+                <div className={"Content-inputImage"}>
+                    <div>
+                        <p className={"Content-inputTitle"}>썸네일 이미지</p>
+                        {exist_thumbnail &&
+                            <img src={img_url + exist_thumbnail} alt={'thumbnail'} />
+                        }
+                        <input type='file' name='thumbnail' onChange={handleFileChange} />
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>메인 이미지</p>
+                        {existMain &&
+                            <img src={img_url + existMain} alt={'main'} onChange={handleFileChange} />
+                        }
+                        <input type='file' name='main' onChange={handleFileChange} />
+                    </div>
+                    <div>
+                        <p className={"Content-inputTitle"}>본문 이미지</p>
+                        {exist_photo &&
+                            <img src={img_url + exist_photo} alt={'photo'} />
+                        }
+                        <input type='file' name='photo' onChange={handleFileChange} />
+                    </div>
+                </div>
             </div>
-            <div>
-                <h3>제목</h3>
-                <input type='text' name='title' placeholder='제목을 입력하세요' onChange={handleChange} value={title}/>
+            <div className={"Content-btnPlace"}>
+                <input className={"Content-writeBtn"} type='submit' name={'upload_btn'} value={'보내기'}/>
+                <input className={"Content-btn"} type={'submit'} name={'tmp_btn'} value={'임시저장'}/>
             </div>
-            <div>
-                <h3>콘텐츠 내용</h3>
-                <textarea maxLength={1000} name='context' placeholder='콘텐츠 내용을 입력하세요' onChange={handleChange} value={context} />
-            </div>
-            <div>
-                <h3>관련 URL 입력</h3>
-                <input type='text' onChange={handleChange} placeholder='http://' value={link} />
-            </div>
-            <div>
-                <h3>발행 유형</h3>
-                <label>실시간</label>
-                <input type={"radio"} name={'upload_type'} value={'실시간'} onChange={handleChange}/>
-                <label>예약</label>
-                <input type={"radio"} name={'upload_type'} value={'예약'} onChange={handleChange}/>
-            </div>
-            <div>
-                <h3>발행 날짜</h3>
-                <input type={"datetime-local"} name={'upload_date'} value={upload_date} onChange={handleChange}/>
-            </div>
-            <div>
-                <h3>날짜</h3>
-                <p>{date}</p>
-            </div>
-            <div>
-                <h3>콘텐츠 이미지</h3>
-                {exist_photo &&
-                    <img src={img_url + exist_photo} alt={'thumbnail'} />
-                }
-                <input type='file' name='photo' onChange={handleFileChange} />
-            </div>
-            <div>
-                <h3>대표 이미지</h3>
-                {exist_thumbnail &&
-                    <img src={img_url + exist_thumbnail} alt={'thumbnail'} />
-                }
-                <input type='file' name='thumbnail' onChange={handleFileChange} />
-            </div>
-            <div>
-                <h3>메인 이미지</h3>
-                {existMain &&
-                    <img src={img_url + existMain} onChange={handleFileChange} />
-                }
-                <input type='file' name='main' onChange={handleFileChange} />
-            </div>
-            <div>
-                <input type='submit' name={'upload_btn'} value={'업로드 하기'}/>
-                <input type={'submit'} name={'tmp_btn'} value={'임시저장 하기'}/>
             </div>
         </form>
     )

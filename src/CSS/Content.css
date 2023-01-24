@@ -74,6 +74,68 @@
     color: #696969;
 }
 
+.Content-inputTitle {
+    font-size: 14px;
+    color: #8E8E8E;
+}
+
+.Content-input {
+    border: none;
+    width: 690px;
+    height: 50px;
+}
+
+.Content-input::placeholder {
+    color: #8E8E8E;
+}
+
+.Content-inputPlace {
+    display: flex;
+    width: 95%;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.Content-inputText {
+    width: 70%
+}
+
+.Content-inputImage {
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    width: 30%;
+}
+
+.Content-btnPlace {
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: #444444;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+}
+
+.Content-writeBtn {
+    background: #05D287;
+    border-radius: 10px;
+    border-style: none;
+    color: white;
+    width: 100px;
+    height: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Content-btn {
+    background: white;
+    border-radius: 10px;
+    border-style: none;
+    width: 100px;
+    height: 60px;
+}
+
 a {
     text-decoration: none;
     color: black;
