@@ -331,10 +331,13 @@ function ContentsList() {
     const renderTmpList = (list) => {
         return list.map((content) => {
             return [
-                <Link to={'/contents/update/' + content.content_id}>
+                <div>
+                    <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
+                    <Link to={'/contents/update/' + content.content_id}>
                         <p>{content.content_title}</p>
                         <p>{content.content_date}</p>
-                </Link>
+                    </Link>
+                </div>
             ]
         })
     }
