@@ -287,7 +287,6 @@ function ContentsList() {
     const [count, setCount] = useState(0);
     const [list, setList] = useState([]);
     const [search_word, setSearchWord] = useState('');
-    const [is_delete, setIsDelete] = useState(false);
     const [delete_list, setDeleteList] = useState([]);
     const [category, setCategory] = useState('등록순');
 
@@ -318,7 +317,6 @@ function ContentsList() {
 
             return [
                     <div>
-                        {/*{is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}*/}
                         <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                         <Link to={'/contents/' + content.content_id}>
                             <img src={src} height='120' alt='thumbnail'/>
@@ -329,27 +327,6 @@ function ContentsList() {
             ]
         })
     }
-
-    // const getContentList = useCallback(async () => {
-    //     const res = await axios.get('/api/content?aspect=admin');
-    //     setCount(res.data.length);
-    //     setList(res.data.map((content) => {
-    //           let src = img_url + content.content_thumbnail;
-    //
-    //           return [
-    //               <Link to={'/contents/' + content.content_id}>
-    //                   <div>
-    //                       {/*{is_delete && <button onClick={(event) => handleDeleteContent(event, content.content_id)}>x</button>}*/}
-    //                       <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-    //                       <img src={src} height='120' alt='thumbnail'/>
-    //                       <h3>{content.content_title}</h3>
-    //                       <p>{content.content_context}</p>
-    //                   </div>
-    //               </Link>
-    //           ]
-    //       })
-    //     );
-    // }, [is_delete, handleClickCheckbox])
 
     useEffect(() => {
         fetchContentList(category)
