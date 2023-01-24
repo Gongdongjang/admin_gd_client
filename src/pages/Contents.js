@@ -239,7 +239,6 @@ function ContentsWrite() {
             <div>
                 <input type='submit' name={'upload_btn'} value={'업로드 하기'}/>
                 <input type={'submit'} name={'tmp_btn'} value={'임시저장 하기'}/>
-                <button type={"button"} onClick={(e) => { e.preventDefault(); document.location.href='/contents/tmp'; }}>임시저장 리스트</button>
             </div>
         </form>
     )
@@ -392,6 +391,7 @@ function ContentsList() {
                   <Link to={'/contents/write'} >
                       <button>+ 새로운 콘텐츠 등록하기</button>
                   </Link>
+                  <button type={"button"} onClick={(e) => { e.preventDefault(); document.location.href='/contents/tmp'; }}>임시저장 리스트</button>
               </div>
               <h3>콘텐츠 모아보기</h3>
               {renderContentList(list)}
