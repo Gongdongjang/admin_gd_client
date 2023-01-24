@@ -414,6 +414,16 @@ function ContentsList() {
                   <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
                   <p className={"Content-count"}>전체 {count}개</p>
               </div>
+              <div className={"Content-row"}>
+              <input type={"checkbox"}/>
+                  <div className={"Content-detailRow"}>
+                      <p>등록 번호</p>
+                      <p>컨텐츠 명</p>
+                      <p>분류</p>
+                      <p>작성 일자</p>
+                      <p>업로드 일정</p>
+                  </div>
+              </div>
               {isTmp === 0 ? renderContentList(list) : renderTmpList(list)}
           </div>
       </div>
