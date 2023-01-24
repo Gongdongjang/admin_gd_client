@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {Link, Route, Routes, useLocation, useParams} from "react-router-dom";
+import "../CSS/Content.css";
 
 const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
 
@@ -316,7 +317,7 @@ function ContentsList() {
             let src = img_url + content.content_thumbnail;
 
             return [
-                    <div>
+                    <div className={"Content-detail"}>
                         <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                         <Link to={'/contents/' + content.content_id}>
                             <img src={src} height='120' alt='thumbnail'/>
@@ -331,7 +332,7 @@ function ContentsList() {
     const renderTmpList = (list) => {
         return list.map((content) => {
             return [
-                <div>
+                <div className={"Content-detail"}>
                     <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                     <Link to={'/contents/update/' + content.content_id}>
                         <p>{content.content_title}</p>
@@ -386,30 +387,30 @@ function ContentsList() {
     }
 
     return (
-      <div className="section">
-          <div>
-              <p>지금까지 업로드된 콘텐츠</p>
-              <h2>{count} 개</h2>
-              <select name={'category'} onChange={handleChange}>
-                  <option value={'등록순'} selected={category === '등록순'}>등록순</option>
-                  <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
-                  <option value={'상품 홍보'} selected={category === '상품 홍보'}>상품 홍보</option>
-                  <option value={'스토어 홍보'} selected={category === '스토어 홍보'}>스토어 홍보</option>
-                  <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
-              </select>
-              <div>
+      <div className="Content-container">
+          <div className={"Content-row"}>
+              <button className={"Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(0)}}>전체</button>
+              <button className={"Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(1) }}>임시저장 목록</button>
+              <Link to={'/contents/write'} >
+                  <button className={"Content-menuBtn"}>작성하기</button>
+              </Link>
+          </div>
+          <div className={"Content-content"}>
+              <div className={"Content-row"}>
                   <form onSubmit={handleSearchSubmit}>
-                      <input type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
+                      <input className={"Content-searchBox"} type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
                       <input type='submit' value='검색' />
                   </form>
+                  <select className={"Content-category"} name={'category'} onChange={handleChange}>
+                      <option value={'등록순'} selected={category === '등록순'}>등록순</option>
+                      <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
+                      <option value={'상품 홍보'} selected={category === '상품 홍보'}>상품 홍보</option>
+                      <option value={'스토어 홍보'} selected={category === '스토어 홍보'}>스토어 홍보</option>
+                      <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
+                  </select>
                   <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
-                  <Link to={'/contents/write'} >
-                      <button>+ 새로운 콘텐츠 등록하기</button>
-                  </Link>
-                  <button type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(0)}}>전체</button>
-                  <button type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(1) }}>임시저장 리스트</button>
+                  <p className={"Content-count"}>전체 {count}개</p>
               </div>
-              <h3>콘텐츠 모아보기</h3>
               {isTmp === 0 ? renderContentList(list) : renderTmpList(list)}
           </div>
       </div>
