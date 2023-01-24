@@ -244,43 +244,43 @@ function ContentsWrite() {
     )
 }
 
-function ContentsTmp() {
-    const [list, setList] = useState('');
-    const [is_delete, setIsDelete] = useState(false);
-
-    const handleDeleteClick = () => {
-        setIsDelete(!is_delete);
-    }
-
-    const getTmpList = useCallback(async () => {
-        const res = await axios.get('/api/content/tmp');
-        setList(res.data.map((content) => {
-                return [
-                    <Link to={'/contents/update/' + content.content_id}>
-                        <div style={{backgroundColor: "gray"}}>
-                            {is_delete && <button>x</button>}
-                            <p>{content.content_context}</p>
-                            <p>{content.content_date}</p>
-                        </div>
-                    </Link>
-                ]
-            })
-        );
-    }, [is_delete])
-
-    useEffect(() => {
-        getTmpList();
-    }, [getTmpList])
-
-    return (
-        <div>
-            <h1>임시저장 리스트</h1>
-            <button onClick={handleDeleteClick}>편집</button>
-            {list}
-            <button>취소</button>
-        </div>
-    )
-}
+// function ContentsTmp() {
+//     const [list, setList] = useState('');
+//     const [is_delete, setIsDelete] = useState(false);
+//
+//     const handleDeleteClick = () => {
+//         setIsDelete(!is_delete);
+//     }
+//
+//     const getTmpList = useCallback(async () => {
+//         const res = await axios.get('/api/content/tmp');
+//         setList(res.data.map((content) => {
+//                 return [
+//                     <Link to={'/contents/update/' + content.content_id}>
+//                         <div style={{backgroundColor: "gray"}}>
+//                             {is_delete && <button>x</button>}
+//                             <p>{content.content_context}</p>
+//                             <p>{content.content_date}</p>
+//                         </div>
+//                     </Link>
+//                 ]
+//             })
+//         );
+//     }, [is_delete])
+//
+//     useEffect(() => {
+//         getTmpList();
+//     }, [getTmpList])
+//
+//     return (
+//         <div>
+//             <h1>임시저장 리스트</h1>
+//             <button onClick={handleDeleteClick}>편집</button>
+//             {list}
+//             <button>취소</button>
+//         </div>
+//     )
+// }
 
 function ContentsList() {
     const [count, setCount] = useState(0);
@@ -288,6 +288,7 @@ function ContentsList() {
     const [search_word, setSearchWord] = useState('');
     const [delete_list, setDeleteList] = useState([]);
     const [category, setCategory] = useState('등록순');
+    const [isTmp, setIsTmp] = useState(0);
 
     const handleClickCheckbox = async (event, delete_list) => {
         const deleteIndex = event.target.value;
@@ -301,8 +302,8 @@ function ContentsList() {
         console.log(delete_list);
     }
 
-    const fetchContentList = async (category) => {
-        let url = '/api/content?aspect=admin';
+    const fetchContentList = async (category, isTmp) => {
+        let url = `/api/content?aspect=admin&is_tmp=${isTmp}`;
         if (category !== '등록순') url += `&category=${category}`;
 
         const res = await axios.get(url);
@@ -327,9 +328,20 @@ function ContentsList() {
         })
     }
 
+    const renderTmpList = (list) => {
+        return list.map((content) => {
+            return [
+                <Link to={'/contents/update/' + content.content_id}>
+                        <p>{content.content_title}</p>
+                        <p>{content.content_date}</p>
+                </Link>
+            ]
+        })
+    }
+
     useEffect(() => {
-        fetchContentList(category)
-    }, [category])
+        fetchContentList(category, isTmp)
+    }, [category, isTmp])
 
     const handleSearchChange = (event) => {
         setSearchWord(event.target.value);
@@ -391,10 +403,11 @@ function ContentsList() {
                   <Link to={'/contents/write'} >
                       <button>+ 새로운 콘텐츠 등록하기</button>
                   </Link>
-                  <button type={"button"} onClick={(e) => { e.preventDefault(); document.location.href='/contents/tmp'; }}>임시저장 리스트</button>
+                  <button type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(0)}}>전체</button>
+                  <button type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(1) }}>임시저장 리스트</button>
               </div>
               <h3>콘텐츠 모아보기</h3>
-              {renderContentList(list)}
+              {isTmp === 0 ? renderContentList(list) : renderTmpList(list)}
           </div>
       </div>
     )
@@ -409,7 +422,7 @@ function Contents() {
                 <Route path='/:content_id' element={<ContentsDetail />}/>
                 <Route path='/write' element={<ContentsWrite />}/>
                 <Route path='/update/:content_id' element={<ContentsWrite />}/>
-                <Route path='/tmp' element={<ContentsTmp />}/>
+                {/*<Route path='/tmp' element={<ContentsTmp />}/>*/}
             </Routes>
         </div>
     )
