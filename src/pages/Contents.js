@@ -334,13 +334,13 @@ function ContentsList() {
             return [
                 <div className={"Content-detail"}>
                     <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                    <Link to={'/contents/update/' + content.content_id}>
+                    <NavLink className={"Content-detailRow"} to={'/contents/update/' + content.content_id}>
                         <p>{content.content_id}</p>
                         <p>{content.content_title}</p>
                         <p>{content.content_category}</p>
                         <p>{content.content_date}</p>
                         <p>{content.upload_date}</p>
-                    </Link>
+                    </NavLink>
                 </div>
             ]
         })
