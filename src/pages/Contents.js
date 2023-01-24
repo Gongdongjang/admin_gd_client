@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
-import {Link, Route, Routes, useLocation, useParams} from "react-router-dom";
+import {Link, Route, Routes, useLocation, useParams, NavLink} from "react-router-dom";
 import "../CSS/Content.css";
 
 const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
@@ -317,13 +317,13 @@ function ContentsList() {
             return [
                     <div className={"Content-detail"}>
                         <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                        <Link to={'/contents/' + content.content_id}>
+                        <NavLink className={"Content-detailRow"} to={'/contents/' + content.content_id}>
                                 <p>{content.content_id}</p>
                                 <p>{content.content_title}</p>
                                 <p>{content.content_category}</p>
                                 <p>{content.content_date}</p>
                                 <p>{content.upload_date}</p>
-                        </Link>
+                        </NavLink>
                     </div>
             ]
         })
@@ -422,8 +422,7 @@ function ContentsList() {
 
 
 function Contents() {
-    return (
-        <div>
+    return [
             <Routes>
                 <Route path='/' element={<ContentsList />}/>
                 <Route path='/:content_id' element={<ContentsDetail />}/>
@@ -431,8 +430,7 @@ function Contents() {
                 <Route path='/update/:content_id' element={<ContentsWrite />}/>
                 {/*<Route path='/tmp' element={<ContentsTmp />}/>*/}
             </Routes>
-        </div>
-    )
+        ]
 }
 
 export default Contents;
