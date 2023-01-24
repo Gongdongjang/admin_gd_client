@@ -289,6 +289,7 @@ function ContentsList() {
     const [search_word, setSearchWord] = useState('');
     const [is_delete, setIsDelete] = useState(false);
     const [delete_list, setDeleteList] = useState([]);
+    const [category, setCategory] = useState('등록순');
 
     const handleClickCheckbox = async (event, delete_list) => {
         const deleteIndex = event.target.value;
@@ -302,8 +303,11 @@ function ContentsList() {
         console.log(delete_list);
     }
 
-    const fetchContentList = async () => {
-        const res = await axios.get('/api/content?aspect=admin');
+    const fetchContentList = async (category) => {
+        let url = '/api/content?aspect=admin';
+        if (category !== '등록순') url += `&category=${category}`;
+
+        const res = await axios.get(url);
         setCount(res.data.length);
         setList(res.data);
     }
@@ -348,8 +352,8 @@ function ContentsList() {
     // }, [is_delete, handleClickCheckbox])
 
     useEffect(() => {
-        fetchContentList()
-    }, [])
+        fetchContentList(category)
+    }, [category])
 
     const handleSearchChange = (event) => {
         setSearchWord(event.target.value);
@@ -383,11 +387,25 @@ function ContentsList() {
         }
     }
 
+    const handleChange = async (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        if (name === 'category') setCategory(value);
+    }
+
     return (
       <div className="section">
           <div>
               <p>지금까지 업로드된 콘텐츠</p>
               <h2>{count} 개</h2>
+              <select name={'category'} onChange={handleChange}>
+                  <option value={'등록순'} selected={category === '등록순'}>등록순</option>
+                  <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
+                  <option value={'상품 홍보'} selected={category === '상품 홍보'}>상품 홍보</option>
+                  <option value={'스토어 홍보'} selected={category === '스토어 홍보'}>스토어 홍보</option>
+                  <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
+              </select>
               <div>
                   <form onSubmit={handleSearchSubmit}>
                       <input type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
