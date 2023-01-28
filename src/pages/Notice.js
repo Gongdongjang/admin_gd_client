@@ -1,6 +1,7 @@
 import {Link, Route, Routes} from "react-router-dom";
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
+import "../CSS/Notice.css";
 
 function NoticeList() {
   const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
@@ -8,6 +9,7 @@ function NoticeList() {
   const [list, setList] = useState([]);
   const [delete_list, setDeleteList] = useState([]);
   const [is_detail, setIsDetail] = useState([]);
+  const [count, setCount] = useState(0);
 
   const handleClickDetail = (index) => {
     is_detail[index] = !is_detail[index];
@@ -50,19 +52,17 @@ function NoticeList() {
   const fetchNoticeList = async () => {
     const res = await axios.get('/api/notice');
     setList(res.data);
+    setCount(res.data.length)
   }
 
   const renderNoticeList = (list) => {
     return list.map((notice) => {
       return [
-        <div key={notice.notice_id} onClick={() => handleClickDetail(notice.notice_id)}>
+        <div className={"Notice-detail"} key={notice.notice_id} onClick={() => handleClickDetail(notice.notice_id)}>
           <input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
+          <p>{notice.notice_title}</p>
           <p>{notice.notice_target}</p>
-          <h2>{notice.notice_title}</h2>
           <p>{notice.notice_date.split('T')[0]}</p>
-          {is_detail[notice.notice_id] && notice.notice_photo && <img src={img_url + notice.notice_photo} alt={'notice photo'} />}<br />
-          {is_detail[notice.notice_id] && notice.notice_context}
-          <hr />
         </div>
       ]
     });
@@ -73,13 +73,13 @@ function NoticeList() {
   }, [])
 
   return (
-    <div>
+    <div className={"Notice-container"}>
       <Link to={'/notice/write'}>
-        <button>+ 새로운 공지 등록하기</button>
+        <button className={"Notice-menuBtn"}>공지 작성하기</button>
       </Link>
+      <p>{count} 개</p>
       <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
-      <div>
-        <h1>반환 및 정책 ></h1>
+      <div className={"Notice-content"}>
         {renderNoticeList(list)}
       </div>
     </div>
