@@ -3,7 +3,7 @@ import axios from "axios";
 import {Link, Route, Routes, useLocation, useParams, NavLink} from "react-router-dom";
 import "../CSS/Content.css";
 
-const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
+const img_url = 'https://ggdjang.s3.ap-northeast-2.amazonaws.com/';
 
 function ContentsDetail() {
     const [title, setTitle] = useState('');
