@@ -298,6 +298,7 @@ function ContentsList() {
     const [delete_list, setDeleteList] = useState([]);
     const [category, setCategory] = useState('등록순');
     const [isTmp, setIsTmp] = useState(0);
+    const [bannerList, setBannerList] = useState([]);
 
     const handleClickCheckbox = async (event, delete_list) => {
         const deleteIndex = event.target.value;
@@ -318,6 +319,10 @@ function ContentsList() {
         const res = await axios.get(url);
         setCount(res.data.length);
         setList(res.data);
+
+        const bannerRes = await axios.get('/api/content/banner');
+        const bannerData = bannerRes.data.data;
+        setBannerList([bannerData[0].content_id, bannerData[1].content_id, bannerData[2].content_id])
     }
 
     const renderContentList = (list) => {
@@ -397,6 +402,33 @@ function ContentsList() {
         if (name === 'category') setCategory(value);
     }
 
+    const handleBannerChange = async (event, bannerList) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        switch (name) {
+            case 'banner1': setBannerList([value, bannerList[1], bannerList[2]]); break;
+            case 'banner2': setBannerList([bannerList[0], value, bannerList[2]]); break;
+            case 'banner3': setBannerList([bannerList[0], bannerList[1], value]); break;
+        }
+    }
+
+    const handleBannerSubmit = async (event) => {
+        event.preventDefault();
+
+        let body = [];
+        for (let banner of bannerList) {
+            body.push({
+                id: banner,
+                order: bannerList.indexOf(banner) + 1
+            })
+        }
+
+        const res = await axios.post('/api/content/banner', body);
+        if (res.status === 200) alert('홍보용 배너 컨텐츠가 성공적으로 변경됐습니다.');
+        else alert('서버에 오류가 발생했습니다. 개발팀에게 문의 주세요.');
+    }
+
     return (
       <div className="Content-container">
           <div className={"Content-row"}>
@@ -422,6 +454,15 @@ function ContentsList() {
                   <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
                   <p className={"Content-count"}>전체 {count}개</p>
               </div>
+              <form className={"Content-row"} onSubmit={handleBannerSubmit}>
+                  <p>1번 콘텐츠</p>
+                  <input type={"number"} name={"banner1"} value={bannerList[0]} onChange={(event) => handleBannerChange(event, bannerList)}/>
+                  <p>2번 콘텐츠</p>
+                  <input type={"number"} name={"banner2"} value={bannerList[1]} onChange={(event) => handleBannerChange(event, bannerList)}/>
+                  <p>3번 콘텐츠</p>
+                  <input type={"number"} name={"banner3"} value={bannerList[2]} onChange={(event) => handleBannerChange(event, bannerList)}/>
+                  <input type={'submit'} value={'홍보용 배너 변경하기'}/>
+              </form>
               <div className={"Content-row"}>
               <input type={"checkbox"}/>
                   <div className={"Content-detailRow"}>
