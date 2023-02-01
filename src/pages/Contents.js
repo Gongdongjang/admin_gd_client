@@ -400,8 +400,8 @@ function ContentsList() {
     return (
       <div className="Content-container">
           <div className={"Content-row"}>
-              <button className={"Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(0)}}>전체</button>
-              <button className={"Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(1) }}>임시저장 목록</button>
+              <button className={isTmp === 0 ? "Content-menuBtn-clicked" : "Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(0)}}>전체</button>
+              <button className={isTmp === 1 ? "Content-menuBtn-clicked" : "Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(1) }}>임시저장 목록</button>
               <Link to={'/contents/write'} >
                   <button className={"Content-menuBtn"}>작성하기</button>
               </Link>

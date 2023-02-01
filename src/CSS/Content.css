@@ -49,6 +49,14 @@
     color: #B4B4B4;
 }
 
+.Content-menuBtn-clicked {
+    border: none;
+    background-color: white;
+    font-size: 24px;
+    font-weight: 500;
+    color: black;
+}
+
 .Content-menuBtn:hover {
     color: #444444;
 }
