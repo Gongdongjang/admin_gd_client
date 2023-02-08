@@ -25,7 +25,6 @@ function NotificationList() {
     }
 
     const renderNotificationList = (list) => {
-        console.log(list);
         return list.map((notification) => {
             return [
                 <div className={"Notification-detail"}>
@@ -50,10 +49,6 @@ function NotificationList() {
 
     return (
         <div className={"Notification-container"}>
-            <div>
-                <NavLink to={'/notification'}>알림 내역</NavLink>
-                <NavLink to={'/notification/write'}>알림 작성하기</NavLink>
-            </div>
             <p>전체 {count}개</p>
             <select className={"Notification-category"} name={'filter'} onChange={handleChange}>
                 <option value={'등록순'}>등록순</option>
