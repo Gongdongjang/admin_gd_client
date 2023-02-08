@@ -30,7 +30,7 @@ class Routers extends React.Component{
                     <Route path="/mdPost/update/:md_id" element={<MD_post />}/>
                     {/*list */}
                     <Route path="/ItemPage/:md_id"  element={<ItemPage />} />
-                    <Route path={"/notification"} element={<Notification />} />
+                    <Route path={"/notification/*"} element={<Notification />} />
                 </Routes>
             </div>
             
