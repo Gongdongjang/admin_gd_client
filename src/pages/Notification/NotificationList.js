@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 function NotificationList() {
     const [list, setList] = useState([]);
     const [count, setCount] = useState(0);
-    const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState('등록순');
 
     useEffect(() => {
         fetchNotificationList(filter);
@@ -50,8 +50,12 @@ function NotificationList() {
 
     return (
         <div className={"Notification-container"}>
+            <div>
+                <NavLink to={'/notification'}>알림 내역</NavLink>
+                <NavLink to={'/notification/write'}>알림 작성하기</NavLink>
+            </div>
             <p>전체 {count}개</p>
-            <select className={"Content-category"} name={'filter'} onChange={handleChange}>
+            <select className={"Notification-category"} name={'filter'} onChange={handleChange}>
                 <option value={'등록순'}>등록순</option>
                 <option value={'소비자'}>소비자 전체</option>
                 <option value={'개인'}>소비자 개별</option>
