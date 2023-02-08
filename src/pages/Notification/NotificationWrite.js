@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import '../../CSS/Notification.css';
 
 function NotificationWrite() {
     const [users, setUsers] = useState([]);
@@ -115,7 +116,9 @@ function NotificationWrite() {
                             <option value={'개인'}>소비자 개별</option>
                             <option value={'스토어'}>스토어</option>
                         </select>
+                        <div id={"Notification-userList"}>
                         { target === '개인' && renderUsers(users) }
+                        </div>
                     </div>
                     <div>
                         <p>알림 제목</p>
