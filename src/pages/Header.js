@@ -21,7 +21,7 @@ class Header extends React.Component{
                         <li><Link to="/review">리뷰 관리</Link></li>
                         <li><Link to="/board">공지사항</Link></li>
                         <li><Link to="/contents">콘텐츠</Link></li>
-                        <li><Link to="/message">알림 관리</Link></li>
+                        <li><Link to="/notification">알림 관리</Link></li>
                     </ul>
                     </div>
 
@@ -45,7 +45,7 @@ class Header extends React.Component{
                         
                     </ul>
                 </div>
-            </div>      
+            </div>
   );
     }
 }

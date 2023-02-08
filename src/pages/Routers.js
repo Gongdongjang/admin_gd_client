@@ -10,6 +10,7 @@ import MDList from './MDList';
 import ItemPage from './ItemPage';
 import MdPostOk from './MdPostOk';
 import MdEditOk from './MdEditOk';
+import Notification from './Notification';
 class Routers extends React.Component{
     render(){
         return (
@@ -29,6 +30,7 @@ class Routers extends React.Component{
                     <Route path="/mdPost/update/:md_id" element={<MD_post />}/>
                     {/*list */}
                     <Route path="/ItemPage/:md_id"  element={<ItemPage />} />
+                    <Route path={"/notification"} element={<Notification />} />
                 </Routes>
             </div>
             
