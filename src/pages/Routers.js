@@ -10,7 +10,7 @@ import MDList from './MDList';
 import ItemPage from './ItemPage';
 import MdPostOk from './MdPostOk';
 import MdEditOk from './MdEditOk';
-import Notification from './Notification';
+import Notification from './Notification/Notification';
 class Routers extends React.Component{
     render(){
         return (

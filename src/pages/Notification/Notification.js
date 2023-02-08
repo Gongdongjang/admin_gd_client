@@ -1,12 +1,5 @@
 import {Route, Routes} from "react-router-dom";
-
-function NotificationList() {
-    return (
-        <div className={"Notification-container"}>
-            <p>hello Word</p>
-        </div>
-    )
-}
+import NotificationList from "./NotificationList";
 
 function Notification() {
     return [
