@@ -4,8 +4,8 @@ import '../../CSS/Notification.css';
 
 function NotificationWrite() {
     const [users, setUsers] = useState([]);
-    const [type, setType] = useState('');
-    const [target, setTarget] = useState('');
+    const [type, setType] = useState('이벤트');
+    const [target, setTarget] = useState('소비자');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [pushType, setPushType] = useState('');
@@ -73,20 +73,21 @@ function NotificationWrite() {
         body.append('pushType', pushType);
         body.append('date', date);
         body.append('image', image);
+        console.log(target);
 
-        let res;
+        let msg;
         if (target === '소비자') {
             body.append('topic', 'userTopic');
 
-            res = await axios.post('/api/notification/topic', body);
-            console.log(res);
+            const res = await axios.post('/api/notification/topic', body);
+            msg = res.data.msg;
         } else if (target === '개인') {
             body.append('userIds', userIds);
 
-            res = await axios.post('/api/notification/token', body);
+            const res = await axios.post('/api/notification/token', body);
+            msg = res.data.msg;
         }
 
-        const msg = res.data.msg;
         if (msg === 'NOTIFICATION_SEND_SUCCESS') {
             alert('알림이 성공적으로 전송됐습니다.');
             document.location.replace('/notification');
