@@ -1,6 +1,13 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import '../../CSS/Notification.css';
+import * as Loader from "react-loader-spinner";
+
+function Loading() {
+    return (
+        <Loader.TailSpin color={"#05D287"} />
+    )
+}
 
 function NotificationWrite() {
     const [users, setUsers] = useState([]);
@@ -12,6 +19,8 @@ function NotificationWrite() {
     const [date, setDate] = useState('');
     const [image, setImage] = useState(null);
     const [userIds, setUserIds] = useState([]);
+
+    const [loading, setLoading] = useState(null);
 
     useEffect(() => {
         fetchUsers();
@@ -65,6 +74,7 @@ function NotificationWrite() {
 
     const handleSubmit = async (event, userIds) => {
         event.preventDefault();
+        setLoading(true);
 
         const submitter = event.nativeEvent.submitter.name;
         if (submitter === 'cancel') {
@@ -79,7 +89,6 @@ function NotificationWrite() {
         body.append('pushType', pushType);
         body.append('date', date);
         body.append('image', image);
-        console.log(target);
 
         let msg;
         if (target === '소비자') {
@@ -88,25 +97,29 @@ function NotificationWrite() {
             const res = await axios.post('/api/notification/topic', body);
             msg = res.data.msg;
         } else if (target === '개인') {
-            body.append('userIds', userIds);
+            if (userIds.length === 0) {
+                alert('알림을 보낼 사용자를 한 명 이상 선택해주세요.');
+            } else {
+                body.append('userIds', userIds);
 
-            const res = await axios.post('/api/notification/token', body);
-            msg = res.data.msg;
+                const res = await axios.post('/api/notification/token', body);
+                msg = res.data.msg;
+            }
         }
 
+        setLoading(false);
         if (msg === 'NOTIFICATION_SEND_SUCCESS') {
             alert('알림이 성공적으로 전송됐습니다.');
             document.location.replace('/notification');
         } else if (msg === 'NOTIFICATION_RESERVE_SUCCESS') {
             alert('알림이 성공적으로 예약됐습니다.');
             document.location.replace('/notification');
-        } else {
-            alert('오류가 발생했습니다. 다시 시도해주세요.');
         }
     }
 
     return (
         <form className={"Notification-container Notification-content"} onSubmit={(event) => handleSubmit(event, userIds)}>
+            {loading ? <Loading /> : ""}
             <div className={"Notification-content"}>
                 <div className={"Notification-inputPlace"}>
                     <div>
