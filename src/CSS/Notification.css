@@ -28,6 +28,15 @@
     padding-left: 10px;
 }
 
+.Notification-leftRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
 .Notification-detail {
     display: flex;
     justify-content: space-between;
@@ -63,7 +72,54 @@
     color: #8E8E8E;
 }
 
+.Notification-inputPlace {
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.Notification-input {
+    border: none;
+    width: 690px;
+    height: 50px;
+    margin-left: 0;
+}
+
+.Notification-btnPlace {
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: #444444;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+}
+
+.Notification-writeBtn {
+    background: #05D287;
+    border-radius: 10px;
+    border-style: none;
+    color: white;
+    width: 100px;
+    height: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Notification-btn {
+    background: white;
+    border-radius: 10px;
+    border-style: none;
+    width: 100px;
+    height: 60px;
+}
+
 #Notification-userList {
+    width: 100%;
     height: 300px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }

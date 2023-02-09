@@ -25,14 +25,20 @@ function NotificationWrite() {
     }
 
     const renderUsers = (users) => {
-        return users.map((user) => {
+        const userList = users.map((user) => {
             return (
-                <div>
+                <div className={"Notification-leftRow"}>
                     <input type={"checkbox"} value={user.user_no} onChange={(event) => handleCheckUser(event, userIds)}/>
                     <p>{user.user_id}({user.user_name})</p>
                 </div>
             )
         })
+
+        return (
+            <div id={"Notification-userList"}>
+                {userList}
+            </div>
+        )
     }
 
     const handleCheckUser = (event, userIds) => {
@@ -100,55 +106,55 @@ function NotificationWrite() {
     }
 
     return (
-        <form className={"Notification-container"} onSubmit={(event) => handleSubmit(event, userIds)}>
+        <form className={"Notification-container Notification-content"} onSubmit={(event) => handleSubmit(event, userIds)}>
             <div className={"Notification-content"}>
                 <div className={"Notification-inputPlace"}>
                     <div>
-                        <p>알림 분류</p>
+                        <p className={"Notification-inputTitle"}>알림 분류</p>
                         <select className={"Notification-category"} name={'type'} onChange={handleChange}>
                             <option value={'이벤트'}>이벤트</option>
                             <option value={'기타'}>기타</option>
                         </select>
                     </div>
                     <div>
-                        <p>대상자</p>
+                        <p className={"Notification-inputTitle"}>대상자</p>
                         <select className={"Notification-category"} name={'target'} onChange={handleChange}>
                             <option value={'소비자'}>소비자 전체</option>
                             <option value={'개인'}>소비자 개별</option>
                             <option value={'스토어'}>스토어</option>
                         </select>
-                        <div id={"Notification-userList"}>
                         { target === '개인' && renderUsers(users) }
+                    </div>
+                    <div>
+                        <p className={"Notification-inputTitle"}>알림 제목</p>
+                        <input className={"Notification-input"} type={"text"} name={"title"} value={title} onChange={handleChange} placeholder={"제목을 입력하세요."} />
+                    </div>
+                    <div>
+                        <p className={"Notification-inputTitle"}>알림 제목</p>
+                        <textarea className={"Notification-input"} name={"content"} value={content} onChange={handleChange} placeholder={"내용을 입력하세요."} />
+                    </div>
+                    <div>
+                        <p className={"Notification-inputTitle"}>발행 유형</p>
+                        <div className={"Notification-leftRow"}>
+                            <p>실시간</p>
+                            <input type={"radio"} name={'pushType'} value={'실시간'} onChange={handleChange}/>
+                            <p>예약</p>
+                            <input type={"radio"} name={'pushType'} value={'예약'} onChange={handleChange}/>
                         </div>
                     </div>
                     <div>
-                        <p>알림 제목</p>
-                        <input type={"text"} name={"title"} value={title} onChange={handleChange} placeholder={"제목을 입력하세요."} />
-                    </div>
-                    <div>
-                        <p>알림 제목</p>
-                        <textarea name={"content"} value={content} onChange={handleChange} placeholder={"내용을 입력하세요."} />
-                    </div>
-                    <div>
-                        <p>발행 유형</p>
-                        <label>실시간</label>
-                        <input type={"radio"} name={'pushType'} value={'실시간'} onChange={handleChange}/>
-                        <label>예약</label>
-                        <input type={"radio"} name={'pushType'} value={'예약'} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <p>발송 일자</p>
+                        <p className={"Notification-inputTitle"}>발송 일자</p>
                         <input type={"datetime-local"} name={"date"} value={date} onChange={handleChange} />
                     </div>
+                    <div>
+                        <p className={"Notification-inputTitle"}>참고 이미지</p>
+                        <input type={"file"} name={"image"} onChange={handleChange}/>
+                    </div>
                 </div>
-                <div>
-                    <p>참고 이미지</p>
-                    <input type={"file"} name={"image"} onChange={handleChange}/>
+                <div className={"Notification-btnPlace"}>
+                    <input className={"Notification-writeBtn"} type={"submit"} name={"submit"} value={"보내기"}/>
+                    <input className={"Notification-btn"} type={"submit"} name={"cancel"} value={"취소"}/>
                 </div>
-            </div>
-            <div>
-                <input type={"submit"} name={"submit"} value={"보내기"}/>
-                <input type={"submit"} name={"cancel"} value={"취소"}/>
             </div>
         </form>
     )
