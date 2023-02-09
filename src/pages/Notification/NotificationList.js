@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {NavLink} from "react-router-dom";
+import '../../CSS/Notification.css';
 
 function NotificationList() {
     const [list, setList] = useState([]);
@@ -28,7 +29,7 @@ function NotificationList() {
         return list.map((notification) => {
             return [
                 <div className={"Notification-detail"}>
-                    <NavLink to={'/notification/' + notification.notification_id}>
+                    <NavLink className={"Notification-row"} to={'/notification/' + notification.notification_id}>
                         <p>{notification.notification_title}</p>
                         <p>{notification.notification_target}</p>
                         <p>{notification.notification_type}</p>
@@ -48,14 +49,23 @@ function NotificationList() {
     }
 
     return (
-        <div className={"Notification-container"}>
-            <p>전체 {count}개</p>
-            <select className={"Notification-category"} name={'filter'} onChange={handleChange}>
-                <option value={'등록순'}>등록순</option>
-                <option value={'소비자'}>소비자 전체</option>
-                <option value={'개인'}>소비자 개별</option>
-                <option value={'스토어'}>스토어</option>
-            </select>
+        <div className={"Notification-container Notification-content"}>
+            <div className={"Notification-row"}>
+                <select className={"Notification-category"} name={'filter'} onChange={handleChange}>
+                    <option value={'등록순'}>등록순</option>
+                    <option value={'소비자'}>소비자 전체</option>
+                    <option value={'개인'}>소비자 개별</option>
+                    <option value={'스토어'}>스토어</option>
+                </select>
+                <p className={"Notification-count"}>전체 {count}개</p>
+            </div>
+            <div className={"Notification-row"}>
+                <p>알림 제목</p>
+                <p>대상자</p>
+                <p>분류</p>
+                <p>작성 일자</p>
+                <p>공지 일정</p>
+            </div>
             {renderNotificationList(list)}
         </div>
     )
