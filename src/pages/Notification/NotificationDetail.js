@@ -20,33 +20,33 @@ function NotificationDetail() {
 
     const renderNotificationDetail = (detail) => {
         return (
-            <div className={'Notification-container'}>
-                <div>
-                    <p>알림 제목</p>
+            <div>
+                <div className={"Notification-row"}>
+                    <p className={"Notification-inputTitle"}>알림 제목</p>
                     <p>{detail.notification_title}</p>
                 </div>
-                <div>
-                    <p>알림 분류</p>
+                <div style={{background: "white"}} className={"Notification-row"}>
+                    <p className={"Notification-inputTitle"}>알림 분류</p>
                     <p>{detail.notification_type}</p>
                 </div>
-                <div>
-                    <p>대상자</p>
+                <div className={"Notification-row"}>
+                    <p className={"Notification-inputTitle"}>대상자</p>
                     <p>{detail.notification_target}</p>
                 </div>
-                <div>
-                    <p>작성 일자</p>
+                <div style={{background: "white"}} className={"Notification-row"}>
+                    <p className={"Notification-inputTitle"}>작성 일자</p>
                     <p>{detail.createdAt}</p>
                 </div>
-                <div>
-                    <p>발송 일자</p>
+                <div className={"Notification-row"}>
+                    <p className={"Notification-inputTitle"}>발송 일자</p>
                     <p>{detail.notification_date}</p>
                 </div>
-                <div>
-                    <p>알림 내용</p>
+                <div style={{background: "white"}} className={"Notification-row"}>
+                    <p className={"Notification-inputTitle"}>알림 내용</p>
                     <p>{detail.notification_content}</p>
                 </div>
-                <div>
-                    <p>이미지</p>
+                <div className={"Notification-row"}>
+                    <p className={"Notification-inputTitle"}>이미지</p>
                     <p>{detail.notification_img}</p>
                 </div>
             </div>
@@ -54,7 +54,7 @@ function NotificationDetail() {
     }
 
     return (
-        <div className={"Notification-container"}>
+        <div className={"Notification-container Notification-content"}>
             <h3>알림 상세보기</h3>
             <p>{renderNotificationDetail(detail)}</p>
         </div>

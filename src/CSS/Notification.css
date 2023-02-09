@@ -58,6 +58,11 @@
      height: 50px;
 }
 
+.Notification-inputTitle {
+    font-size: 14px;
+    color: #8E8E8E;
+}
+
 #Notification-userList {
     height: 300px;
     overflow-y: scroll;
