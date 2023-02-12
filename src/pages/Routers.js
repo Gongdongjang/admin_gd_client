@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import MD from './MD';
 import Partner from './Partner';
-import Contents from './Contents';
+import Contents from './Contents/Contents';
 import Login from './Login';
 import MD1 from './MD1';
 import MD2 from './MD2';
