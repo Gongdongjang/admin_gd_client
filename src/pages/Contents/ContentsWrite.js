@@ -11,7 +11,7 @@ function ContentsWrite() {
     const [upload_type, setUpload_type] = useState('');
     const [context, setContext] = useState('');
     const [link, setLink] = useState('');
-    const [category, setCategory] = useState('공동장을 이용해야 하는 이유')
+    const [category, setCategory] = useState('공동장 소식')
     const [thumbnail, setThumbnail] = useState(null);
     const [exist_thumbnail, setExistThumbnail] = useState('');
     const [photo, setPhoto] = useState(null);
