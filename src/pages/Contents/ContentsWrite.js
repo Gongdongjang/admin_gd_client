@@ -102,6 +102,7 @@ function ContentsWrite() {
         setContext(content.content_context);
         setLink(content.content_link);
         setDate(content.content_date.split('T')[0]);
+        setUpload_type(content.upload_type);
         setCategory(content.content_category);
         setExistPhoto(content.content_photo);
         setExistThumbnail(content.content_thumbnail);
@@ -144,9 +145,9 @@ function ContentsWrite() {
                         <div>
                             <p className={"Content-inputTitle"}>발행 유형</p>
                             <label>실시간</label>
-                            <input type={"radio"} name={'upload_type'} value={'실시간'} onChange={handleChange}/>
+                            <input type={"radio"} name={'upload_type'} value={'실시간'} checked={upload_type === '실시간'} onChange={handleChange}/>
                             <label>예약</label>
-                            <input type={"radio"} name={'upload_type'} value={'예약'} onChange={handleChange}/>
+                            <input type={"radio"} name={'upload_type'} value={'예약'} checked={upload_type === '예약'} onChange={handleChange}/>
                         </div>
                         <div>
                             <p className={"Content-inputTitle"}>발행 날짜</p>
@@ -172,7 +173,7 @@ function ContentsWrite() {
                             }
                             <input type='file' name='main' onChange={handleFileChange} />
                         </div>
-                        <div>
+                        <div>d
                             <p className={"Content-inputTitle"}>본문 이미지</p>
                             {exist_photo &&
                                 <img src={img_url + exist_photo} alt={'photo'} />
