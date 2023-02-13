@@ -75,10 +75,10 @@ function NoticeWrite() {
                     <p className={"Notice-inputTitle"}>공지 텍스트</p>
                     <textarea className={"Notice-input"} maxLength={1000} placeholder={'추가 텍스트를 입력하세요.'} onChange={handleChange} name={'context'} value={context}/>
                 </div>
+                <div className={"Notice-btnPlace"}>
+                    <input className={"Notice-writeBtn"} type={'submit'} value={'발송 하기'} />
+                </div>
             </form>
-            <div className={"Notice-btnPlace"}>
-                <input className={"Notice-writeBtn"} type={'submit'} value={'발송 하기'} />
-            </div>
         </div>
     )
 }

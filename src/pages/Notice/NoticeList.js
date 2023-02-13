@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import axios from "axios";
 
 function NoticeList() {
@@ -55,11 +55,13 @@ function NoticeList() {
     const renderNoticeList = (list) => {
         return list.map((notice) => {
             return [
-                <div className={"Notice-detail"} key={notice.notice_id} onClick={() => handleClickDetail(notice.notice_id)}>
-                    <input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                    <p>{notice.notice_title}</p>
-                    <p>{notice.notice_target}</p>
-                    <p>{notice.notice_date.split('T')[0]}</p>
+                <div className={"Notice-detail"} key={notice.notice_id}>
+                    <NavLink className={"Notice-detailRow"} to={'/notice/' + notice.notice_id}>
+                        <input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
+                        <p>{notice.notice_title}</p>
+                        <p>{notice.notice_target}</p>
+                        <p>{notice.notice_date.split('T')[0]}</p>
+                    </NavLink>
                 </div>
             ]
         });
