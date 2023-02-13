@@ -42,10 +42,11 @@
     font-size: 24px;
     font-weight: 500;
     color: #B4B4B4;
+    margin-left: 20px;
 }
 
-.Notice-menuBtn:hover {
-    color: #444444;
+.active {
+    color: #000000;
 }
 
 .Notice-inputPlace {

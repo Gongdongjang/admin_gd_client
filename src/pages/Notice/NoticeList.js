@@ -71,9 +71,6 @@ function NoticeList() {
 
     return (
         <div className={"Notice-container"}>
-            <Link to={'/notice/write'}>
-                <button className={"Notice-menuBtn"}>공지 작성하기</button>
-            </Link>
             <p>{count} 개</p>
             <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
             <div className={"Notice-content"}>
