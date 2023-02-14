@@ -59,8 +59,8 @@ function NoticeList() {
                     <NavLink className={"Notice-detailRow"} to={'/notice/' + notice.notice_id}>
                         <input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                         <p>{notice.notice_title}</p>
-                        <p>{notice.notice_target}</p>
-                        <p>{notice.notice_date.split('T')[0]}</p>
+                        <p>{notice.createdAt}</p>
+                        <p>{notice.notice_date}</p>
                     </NavLink>
                 </div>
             ]
@@ -73,9 +73,17 @@ function NoticeList() {
 
     return (
         <div className={"Notice-container"}>
-            <p>{count} 개</p>
-            <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
             <div className={"Notice-content"}>
+                <div className={"Notice-row"}>
+                    <p>전체 {count}개</p>
+                    <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>삭제하기</button>
+                </div>
+                <div className={"Notice-detailRow"}>
+                    <input type={"checkbox"}/>
+                    <p>공지 제목</p>
+                    <p>작성 일자</p>
+                    <p>공지 일정</p>
+                </div>
                 {renderNoticeList(list)}
             </div>
         </div>

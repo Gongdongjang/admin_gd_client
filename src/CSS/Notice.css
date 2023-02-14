@@ -9,6 +9,12 @@
     width: 100%;
 }
 
+.Notice-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .Notice-content {
     display: flex;
     flex-direction: column;
@@ -88,4 +94,8 @@
     height: 60px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+a {
+    text-decoration: none;
 }

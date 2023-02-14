@@ -6,9 +6,11 @@ import NoticeDetail from "./Notice/NoticeDetail";
 
 function Notice() {
   return (
-    <div>
-        <NavLink className={"Notice-menuBtn"} to={'/notice'} end>공지사항</NavLink>
-        <NavLink className={"Notice-menuBtn"} to={'/notice/write'}>공지 작성하기</NavLink>
+    <div className={"Notice-container"}>
+        <div className={"Notice-row"}>
+            <NavLink className={"Notice-menuBtn"} to={'/notice'} end>공지사항</NavLink>
+            <NavLink className={"Notice-menuBtn"} to={'/notice/write'}>공지 작성하기</NavLink>
+        </div>
       <Routes>
         <Route path='/' element={<NoticeList />}/>
         <Route path='/write' element={<NoticeWrite />}/>
