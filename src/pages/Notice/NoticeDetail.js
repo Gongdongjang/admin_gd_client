@@ -20,19 +20,23 @@ function NoticeDetail() {
     const renderDetail = (detail) => {
         return (
             <div>
-                <div className={"Notice-detailRow"}>
+                <div style={{background: "#F8F8F8"}} className={"Notice-detailRow"}>
                     <p className={"Notice-inputTitle"}>공지 제목</p>
                     <p>{detail.notice_title}</p>
                 </div>
-                <div className={"Notice-detailRow"}>
+                <div style={{background: "white"}} className={"Notice-detailRow"}>
+                    <p className={"Notice-inputTitle"}>작성 일자</p>
+                    <p>{detail.createdAt}</p>
+                </div>
+                <div style={{background: "#F8F8F8"}} className={"Notice-detailRow"}>
                     <p className={"Notice-inputTitle"}>공지 일정</p>
                     <p>{detail.notice_date}</p>
                 </div>
-                <div className={"Notice-detailRow"}>
+                <div style={{background: "white"}} className={"Notice-detailRow"}>
                     <p className={"Notice-inputTitle"}>이미지</p>
-                    <img src={img_url + detail.notice_photo} />
+                    <img src={img_url + detail.notice_photo} alt={"공지사항 이미지"}/>
                 </div>
-                <div className={"Notice-detailRow"}>
+                <div style={{background: "#F8F8F8"}} className={"Notice-detailRow"}>
                     <p className={"Notice-inputTitle"}>공지 내용</p>
                     <p>{detail.notice_context}</p>
                 </div>
@@ -45,8 +49,8 @@ function NoticeDetail() {
     }, []);
 
     return (
-        <div className={"Notice-container"}>
-            <h1>공지사항 상세보기</h1>
+        <div className={"Notice-container Notice-content"}>
+            <h2>공지사항 상세보기</h2>
             {renderDetail(detail)}
         </div>
     )
