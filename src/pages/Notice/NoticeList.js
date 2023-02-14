@@ -56,8 +56,8 @@ function NoticeList() {
         return list.map((notice) => {
             return [
                 <div className={"Notice-detail"} key={notice.notice_id}>
+                    <input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                     <NavLink className={"Notice-detailRow"} to={'/notice/' + notice.notice_id}>
-                        <input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
                         <p>{notice.notice_title}</p>
                         <p>{notice.createdAt}</p>
                         <p>{notice.notice_date}</p>
