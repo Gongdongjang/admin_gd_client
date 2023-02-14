@@ -6,7 +6,7 @@ function NoticeWrite() {
     const [context, setContext] = useState('');
     const [date, setDate] = useState(new Date(Date.now()).toISOString().split('.')[0]);
     const [target, setTarget] = useState('');
-    const [type, setType] = useState('');
+    const [type, setType] = useState('실시간');
     const [photo, setPhoto] = useState(null);
 
     const handleChange = (event) => {
@@ -48,12 +48,8 @@ function NoticeWrite() {
     return (
         <div className={"Notice-content"}>
             <form className={"Notice-inputPlace"} onSubmit={handleSubmit}>
-                <div>
-                    <p className={"Notice-inputTitle"}>제목</p>
-                    <input className={"Notice-input"} maxLength={20} type={'text'} placeholder={'제목을 입력하세요'} name={'title'} onChange={handleChange} value={title}/>
-                </div>
                 <div onChange={handleChange}>
-                    <p className={"Notice-inputTitle"}>발송 유형</p>
+                    <p className={"Notice-inputTitle"}>업로드 유형</p>
                     <label className={"Notice-inputTitle"}>
                         <input type={'radio'} value={'실시간'} name={'type'}/>
                         실시간
@@ -64,19 +60,23 @@ function NoticeWrite() {
                     </label>
                 </div>
                 <div>
-                    <p className={"Notice-inputTitle"}>업로드 날짜</p>
+                    <p className={"Notice-inputTitle"}>공지 일정</p>
                     <input className={"Notice-input"} type={'datetime-local'} name={'date'} onChange={handleChange} value={date}/>
+                </div>
+                <div>
+                    <p className={"Notice-inputTitle"}>공지 제목</p>
+                    <input className={"Notice-input"} maxLength={20} type={'text'} placeholder={'제목을 입력하세요'} name={'title'} onChange={handleChange} value={title}/>
+                </div>
+                <div>
+                    <p className={"Notice-inputTitle"}>공지 내용</p>
+                    <textarea className={"Notice-input"} maxLength={1000} placeholder={'내용을 입력하세요.'} onChange={handleChange} name={'context'} value={context}/>
                 </div>
                 <div>
                     <p className={"Notice-inputTitle"}>이미지</p>
                     <input type={'file'} name={'photo'} onChange={handleFileChange}/>
                 </div>
-                <div>
-                    <p className={"Notice-inputTitle"}>공지 텍스트</p>
-                    <textarea className={"Notice-input"} maxLength={1000} placeholder={'추가 텍스트를 입력하세요.'} onChange={handleChange} name={'context'} value={context}/>
-                </div>
                 <div className={"Notice-btnPlace"}>
-                    <input className={"Notice-writeBtn"} type={'submit'} value={'발송 하기'} />
+                    <input className={"Notice-writeBtn"} type={'submit'} value={'게시'} />
                 </div>
             </form>
         </div>
