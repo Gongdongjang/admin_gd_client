@@ -1,12 +1,16 @@
 .orderListContainer{
     width:80%;margin: 1% 10%;height: auto;
 }
-table {
-    width: 100%;
+.orderList_table {
+    background-color: white;
+    margin: 50px;
+    width: 1500px;max-height: 700px;
+    overflow-x: hidden;
+    overflow-y: scroll;
     border-top: 1px solid #444444;
     border-collapse: collapse;
   }
-  th, td {
+.orderList_table  th, td {
     border-bottom: 1px solid #444444;
     padding: 10px;
   }

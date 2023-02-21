@@ -20,22 +20,31 @@ export const  removeMD = async function(mdId) {
 export const duration=(start,end)=>{ 
     return start.substr(0, 10)+'~'+end.substr(0, 10);
   }
-
-  
-  //미완성
-  const getName = async (farm_id,store_id) => {
-    const res2 = await axios.get(`http://localhost:5000/api/read/name/${farm_id}/${store_id}`)
-    .then(({ data }) => {
-      //console.log(data);
-      this.setState({ 
-        //loading: true,
-        //ItemList: data
-      });
-    })
-    const data_names= res2.data;
-   
-    let arr=[data_names.farm_name,data_names.store_name];
-
-    return arr;
+export const getWeek = (checkedList)=>{ //selectbox 선택된 요일 추출
+  // eslint-disable-next-line
+    const reg = '/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi';
     
+    
+   
+    return(checkedList.toString().replace(reg,''));
   }
+
+export const setChecked=(selecteds)=>{ //선택된 사항 체크하기
+  // 선택된 목록 가져오기
+  const arr3 = selecteds.split(" "); //하나씩 추출
+  
+ for(var i=0;i<arr3.length;i++)
+ {
+   let query = 'input[value="'+arr3[i].replace(/\s/gi, "")+'"]';
+   document.querySelector(query).checked=true;
+ }
+}
+export const debounce = (callback,delay)=>{ //api 호출 빈도 줄이기
+  let timer;
+  return (...args)=>{
+    clearTimeout(timer); //실행한 함수(setTimeout)를 취소
+    timer = setTimeout(()=>callback(...args),delay);//딜레이가 지나면 콜백함수 실행
+  };
+}
+
+

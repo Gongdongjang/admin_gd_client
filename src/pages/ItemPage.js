@@ -2,10 +2,11 @@ import React,{useEffect,useState} from "react";
 import axios from "axios";
 import { Link ,useLocation} from "react-router-dom";
 import * as functions from './functions.js';
+import noImg from "../imgs/gdg_admin_ic/image_not_supported_48.png";
 import '../CSS/MdRead.css';
 
 function ItemPage  (){
-  const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
+  const img_url = 'https://ggdjang.s3.ap-northeast-2.amazonaws.com/';
   const body = useLocation().state.body;
   //console.log(JSON.stringify(body));
   let[farm, setFarm] = useState();
@@ -34,7 +35,7 @@ function ItemPage  (){
   useEffect(() => { //상점,농가 id로 이름 검색해서 넣기 
     
     axios
-      .get(`http://localhost:5000/api/search/name/${body.farm_id}/${body.store_id}`)
+      .get(`http://localhost:5000/api/md/name/${body.farm_id}/${body.store_id}`)
       .then(({data }) => {
         //console.log(data);
         setFarm(data.farm_name);
@@ -47,7 +48,7 @@ function ItemPage  (){
       });
   
       axios
-      .get(`http://localhost:5000/api/read/imgs/${body.md_id}`)
+      .get(`http://localhost:5000/api/md/imgs/${body.md_id}`)
       .then(({data }) => {
         console.log(data);
        console.log(data[0].mdimg_thumbnail.toString());
@@ -66,71 +67,90 @@ function ItemPage  (){
       });
 
   }, []);
-  const isFridge=()=>{
-    if(body.md_isFridge)
-      fridge="냉장 보관 필요";
-    else
-      fridge="실온 보관 가능"
-      return fridge;
+  const mdCancle=(e)=>{
+   
+    e.preventDefault();
+         axios
+         .post(`http://localhost:5000/api/md/cancle/${body.md_id}`)
+         .then((res) => console.log(res))
+         .then(alert("공동구매가 종료되었습니다"))
+         .then(window.location.href = '/mdPost/MDEnd'); 
+     
   }
   return (
     <div className="section">
-      <div className='mdPage_container'>
-        <h1>상품 상세페이지</h1>
-        <Link to={`/orderList/${body.md_id}`} state={{md_id : body.md_id}}>
-        <h3>픽업리스트 확인하기</h3>  
+      <div className='farmPage_container'>
+        <div className="farmPageContent">
+          <img className="pageThumbnail" src={ img_url + thumbnail} />
+          
+          <div className='page_title'>
+            <p className="partner_name">{body.md_name}</p>
+            <Link to={`/MDPost/mdPost/update/${body.md_id}`} ><p className="updateBtn">수정하기</p></Link>
+          </div>
+          <Link to={`/orderList/${body.md_id}`} state={{md_id : body.md_id}}>
+        <h4>픽업리스트 확인하기</h4>  
         </Link>
-        <div className="pageContent">
+          <table className="partnerPage_table">
           
-          <p>상품번호 : {body.md_id}</p>
-          <p>상품이름 : {body.md_name}</p>
-          <p>상품가격 : {body.pay_price} </p>
-          <p>남은구매일 : {body.md_dd} </p>
-          <p>상품중량 : {body.md_weight}</p>
-          <p>상품구성 : {body.pay_comp}</p>
-          <p>냉장고필요여부 : {isFridge()}</p>
-          <p>진행농가 : {farm}</p>
-          <p>농가소개 : {farm_info}</p>
-          <p>구매제한 : {body.md_maxqty}</p>
-          <p>할인정보 : {body.pay_dc}</p>
-          <p>결제예정일 : {body.pay_schedule.substr(0, 10)}</p>
-          <p>진행일 : {functions.duration(body.md_start,body.md_end)}</p>
-          <p>목표수량 : {body.stk_goal}</p>
-          <p>최대확보수량 : {body.stk_max}</p>
-          <p>남은수량 : {body.stk_remain}</p> 
-          <p>현재구매수량 : {body.stk_total}</p>
-          <p>가게이름 : {store}</p>
-          <p>가게 설명 : {store_info}</p>
-          <p>픽업일 : {functions.duration(body.pu_start,body.pu_end)}</p>
-          <p>썸네일</p>
-
-          <img src={ img_url + thumbnail} alt={`${thumbnail}`}/>
-          <p>슬라이드</p>
+            <tbody>
+            <tr><th>상품번호</th><th>{body.md_id}</th></tr>
+            <tr><th>등록일/수정일</th><th> {body.md_date}</th><th>조회수</th><th> {body.md_views}</th></tr>
+            <tr><th>시작 날짜  </th><th>  {body.md_start}</th><th>마감 날짜</th><th>{body.md_end}</th></tr>
+            <tr><th>픽업일  </th><th>{functions.duration(body.pu_start,body.pu_end)}</th><th>냉장고 유무</th><th>{body.md_isFridge}</th></tr>
+            <tr><th>농가</th><th> {farm}</th><th>스토어</th><th> {store}</th></tr>
+            <tr><th>목표수량</th><th> {body.stk_goal}</th><th>상품종류  </th><th> {body.md_type}</th></tr>
+            <tr><th>상품구성  </th><th>{body.pay_comp}</th></tr>
+            <tr><th>상품가격 </th><th>{body.pay_price}</th><th>할인정보 </th><th> {body.pay_dc}</th></tr>
+            </tbody>
+          </table>
+          <button id="MD_cancelBtn" onClick={mdCancle}>공동구매 종료하기</button>
+        </div>
+        <div className="farmPageReport">
+        <h2>공동구매 이미지 등록  </h2>
+        <div className="pageImgBox">
           <div>
-          {images.map((image, id) => (
-                <div  className="imgbox" key={id}>
-                  
-                  <img className="selectedImg" src={img_url+image} alt={`${image}-${id}`} />
-                </div>
-              ))}
+            <div className="pageImg">
+              <p>썸네일이미지</p>
+              <img src={ img_url + thumbnail} alt={`${thumbnail}`}/>
+            </div>
+            <div className="pageImg">
+              <p>본문 이미지</p>
+              <img src={ img_url+ detail} alt={`${detail}`} />
+            </div>
           </div>
           
-          <br/> <br/> <br/> <br/> <br/>
-          <p>상세이미지</p>
-          <img src={ img_url+ detail} alt={`${detail}`} />
+          <div className="pageImgMain">
+          <p>메인이미지</p>
+            <div className="pageSlide">
+              {images.map((image, id) => (
+                <span   key={id}>
+                  <img className="selectedImg" src={img_url+image} />
+                </span>
+              ))}
+            </div>
+          </div>
+         
 
         </div>
-                
-        <div className="pageBtn">
-          <div className='ud_btn'>
-            <Link to={`/mdPost/update/${body.md_id}`} ><button  type="button">수정</button></Link>
-            <button type="button" onClick={()=>functions.removeMD(body.md_id)}>삭제</button>
-          </div>
-          <div className='return_btn'>
-            <Link to="/mdRead"><button>목록으로 돌아가기</button></Link>
-          </div>
-        </div>
+
+          
+          
+        <h2>공동구매 진행상황  </h2>
+        <table className="MD_table">  
+        
+        <tbody>
+          
+            <tr><th>진행단계</th><th> {body.stk_confirm}</th><th>주문확정여부  </th><th> {body.md_result}</th></tr>
+            <tr><th>목표수량</th><th> {body.stk_goal}</th><th>남은수량  </th><th> {body.stk_remain}</th></tr>
+            <tr><th>현재구매수량  </th><th> {body.stk_total}</th></tr>
+       
+            <tr><th>운송장번호</th><th> {body.pu_waybill}</th></tr>
+            
+            
+            </tbody>
+          </table>
       </div>
+    </div>
     </div>
       );
 }
