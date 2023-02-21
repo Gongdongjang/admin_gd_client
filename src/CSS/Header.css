@@ -1,0 +1,102 @@
+a { text-decoration: none; color: black;}
+.menuTop{ /*로고,로그인*/
+    position: absolute;
+    width: 1920px;
+    height:100px;
+    top: 0px;
+    background-color: rgb(255, 255, 255);
+}
+#Logo{
+    
+   /* 공동장 로고 */
+position: absolute;
+width: 200px;
+height: 35px;
+left: 30px;
+top: 30px;
+background: url('../imgs/gdg_admin_ic/ic_logo2.png') no-repeat ; 
+background-size: 90px 30px;
+background-position: center;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 28px;
+line-height: 35px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+
+/* gg/600 */
+
+color: #05D287;
+}
+#login{
+    position: absolute;
+    width: 60px;
+    height: 23px;
+    left: 1777px;
+    top: 30px;
+    
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    
+    /* gb/800 */
+    
+    color: #282828;
+}
+.menuLeft{ /*좌측메뉴판*/
+    display: inline‑block;
+    float: left;
+    width: 242px;
+    height:100vh;
+    background-color: white;
+}
+.menuLeft ul{
+    position: absolute;
+    top:100px;
+    width: 242px;
+    height: auto;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 23px;
+    margin: 0px;
+    
+    /* identical to box height */
+    /* gb/700 */
+    color: #444444;
+}
+
+
+#mainMenuUl li{
+    width: 230px;
+    height: 64px;
+    float: right;
+    line-height: 64px;
+    background-color: rgb(255, 255, 255);
+}
+#mainMenuUl li:hover{
+    background: #F4F4F4;
+    border-radius: 10px 0px 0px 10px;
+}
+#topUl{ /*txt 관리*/
+    width: 230px;
+    height: 60px;
+    float: right;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 60px;
+    margin: 0px;
+    color: #05D287;
+}

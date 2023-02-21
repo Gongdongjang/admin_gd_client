@@ -1,3 +1,4 @@
+
 import Partner_page from './Partner_page';
 import Partner_header from './Partner_header';
 import React, { useState, useEffect }  from 'react';
@@ -15,6 +16,6 @@ function Partner (){
         </div>
       </div>
     );
-  
+
 }
   export default Partner;
