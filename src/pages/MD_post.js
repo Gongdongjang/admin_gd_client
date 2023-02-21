@@ -1,30 +1,32 @@
 import React ,{useState,useEffect,useCallback}from "react";
 import axios from "axios";
-import { Link ,useLocation,useParams} from "react-router-dom";
+import { Link ,useLocation,useParams, useNavigate} from "react-router-dom";
 import '../CSS/MdPost.css';
 
 function MD_post() {
+  let navigate = useNavigate();
   const url = useLocation();
-  const img_url = 'https://gdjang.s3.ap-northeast-2.amazonaws.com/';
+  const img_url = 'https://ggdjang.s3.ap-northeast-2.amazonaws.com/';
   const { md_id } = useParams();
   const [input, setInput] = useState({ //상품 정보
     
     md_name : '',
-    md_weight : '',
+    md_type : '',
     md_start : '',
     md_end : '',
-    md_maxqty :'',
+    
     pay_price :'',
     pay_dc : '',
     pay_comp : '',
     md_isFridge :'',
-    pay_schedule : '',
+    
     farm_name : '',
     stk_goal : '',
-    stk_max :'',
+    stk_confirm :'공동구매 진행전',
     store_name : '',
     pu_start : '',
     pu_end : '',
+    pu_waybill : '',
 })
 
 const [photos,setPhotos] = useState({ //상품별 이미지
@@ -53,11 +55,10 @@ let [search_farm, setSearch_farm] = useState([]);
 let [search_store, setSearch_Store] = useState([]);
   
 const {  
-  md_name ,md_weight ,md_start ,md_end ,md_maxqty , pay_price , pay_dc ,pay_comp ,md_isFridge,pay_schedule ,
-  farm_name ,stk_goal ,stk_max ,store_name ,pu_start ,pu_end , } = input; //상품 정보
+  md_name ,md_type ,md_start ,md_end , pay_price , pay_dc ,pay_comp ,md_isFridge,
+  farm_name ,stk_goal ,stk_confirm ,store_name ,pu_start ,pu_end , pu_waybill, } = input; //상품 정보
 
-const{
-  thumbnail,  detail,} = photos; //이미지 정보
+const{ thumbnail,  detail,} = photos; //이미지 정보
 
 const debounce = (callback,delay)=>{ //api 호출 빈도 줄이기
   let timer;
@@ -70,13 +71,13 @@ const debounce = (callback,delay)=>{ //api 호출 빈도 줄이기
 const load=()=>{ //등록된 농가,상점 load
   
   axios
-    .get(`http://localhost:5000/api/post/farm`)
+    .get(`http://localhost:5000/api/md/all/farm`)
     .then(({ data }) => {
       setSearch_farm(data);
     })
 
     axios
-    .get(`http://localhost:5000/api/post/store`)
+    .get(`http://localhost:5000/api/md/all/store`)
     .then(({ data }) => {
       setSearch_Store(data);
     })
@@ -89,7 +90,7 @@ const getPostContent= async () => { //작성된 내용 가져오기_수정시
   const res2 = await axios.get(`http://localhost:5000/api/read/name/${md_id}`);
   const data_names= res2.data;
   console.log(data_names);
-  axios.get(`http://localhost:5000/api/read/imgs/${md_id}`)
+  axios.get(`http://localhost:5000/api/md/imgs/${md_id}`)
   .then(({data }) => {
     console.log(data);
    console.log(data[0].mdimg_thumbnail.toString());
@@ -108,23 +109,24 @@ const getPostContent= async () => { //작성된 내용 가져오기_수정시
   });
   const getData = {
     md_name : datas[0].md_name,
-    md_weight : datas[0].md_weight,
+    md_type : datas[0].md_type,
     md_start : datas[0].md_start.substr(0, 10),
     md_end : datas[0].md_end.substr(0, 10),
-    md_maxqty :datas[0].md_maxqty,
+    
     pay_price :datas[0].pay_price,
     pay_dc : datas[0].pay_dc,
     pay_comp : datas[0].pay_comp,
     md_isFridge : datas[0].md_isFridge,
-    pay_schedule : datas[0].pay_schedule.substr(0, 10),
+    
     farm_name : data_names.farm_name,
     stk_goal : datas[0].stk_goal,
-    stk_max :datas[0].stk_max,
+    stk_confirm : datas[0].stk_confirm,
     store_name : data_names.store_name,
     pu_start : datas[0].pu_start.substr(0, 10),
     pu_end : datas[0].pu_end.substr(0, 10),
+    pu_waybill :datas[0].pu_waybill,
   };
-  //console.log(getData);
+  console.log(getData);
  
   setInput(getData);
 }
@@ -149,7 +151,11 @@ useEffect(() => {
   }
 }, []);
 
-
+function handleClick() {
+  alert("작성중인 내용이 삭제됩니다");
+  window.location.href = '/mdPost'; 
+ // navigate(-1)
+}
 const handleChange = (e) => { //기존 input 함수_호출빈도 줄이기 전
     const {name, value} = e.target ;// destructuring
     //console.log(value);
@@ -209,6 +215,16 @@ const updateChange = (name,value,search_farm,search_store) => {
  
     setSearch(filterData);
 };
+const changeSelectOptionHandler = (e) =>{
+  let name="stk_confirm";
+  let value = e.target.value;
+  console.log("select"+value);
+  setInput({
+    ...input,
+    [name]:value
+  });
+};
+
 const  getDateDiff = (d1, d2) => { //d-day
     const date1 = new Date(d1);
     const date2 = new Date(d2);
@@ -221,8 +237,8 @@ const  getDateDiff = (d1, d2) => { //d-day
     let today = new Date();
     
     e.preventDefault();
-    if(!md_name || !md_start || !md_end ||!md_maxqty || !pay_price  || !pay_schedule || !farm_name 
-      || !stk_goal ||  !stk_max || !store_name || !pu_start ||  !pu_end)
+    if(!md_name || !md_start || !md_end  || !pay_price  || !farm_name 
+      || !stk_goal ||  !store_name || !pu_start ||  !pu_end)
     {
       alert("필수입력란을 채워주세요");
     }
@@ -232,22 +248,23 @@ const  getDateDiff = (d1, d2) => { //d-day
       let body = {
         mdName : md_name,
         mdDate : today.toLocaleString(),
-        weight : md_weight,
+        type : md_type,
         start : md_start,
         end : md_end,
         dd : getDateDiff(md_end,md_start),
-        maxqty : md_maxqty,
+        
         price :pay_price,
         dc : pay_dc,
         comp : pay_comp,
         isFridge :md_isFridge,
-        paySchedule : pay_schedule,
+        
         farmName : farm_name,
         goal : stk_goal,
-        stkMax : stk_max,
+        stkConfirm : stk_confirm,
         storeName : store_name,
         puStart : pu_start,
         puEnd : pu_end,
+        puWaybill : pu_waybill,
        };
        console.log(body);
        const config = {
@@ -266,21 +283,23 @@ const  getDateDiff = (d1, d2) => { //d-day
        if(!md_id)
        {
          axios
-         .post("http://localhost:5000/api/post/md", body)
+         .post("http://localhost:5000/api/md/post", body)
          .then((res) => console.log(res))
-         //.then(window.location.href = '/mdPost/ok');
+         .then(alert("등록이 완료되었습니다"))
+         .then(window.location.href = '/mdPost');
 
          axios
-         .post(`http://localhost:5000/api/post/md/imgs`, formData,config);
+         .post(`http://localhost:5000/api/md/post/imgs`, formData,config);
          
        }
        else{
          axios
          .post(`http://localhost:5000/api/md/update/${md_id}`, body)
          .then((res) => console.log(res))
-         .then(window.location.href = '/mdEdit/ok');
+         .then(alert("수정이 완료되었습니다"))
+         .then(window.location.href = '/mdPost');
        }
-      
+      //
     }
     
   }
@@ -353,12 +372,11 @@ const  getDateDiff = (d1, d2) => { //d-day
       <div className="section">
        
         {/*페이지 내용*/} 
-        <div className='mdPost_container'>
-            <h1>상품 등록/수정하기</h1>
+        <div className='post'>  
             <form  className='md_form' onSubmit={handleSubmit}>
-            <div className="formContent">
-            <h3>상품 정보</h3>
-            <label>
+            <div className="MDformCase">
+              <div className="MDFormLeft">
+              <label>
               상품이름 (필수)
               <input type="text" name="md_name" value={md_name} onChange={onDebounceChange} />
             </label><br/>
@@ -367,8 +385,8 @@ const  getDateDiff = (d1, d2) => { //d-day
               <input type="text" name="pay_price" value={pay_price} onChange={onDebounceChange} />원
             </label><br/>
             <label>
-              상품중량 
-              <input type="text" name="md_weight" value={md_weight} onChange={onDebounceChange} placeholder="ex.1세트 300g"/>
+              상품종류
+              <input type="text" name="md_type" value={md_type} onChange={onDebounceChange} />
             </label><br/>
             <label>
               상품구성
@@ -377,10 +395,13 @@ const  getDateDiff = (d1, d2) => { //d-day
             <label>
               냉장고 필요 여부 (필수)
               <label htmlFor="radio01"className="label_radio">
-              <input id="radio01"className="inputRadio"type="radio" value="0" checked ={md_isFridge=="0"} onChange={handleRadio}/>실온보관
+              <input id="radio01"className="inputRadio"type="radio" value="냉장" checked ={md_isFridge=="냉장"} onChange={handleRadio}/>냉장
               </label>
               <label htmlFor="radio02"className="label_radio">
-              <input id="radio02"className="inputRadio"type="radio" value="1" checked ={md_isFridge=="1"} onChange={handleRadio}/>냉장보관
+              <input id="radio02"className="inputRadio"type="radio" value="냉동" checked ={md_isFridge=="냉동"} onChange={handleRadio}/>냉동
+              </label>
+              <label htmlFor="radio03"className="label_radio">
+              <input id="radio03"className="inputRadio"type="radio" value="없음" checked ={md_isFridge=="없음"} onChange={handleRadio}/>없음
               </label>
             </label><br/>
 
@@ -389,33 +410,26 @@ const  getDateDiff = (d1, d2) => { //d-day
               진행농가 (필수)
               <span>
               <input type="text" name="farm_name" value={farm_name}  onChange={(e) => (onDebounceChange(e))}/>
+              <div className="search_box">
               {search.map((item) => {
                 if(item.farm_name){
                   return (
-                  <>
-                    <div className="search-result" onClick={(e)=>(searchResult('farm_name',item.farm_name))}>
+                  <div className="search_case">
+                    <div className="search_result" onClick={(e)=>(searchResult('farm_name',item.farm_name))}>
                       {item.farm_name}
                     </div>
-                  </>
+                  </div>
                   );
                 }
               })}
+              </div>
               </span>
-            </label><br/>
-
-
-            <label>
-              구매제한 (필수)
-              <input type="text" name="md_maxqty" value={md_maxqty} onChange={onDebounceChange} />세트
             </label><br/>
             <label>
               할인정보
               <textarea name="pay_dc" value={pay_dc} onChange={onDebounceChange} />
             </label><br/>
-            <label>
-              결제예정일 (필수)
-              <input type="date" name="pay_schedule" value={pay_schedule} onChange={onDebounceChange} />
-            </label><br/>
+            
             <div>
             <label>
               진행시작일 (필수)
@@ -427,32 +441,32 @@ const  getDateDiff = (d1, d2) => { //d-day
             </label><br/>
             </div>
 
-            <h3>재고 정보</h3>
             <label>
               목표수량 (필수)
-              <input type="text" name="stk_goal" value={stk_goal} onChange={onDebounceChange} placeholder="ex.최소 수량"/>세트
-            </label><br/>
-            <label>
-            최대확보수량 (필수)
-              <input type="text" name="stk_max" value={stk_max} onChange={onDebounceChange} />세트
+              <input type="text" name="stk_goal" value={stk_goal} onChange={onDebounceChange} />세트
             </label><br/>
             
-            <h3>픽업정보</h3>
+            
+              </div>
+              <div className="MDFormRight">
+              
             <label>
               가게이름 (필수)
               <input type="text" name="store_name" value={store_name} onChange={onDebounceChange} />
+              <div className="search_box">
               {search.map((item) => {
                 if(item.store_name){
                   return (
-                    <>
-                      <div className="search-result" onClick={(e)=>(searchResult('store_name',item.store_name))}>
+                    <div className="search_case">
+                      <div className="search_result" onClick={(e)=>(searchResult('store_name',item.store_name))}>
                         {item.store_name}
                       </div>
-                    </>
+                    </div>
                     );
                 }
                 
               })}
+              </div>
             </label><br/>
             <label>
               픽업시작일 (필수)
@@ -461,45 +475,67 @@ const  getDateDiff = (d1, d2) => { //d-day
             <label>
               픽업마감일 (필수)
               <input type="date" name="pu_end" value={pu_end} onChange={onDebounceChange} />
+            </label><br/>
+            <label>
+              운송장 번호 
+              <input type="text" name="pu_waybill" value={pu_waybill} onChange={onDebounceChange} />
             </label>
-
-            <h3>이미지 첨부</h3>
-            <label className="imgs">
+            <br/>
+            <label>
+              진행상태
+              <select name="stk_confirm" value={stk_confirm} onChange={changeSelectOptionHandler}>
+			          <option value="선택하기">선택하기</option>
+			          <option value="공동구매 진행중">공동구매 진행중</option>
+                <option value="공동구매 종료">공동구매 종료</option>
+			          <option value="상품 준비중">상품 준비중</option>
+                <option value="상품 배송중">상품 배송중</option>
+			          <option value="스토어 도착">스토어 도착</option>
+                <option value="픽업완료">픽업완료</option>
+                
+		          </select>
+            </label>
+            <br/>
+            <label className="postImgs">
               썸네일 (필수)
               <div>
-                <img className={thumbnail ? 'selectedImg' : 'noneImg'} alt="이미지 없음" src={thumbImage.preview_URL || img_url+thumbImage}/>
+                <img className={thumbnail ? 'selectedImg' : 'noneImg'} alt="이미지 없음" src={thumbImage.preview_URL || img_url+thumbImage}style={{width:'200px',height:'200px'}}/>
                 <input type="file" name="thumbnail"  accept='image/*' onChange={handleFileChange} />
               </div>
             </label><br/>
-            <label className="imgs">
+            <label className="postImgs">
               슬라이드 이미지 (최소 1장,최대5장)
               <div className="multipleImgs">
-              <button className="deleteImg" value ="전체삭제"onClick={handleDeleteImage} />
+              <button type="button" className="deleteImg" value ="전체삭제"onClick={handleDeleteImage} >전체삭제</button>
               {
                   images.map((image, id) => (
                     <div  className="imgbox" key={id}>
                       
-                      <img className="selectedImg" src={url.pathname.includes('update')?img_url+image:image} alt={`${img_url+image}`} />
+                      <img className="selectedImg" src={url.pathname.includes('update')?img_url+image:image} alt={`${img_url+image}`} style={{width:'200px',height:'200px',float:'left'}}/>
                     </div>
                   ))
               }
               </div>
               <input type="file" name="slide01" multiple accept='image/*' onChange={handleImages} />
             </label><br/>
-
-            <label className="imgs">
+              <div>
+            <label className="postImgs">
               상품설명 (필수)
               <div>
-                <img className={detail ? 'selectedImg' : 'noneImg'} alt="이미지 없음" src={detailImage.preview_URL|| img_url+detailImage}/>
+                <img className={detail ? 'selectedImg' : 'noneImg'}  alt="이미지 없음" src={detailImage.preview_URL|| img_url+detailImage}style={{width:'200px',height:'400px'}}/>
                 <input type="file" name="detail"  accept='image/*' onChange={handleFileChange} />
               </div>
-            </label><br/>
-
+            </label></div><br/>
+              </div>
+            
             </div>
-            <div className="mdSubmit">
-            <input type="submit" value={ !md_id ? '등록' : '수정'} />
+            
+            <div className="postFooter">
+            <button id="backBtn" type="button" onClick={handleClick}>뒤로가기</button>
+            <input id="submitBtn" type="submit" value={ !md_id ? '등록' : '수정'} />
             </div>
+            
           </form>
+        
         </div>
       </div>
     );

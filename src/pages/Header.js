@@ -6,45 +6,25 @@ class Header extends React.Component{
     render(){
         return (
             <div className="menubar">
-                {/*로그인,알림*/}
-                <div className="topMenu">
-                    <h3 className="topMenus"><Link to="/login">로그인</Link></h3>
-                    <button className="topMenus"><Link to="/message">알림</Link></button>
+                {/*로고,로그인*/}
+                <div className="menuTop">
+                    <Link to="/home"><a id="Logo"></a></Link>
+                    <a id="login"><Link to="/login">로그인</Link></a>
                 </div>
                 {/*메인메뉴*/}
-                <div className="dropdown">
-                    <div className="mainMenu">
-                    <div><Link to="/home"><h5 id="Logo">공동장 로고</h5></Link></div>
+                <span className="menuLeft">
                     <ul  id="mainMenuUl">
-                        <li><Link to="/partner">입점 업체 관리</Link></li>
-                        <li><Link to="/mdPost">공동구매 관리</Link></li>
-                        <li><Link to="/review">리뷰 관리</Link></li>
-                        <li><Link to="/board">공지사항</Link></li>
-                        <li><Link to="/contents">콘텐츠</Link></li>
-                        <li><Link to="/message">알림 관리</Link></li>
+                        <div id="topUl">관리</div>
+                        <Link to="/partner"><li>입점 업체 관리</li></Link>
+                        <Link to="/mdPost"><li>공동구매 관리</li></Link>
+                        <Link to="/contents"><li>컨텐츠 관리</li></Link>
+                        <Link to="/review"><li>리뷰 관리</li></Link>
+                        <Link to="/contents"><li>컨텐츠</li></Link>
+                        <Link to="/msg"><li>알림 관리</li></Link>
+                        <Link to="/board"><li>공지사항 관리</li></Link>
                     </ul>
-                    </div>
-
-                    <ul className="dropdown-content">
-                        <div className="mdMenu">
-                        <li><Link to="/mdPost">상품 등록</Link></li>
-                        <li><Link to="/mdRead">진행중인 상품</Link></li>
-                        </div>
-                        <div className="mdMenu">
-                        <li><Link to="/mdPost">상품 등록</Link></li>
-                        <li><Link to="/mdRead">진행중인 상품</Link></li>
-                        </div>
-                        <div className="mdMenu">
-                        <li><Link to="/mdPost">상품 등록</Link></li>
-                        <li><Link to="/mdRead">진행중인 상품</Link></li>
-                        </div>
-                        <div className="mdMenu">
-                        <li><Link to="/mdPost">상품 등록</Link></li>
-                        <li><Link to="/mdRead">진행중인 상품</Link></li>
-                        </div>
-                        
-                    </ul>
-                </div>
+                    
+                </span>
             </div>      
   );
     }

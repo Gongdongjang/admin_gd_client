@@ -1,11 +1,11 @@
 import React, { useState ,useEffect} from "react";
 import axios from "axios";
-import MDList from "./MDList";
+import MDEndList from "./MDEndList";
 import searchImg from "../imgs/gdg_admin_ic/ic_search.png";
 import { Link } from "react-router-dom";
 //import '../CSS/MdRead.css';
 
-function MD_read (){
+function MDEnd (){
 let[loading,setLoding]=useState(false);
 let[ItemList,setItemList]=useState([]);
 let[selectValue_search,setSelectValue_search]=useState('name');
@@ -20,7 +20,7 @@ const [ style, setStyle ] = useState({display: 'none'});
     //let sort=selectValue_sort;
  
     axios
-      .get(`http://localhost:5000/api/md/sort/${selectValue_sort}`)
+      .get(`http://localhost:5000/api/md/MDResult/${selectValue_sort}`)
       .then(({ data }) => {
         console.log(data);
         setLoding(true);
@@ -39,7 +39,7 @@ const [ style, setStyle ] = useState({display: 'none'});
     let search_value=md_search;
  
     axios
-      .get(`http://localhost:5000/api/md/${search}/${search_value}`)
+      .get(`http://localhost:5000/api/md/MDResult/${search}/${search_value}`)
       .then(( {data }) => {
         console.log(data);
         setLoding(true);
@@ -99,7 +99,7 @@ const [ style, setStyle ] = useState({display: 'none'});
               <label>
               <select id="select" name="selectValue_search" value={selectValue_search} onChange={handleChangeSelectbox}>
                 <option value="name">상품명</option>
-                <option value="farm2">농가</option>
+                <option value="farm">농가</option>
                 <option value="store">스토어</option>
               </select>
               <div id="search">
@@ -111,11 +111,11 @@ const [ style, setStyle ] = useState({display: 'none'});
               
               
               <select id="select"name="selectValue_sort" value={selectValue_sort} onChange={handleChangeSelectbox}>
+                <option value="pickup">픽업중</option>
+                <option value="done">진행확정</option>
+                <option value="cancle">진행실패</option>
+                <option value="out">진행종료</option>
                 <option value="recent">최근등록순</option>
-                <option value="alphabet">가나다순</option>
-                <option value="deadline">마감임박순</option>
-                <option value="number">상품번호순</option>
-                <option value="counts">조회수순</option>
               </select>
  
            </span>
@@ -125,11 +125,11 @@ const [ style, setStyle ] = useState({display: 'none'});
             </span>
             </div>
           <div className="itemComponent">
-            <MDList Itemcard={ItemList} mdCount={mdCount} style={style}/>
+            <MDEndList Itemcard={ItemList} mdCount={mdCount} style={style}/>
           </div>
          </div>
        </div>
     );
   };
 
-  export default MD_read;
+  export default MDEnd;

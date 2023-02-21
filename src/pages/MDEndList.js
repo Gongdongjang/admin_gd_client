@@ -1,9 +1,9 @@
 import React ,{useState}from "react";
-import ItemCard from './itemCard';
+import EndItemCard from './EndItemCard';
 import Paging from './paging';
 import '../CSS/ItemList.css';
 
-const MDList =({Itemcard,mdCount,style })=>{
+const MDEndList =({Itemcard,mdCount,style })=>{
  
     return (
         <div className="itemList">
@@ -16,14 +16,14 @@ const MDList =({Itemcard,mdCount,style })=>{
               <tr >
                   <th style={{width:'70px'}}></th>
                   <th style={{width:'80px'}}>품번</th>
-                  <th style={{width:'200px'}}>상품이름</th>
+                  <th style={{width:'330px'}}>상품이름</th>
                   <th style={{width:'180px'}}>농가명</th>
                   <th style={{width:'180px'}}>상점명</th>
                   <th style={{width:'180px'}}>거래품목</th>
                   <th style={{width:'180px'}}>등록일</th>
-                  <th style={{width:'280px'}}>진행일</th>
+                  <th style={{width:'320px'}}>진행일</th>
                   <th style={{width:'150px'}}>참여/목표</th>
-                  <th style={{width:'290px'}}>진행상황</th>
+                  <th style={{width:'240px'}}>진행결과</th>
                   <th style={{width:'60px'}}></th>
               </tr>
             </thead>
@@ -33,7 +33,7 @@ const MDList =({Itemcard,mdCount,style })=>{
           {Itemcard &&
           Itemcard.map((itemdata) => {
             return (
-              <ItemCard key={itemdata.md_id}
+              <EndItemCard key={itemdata.md_id}
                 body={itemdata}
                 mdId={itemdata.md_id}
                 start={itemdata.md_start}
@@ -53,4 +53,4 @@ const MDList =({Itemcard,mdCount,style })=>{
     );
   
 }
-  export default MDList;
+  export default MDEndList;

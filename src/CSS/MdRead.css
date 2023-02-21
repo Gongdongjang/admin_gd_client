@@ -1,13 +1,72 @@
-.mdRead_container{width:70%;margin: 5% 15%;height: auto; }
-
-.mdInsight{width:94%;height:100px;background-color: rgb(187, 187, 187);padding: 3%;}
-#mdInsightLeft{float: left;}
-#mdInsightRight{float: right;margin-top:5%;}
-
-.mdReadbar{width: 100%;height: auto;}
-#mdReadbarLeft{float: left;width: 20%;padding-left: 3%;}
-#mdReadbarRight{float: right;width: 75%;}
-#mdReadbarRight button{margin: 0 1%;}
-
-.itemComponent{width: 100%;height: 1000px;margin:0 8%;}
+.readTop{ /*리스트 상단바*/
+    position: relative;
+    width: 1600px;
+    height: 60px;
+    left: 40px;
+    top: 40px;
+    background-color: #F4F4F4;
+    
+}
+#readLeft{/*정렬,검색,*/
+    width: 200px;
+    height: 50px;
+   float: left;
+}
+#readRight{ /*전체 개수,편집*/
+    width: 150px;
+    height: 50px;
+    float: right;
+}
+#readRight p,button{ display: inline-block;}
+#search{ /*검색바 컨테이너*/
+    display: inline-block;
+}
+#searchBar{/*검색바 */
+    width: 500px;
+      height: 50px;
+      font-size: 15px;
+      border: 0;
+      border-radius: 5px;
+      outline: none;
+      background-color: rgb(255, 255, 255);
+     
+    }
+#searchBtn{
+    position: relative;
+    left:-50px;
+    top:10px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+#searchBtn img{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+#select{ /*selectbox*/
+    width: 178px; 
+    height: 49px;
+    padding: .8em .5em; 
+    font-family: inherit;  
+    background: url('../imgs/gdg_admin_ic/ic_arrow_down.png') no-repeat 95% 50%; 
+    border-radius: 0px; 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #FFFFFF;
+    margin: 0 10px;
+}
+#select::-ms-expand {
+    display: none;
+    }
+.itemComponent{ /*리스트타이틀,리스트 내용*/
+    position: absolute;
+    top: 120px;
+    width: 1600px;
+    height:100vh;
+    margin: 0;
+    background-color: aquamarine;
+}
 
