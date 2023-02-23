@@ -6,7 +6,7 @@ import '../../CSS/Notification.css';
 
 function Notification() {
     return (
-        <div>
+        <div className={"Notification-container"}>
             <NavLink className={"Notification-menuBtn"} to={'/notification'} end>알림 내역</NavLink>
             <NavLink className={"Notification-menuBtn"} to={'/notification/write'}>알림 작성하기</NavLink>
             <Routes>
