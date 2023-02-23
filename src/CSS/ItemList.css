@@ -1,15 +1,124 @@
 /*itemList.js*/
-.itemList{width:100%;height:2100px;background-color: beige;margin-top: 10%;}
-.list__itemview{list-style-type: none;}
-.item_card{width:210px;height:450px;float: left;border: 1px solid black;margin: 1%; padding: 2%;}
+.itemList{ /*리스트 전체틀*/
+    width:1600px;
+    height:100vh;
+    background-color:#F4F4F4;
+}
 
-.paging {width:100%;height:200px; display: inline-block;
-    background-color: aqua;}
-/*itemCard.js*/
-.itemThumbnail{width:200px;height: 200px;background-color: rgb(221, 221, 221);}
+.itemListTitle { /*리스트 타이틀*/
+    width: 1598px;
+    text-align: center;
+}
+
+.list_itemview{ /*리스트 내용*/
+    list-style-type: none; 
+    overflow-y: scroll;
+    height: 600px;
+}
+.item_card{ /*리스트 각 아이템*/
+    width:1520px;height:80px;
+    margin: 1%; padding: 2px;
+    background: #ffffff;
+    border-radius: 10px;}
+.item_card table{
+    table-layout: fixed;
+}
+.item_card th{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 80px;
+}
+#resultRed{
+    margin:  0 10px;
+    width: 5px;
+    height: 1px;
+    color:#F65D2D;
+    background-color: #F65D2D;
+    border: 1px solid #F65D2D;
+    border-radius: 50%;
+}
+#resultGreen{
+    margin:  0 10px;
+    width: 5px;
+    height: 1px;
+    color:#05D287;
+    background-color: #05D287;
+    border: 1px solid #05D287;
+    border-radius: 50%;
+}
+#resultPurple{
+    margin:  0 10px;
+    width: 5px;
+    height: 1px;
+    color:#8116a1;
+    background-color: #8116a1;
+    border: 1px solid #8116a1;
+    border-radius: 50%;
+}
+.cardContent p{
+        height: 30px;
+        display: inline;
+        margin-left: 5%;
+    }
+.partneritemList{
+    width: 500px;
+    height: 250px;
+}
+.partnerItemList_itemview{
+    float: left;
+width:750px;
+height: 160px;
+    }
+.partnerItem_card{
+    width: 157px;
+    height: 157px;
+    float: left;
+    padding: 0px;
+    position: relative;
+}
+#confirmLabel{
+    position:absolute;
+    top:0px; 
+    width: auto;
+    height: 28px;
+    background: #565656;
+    color:white;
+    font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 28px;
+padding: 5px 10px;
+}
+.partneritems p{
+    overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 157px;
+  height: 20px;
+text-align: center;
+}
+.partneritems img{
+    width:157px;
+    height: 128px;
+}
+.cardBtn button{
+    display: inline-block;
+}
+
+.paging {
+    width:750px;height:50px;
+    margin: 0 auto;
+     display: inline-block;
+ }
+
 /*itempage.js*/
-.mdPage_container{width: 80%;margin: 5% 25%;height: auto;}
-.pageContent{width: 100%;height: auto;padding: 3%;background-color: rgb(226, 228, 230);}
 .pageBtn{width: 50%;height: auto;margin: 3% 30%;background-color: rgb(226, 228, 230);}
 
 .ud_btn button{width:50%;height: 30px;border-radius:5px;background-color: rgb(158, 158, 158);color: white;}

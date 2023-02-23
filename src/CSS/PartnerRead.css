@@ -1,0 +1,262 @@
+/*detailPage*/
+.farmPage_container{
+    width: 1620px;
+    position: absolute;
+}
+.farmPageContent{
+    margin-right: 20px;
+width: 730px;
+height: 750px;
+padding-right: 7px;
+float: left;
+overflow-y:scroll;
+overflow-x: hidden;
+
+}
+.farmPageReport{
+    width: 780px;
+height: 700px;
+margin: 0;
+padding: 30px 40px;
+    background: #ffffff;
+border-radius: 10px;
+    float: left;
+    overflow-y:scroll;
+overflow-x: hidden;
+}
+
+.pageThumbnail{
+    width: 710px;
+    height: 323px;
+    border-radius: 10px;
+}
+.page_title{
+    width: 100%;
+    height: 50px;
+}
+
+.partner_name{
+    width: 550px;
+    height: 30px;
+float: left;
+    
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+
+    /* identical to box height */
+    
+    
+    color: #000000;
+}
+.updateBtn{
+    width: 150px;
+    height: 40px;
+float: right;
+    
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    /* identical to box height */
+    
+    text-align: right;
+    
+    /* go/700 */
+    
+    color: #F75D2D;
+}
+.partnerPage_table{
+    width: 100%;
+    font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 23px;
+/* identical to box height */
+padding:10px;
+color: #7D7D7D;
+margin: 0px;
+}
+.partnerPage_table tr:nth-child(even){
+ 
+        background-color: #ffffff;
+
+}
+.partnerPage_table tr:nth-child(odd){
+ 
+    background-color: #F8F8F8;
+
+}
+.partnerPage_table th:nth-child(even){
+ 
+   color: #000000;
+
+}
+
+.page_memo{
+width: 752px;
+height: 92px;
+background: #FAFAFA;
+   
+}
+
+/*공동구매 상세페이지*/
+#MD_cancelBtn{
+    position: absolute;
+width: 228px;
+height: 60px;
+left: 468px;
+top: 700px;
+
+/* go/700 */
+border: 0px;
+background: #F75D2D;
+border-radius: 10px;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 60px;
+padding: 30px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+/* gb/0 */
+
+color: #FFFFFF;
+}
+.pageImgBox{
+    width: 760px;
+    height: 400px;
+}
+.pageImg{
+    float: left;
+    margin-right: 10px;
+}
+.pageImg img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+.pageImgMain p{
+    position: absolute;
+    top:260px;
+    margin: 10px 0;
+}
+.pageSlide{
+    position: absolute;
+    top:300px;
+    float: left;
+    margin-right: 10px;
+}
+.pageSlide img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+.MD_table{
+    width: 100%;
+    font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+text-align: left;
+padding:15px;
+font-size: 18px;
+line-height: 23px;
+font-weight: 400;
+background-color: #F8F8F8;
+color: #7D7D7D;
+
+}
+.MD_table th:nth-child(odd){
+ width: 200px;
+}
+.MD_table th:nth-child(even){
+    width: 300px;   
+}
+.MD_table th:nth-child(even){
+ 
+    color: #000000;
+ 
+ }
+.report{
+    width: 731px;
+    height: 153px;
+    background-color: beige;
+}
+.reviewPageContent{
+
+    margin-right: 20px;
+    width: 730px;
+    height: 500px;
+    padding-right: 7px;
+    float: left;
+}
+#rvwImg{
+    width: 193px;
+    height: 225px;
+    margin: 2px;
+    object-fit: cover;
+}
+#rvw_isDelete{
+    position: absolute;
+width: 100px;
+height: 25px;
+top: 560px;
+
+font-family: 'Spoqa Han Sans Neo';
+font-style:normal;
+font-weight: 900;
+font-size: 20px;
+line-height: 25px;
+/* identical to box height */
+
+
+color: #000000;
+}
+#rvw_who{
+    position: absolute;
+    width: 740px;
+    height: 149px;
+    top: 600px;
+    
+    line-height: 149px;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+.reviewPageTXT{
+    position: absolute;
+    top: 80px;
+    right: 40px;
+    width: 700px;
+height: 610px;
+margin: 0;
+padding: 30px 40px;
+    background: #f8f8f8;
+border-radius: 10px;
+    float: left;
+}
+#rvw_txt{
+    width: 625px;
+    height: 600px;
+    float: right;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 164%;
+    /* or 30px */
+    
+    color: #000000;
+
+}

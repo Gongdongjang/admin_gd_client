@@ -1,14 +1,21 @@
-import Nav from './Nav';
-import React from "react";
-class Partner extends React.Component{
-    render(){
+
+import Partner_page from './Partner_page';
+import Partner_header from './Partner_header';
+import React, { useState, useEffect }  from 'react';
+import '../CSS/PartnerPost.css';
+
+function Partner (){
+    
     return (
-      <div>
-        <Nav />
-        <h1>Partner</h1>
-        <p>Partner 페이지입니다.</p>
+      <div className="section">
+        {/*페이지 내용*/} 
+        <div className='partner_container'>
+          
+        <Partner_header/>
+        <Partner_page />
+        </div>
       </div>
     );
-  };
+
 }
   export default Partner;
