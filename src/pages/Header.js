@@ -20,7 +20,7 @@ class Header extends React.Component{
                         <Link to="/contents"><li>컨텐츠 관리</li></Link>
                         <Link to="/review"><li>리뷰 관리</li></Link>
                         <Link to="/contents"><li>컨텐츠</li></Link>
-                        <Link to="/msg"><li>알림 관리</li></Link>
+                        <Link to="/notification"><li>알림 관리</li></Link>
                         <Link to="/board"><li>공지사항 관리</li></Link>
                     </ul>
                     

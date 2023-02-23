@@ -17,6 +17,7 @@ import OrderList from './OrderList';
 
 import MdPostOk from './MdPostOk';
 import MdEditOk from './MdEditOk';
+import Notification from './Notification/Notification';
 
 import PushMsg from './PushMsg';
 class Routers extends React.Component{
@@ -35,11 +36,9 @@ class Routers extends React.Component{
                     
                    
                     {/*list */}
-                    
+                    <Route path="/ItemPage/:md_id"  element={<ItemPage />} />
+                    <Route path={"/notification/*"} element={<Notification />} />      
                     <Route path="/orderList/:md_id"  element={<OrderList />} />
-                    
-                    {/*push */}
-                    <Route path="/message" element={<PushMsg />}/>
                 </Routes>
             </div>
             
