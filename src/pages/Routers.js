@@ -7,6 +7,9 @@ import Contents from './Contents/Contents';
 import Review from './Review';
 import ReviewPage from './ReviewPage';
 import Login from './Login';
+import MD1 from './MD1';
+import MD2 from './MD2';
+import Notice from "./Notice";
 import MD_post from './MD_post';
 import MD_read from './MD_read';
 import MDList from './MDList';
@@ -23,6 +26,7 @@ class Routers extends React.Component{
                 <Routes>
                     <Route path="/" element={<Home />}/>
                     <Route path="/home"  element={<Home />} />
+                    <Route path={'/notice/*'} element={<Notice />} />
                     <Route path="/contents/*" element={<Contents />} />
                     <Route path="/partner/*" element={<Partner />} />
                     <Route path="/mdPost/*" element={<MDPost />} exact/>
