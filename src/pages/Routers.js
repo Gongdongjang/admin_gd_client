@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import MDPost from './MDPost';
 import Partner from './Partner';
+import Contents from './Contents/Contents';
 import Review from './Review';
 import ReviewPage from './ReviewPage';
 import Login from './Login';
@@ -22,9 +23,9 @@ class Routers extends React.Component{
                 <Routes>
                     <Route path="/" element={<Home />}/>
                     <Route path="/home"  element={<Home />} />
+                    <Route path="/contents/*" element={<Contents />} />
                     <Route path="/partner/*" element={<Partner />} />
                     <Route path="/mdPost/*" element={<MDPost />} exact/>
-                    <Route path="/contents/*" element={<Review />}/>
                     <Route path="/review/*" element={<Review />}/>
                     <Route path="/login" element={<Login />} />
                     
