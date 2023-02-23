@@ -1,0 +1,190 @@
+.formCase{/*스토어,농가 폼 외곽*/
+    width: 1580px;
+    height:530px;
+    padding: 1% 1%;
+    margin-bottom: 6px;
+    background-color:#ffffff;
+    border-radius: 0px 0px 10px 10px;
+}
+.MDformCase{ /*공구 폼 외곽*/
+    position: absolute;
+    top:25px;
+    width: 1580px;
+    height:600px;
+    padding: 1% 1%;
+    background-color:#ffffff;
+    border-radius: 10px 10px 10px 10px;
+}
+.formContent{ /*폼내 스크롤*/
+    width:97%;
+    height:300px;
+    overflow-y: scroll;
+    background: #ffffff;
+
+}
+.MDFormLeft{ /*공구폼내 죄측파트*/
+    width: 790px;
+    height: 600px;
+    
+    float: left;
+    overflow-y:scroll;
+    overflow-x: hidden;
+    background: #ffffff;
+}
+.MDFormRight{/*공구폼내 우측파트*/
+    width:785px;
+    height: 600px;
+    margin-left: 3px;
+    background: #ffffff;
+    border-radius: 10px;
+    float: left;
+    overflow-y:scroll;
+    overflow-x: hidden;
+}
+.MDformCase input[type=text]{
+    width: 690px;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid  #ECECEC;
+
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    color: #8E8E8E;
+}
+input:focus {outline:none;}
+.MDformCase label{
+    font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+color: #8E8E8E;
+}
+.PartnerFormLeft{ /*협업체폼내 죄측파트*/
+    width: 790px;
+    height: 530px;
+    float: left;
+    overflow-y:scroll;
+    overflow-x: hidden;
+    background: #ffffff;
+}
+.PartnerFormRight{/*협업체폼내 우측파트*/
+    width: 785px;
+    height: 530px;
+    margin-left: 3px;
+    background: #ffffff;
+    border-radius: 10px;
+    float: left;
+    overflow-y:scroll;
+    overflow-x: hidden;
+}
+.formCase input[type=text]{
+    width: 690px;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid  #ECECEC;
+
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    color: #8E8E8E;
+}
+.formCase label{
+    font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+color: #8E8E8E;
+}
+.search_box{
+    width: 315px;
+    max-height: 200px;
+    overflow-y:scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    background-color: #ffffff;
+}
+.search_box::-webkit-scrollbar{
+    display:none;
+  }
+  .search_case{
+    width: 315px;
+    height: 43px;
+    padding: 2px 5px;
+    background-color:  #05D287;
+  }
+.search_result{
+    width: 300px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid rgb(211, 210, 210);
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+    text-align: center;
+/* identical to box height */
+
+
+color: #000000;
+}
+.postFooter{
+    position: absolute;
+    top:700px;
+    left:0px;
+    width: 1678px;
+    background-color: #444444;
+    height: 100px;
+}
+#backBtn{ /*뒤로가기*/
+    position: absolute;
+    width: 180px;
+    height: 60px;
+    left: 1458px;
+    top: 20px;
+    
+    background: #B4B4B4;
+    border-radius: 10px;
+    border: 0px;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 60px;
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+#submitBtn{ /*저장하기*/
+    position: absolute;
+    width: 180px;
+    height: 60px;
+    left: 1258px;
+    top: 20px;
+
+    border: 0px;
+    background: #05D287;
+    border-radius: 10px;
+
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 60px;  
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.multipleImgs{
+    width: 600px;
+    height: 450px;
+}
+

@@ -1,0 +1,125 @@
+body{
+    overflow-x:hidden; 
+    overflow-y:hidden;
+}
+.partner_container{ /*내용파트-헤더와 페이지 포함*/
+    position: absolute;
+    width: 1678px;
+    
+    background-color: rgb(255, 255, 255);
+    top:0px;
+}
+.tab{ /* 탭 컨테이너*/
+    position: absolute;
+    left:245px;
+    width: 1000px;
+    height:100px;
+    margin: 0px;
+    padding-left: 30px;
+    background-color: white;
+}
+
+.postTab{ /*파트너  탭 컨테이너*/
+    width: 30%;height:20px;
+    left:245px;
+    background-color: #ffffff;
+    padding: 2% 1% 0% 0%;
+    border-radius: 10px 10px 10px 10px;
+    
+}
+.tabBtn{/*세부탭*/
+    width: auto;
+    height: 30px;
+
+    float: left;
+    text-align: center;
+    margin: 3% 25px;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+
+    display: flex;
+    align-items: center;
+
+    color: #B4B4B4;
+/* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+.postTabBtn{ /*파트너 세부탭*/
+    width: 70px;
+    height: 36px;
+    display: inline-block;
+   
+    text-align: center;
+    
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    align-items: center;
+
+    color: #8E8E8E;
+    border-bottom: 4px solid #F4F4F4;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.postTabBtn :hover{
+    width: 70px;
+height: 36px;
+display: inline-block;
+   
+text-align: center;
+    
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 500;
+font-size: 16px;
+line-height: 20px;
+
+    align-items: center;
+
+    color: #6765D6;
+
+/* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-bottom: 4px solid #6765D6;
+}
+hr{
+    width: 100%;
+    border: 2px solid #F4F4F4;
+}
+.partnerSection{ /* 내용-리스트,페이지*/
+    position: absolute;
+
+    width: 1678px;
+    top:100px;
+    left:242px;
+    background:  #F4F4F4;
+    border-radius: 20px 0px 0px 0px;
+    padding: 1% 2%;
+    height: 100vh;
+}
+.partnerPost_container{/* 이중 탭-헤더,페이지 포함*/
+    width: 1610px;
+    height: 640px;
+    
+    margin-top: 1%;
+    background: #ffffff;
+    border-radius: 10px 10px 10px 10px;
+}
+.partnerPostSection{/*파트너 등록,수정 페이지*/
+    width: 100%;
+}
