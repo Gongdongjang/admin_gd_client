@@ -42,7 +42,7 @@ function ContentsDetail() {
     }, [getContentDetail]);
 
     return (
-        <div>
+        <div className={"Content-container"}>
             <div>
                 <Link to={'/contents/update/' + content_id}>
                     <button>수정</button>

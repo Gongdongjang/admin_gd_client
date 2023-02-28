@@ -1,66 +1,57 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
-class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: '',
-            pwd: '',
-        };
+function Login () {
+    const [id, setId] = useState('');
+    const [password, setPassword] = useState('');
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    async handleSubmit(event) {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const res = await axios.post('/api/login', {
-                id: this.state.id,
-                password: this.state.password
-            });
-            console.log(res.data);
-            if (res.data.access_token === 'pwd_false') {
-                alert('비밀번호를 확인하세요');
-                document.location = '/login';
-            } else if (res.data.access_token === 'id_false') {
-                alert('아이디를 확인하세요');
-                document.location = '/login';
-            } else if (res.data.access_token === 'false') {
-                alert('모든 정보를 입력하세요');
-                document.location = '/login';
-            } else {
-                document.location = '/';
-            }
-        } catch (e) {
-            alert('잠시 후 다시 시도해주세요');
+        const res = await axios.post('/api/login', {
+            id: id,
+            password: password
+        });
+
+        if (res.data.access_token === 'pwd_false') {
+            alert('비밀번호를 확인하세요');
             document.location = '/login';
+        } else if (res.data.access_token === 'id_false') {
+            alert('아이디를 확인하세요');
+            document.location = '/login';
+        } else if (res.data.access_token === 'false') {
+            alert('모든 정보를 입력하세요');
+            document.location = '/login';
+        } else {
+            document.location = '/';
         }
     }
 
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        switch (name) {
+            case 'id': setId(value); break;
+            default: setPassword(value);
+        }
+    }
+
+    return (
+        <div style={{position: "absolute"}}>
+            <form onSubmit={handleSubmit}>
                 <label>
                     ID
-                    <input type="text" name="id" value={this.state.id || ''} onChange={this.handleChange} />
+                    <input type="text" name="id" value={id || ''} onChange={handleChange} />
                 </label>
                 <label>
                     PASSWORD
-                    <input type="text" name="password" value={this.state.password || ''} onChange={this.handleChange} />
+                    <input type="text" name="password" value={password || ''} onChange={handleChange} />
                 </label>
                 <input type='submit' value='제출' />
             </form>
-        )
-    }
+        </div>
+    )
 }
 
-export default LoginForm;
+export default Login;

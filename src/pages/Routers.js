@@ -7,8 +7,6 @@ import Contents from './Contents/Contents';
 import Review from './Review';
 import ReviewPage from './ReviewPage';
 import Login from './Login';
-import MD1 from './MD1';
-import MD2 from './MD2';
 import Notice from "./Notice";
 import MD_post from './MD_post';
 import MD_read from './MD_read';
@@ -19,7 +17,6 @@ import MdPostOk from './MdPostOk';
 import MdEditOk from './MdEditOk';
 import Notification from './Notification/Notification';
 
-import PushMsg from './PushMsg';
 class Routers extends React.Component{
     render(){
         return (
@@ -36,8 +33,7 @@ class Routers extends React.Component{
                     
                    
                     {/*list */}
-                    <Route path="/ItemPage/:md_id"  element={<ItemPage />} />
-                    <Route path={"/notification/*"} element={<Notification />} />      
+                    <Route path={"/notification/*"} element={<Notification />} />
                     <Route path="/orderList/:md_id"  element={<OrderList />} />
                 </Routes>
             </div>

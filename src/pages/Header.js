@@ -9,7 +9,7 @@ class Header extends React.Component{
                 {/*로고,로그인*/}
                 <div className="menuTop">
                     <Link to="/home"><a id="Logo"></a></Link>
-                    <a id="login"><Link to="/login">로그인</Link></a>
+                    <Link to="/login">로그인</Link>
                 </div>
                 {/*메인메뉴*/}
                 <span className="menuLeft">
@@ -21,7 +21,7 @@ class Header extends React.Component{
                         <Link to="/review"><li>리뷰 관리</li></Link>
                         <Link to="/contents"><li>컨텐츠</li></Link>
                         <Link to="/notification"><li>알림 관리</li></Link>
-                        <Link to="/board"><li>공지사항 관리</li></Link>
+                        <Link to="/notice"><li>공지사항 관리</li></Link>
                     </ul>
                     
                 </span>
