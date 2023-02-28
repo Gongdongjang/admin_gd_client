@@ -112,10 +112,11 @@ const [ style, setStyle ] = useState({display: 'none'});
               
               <select id="select"name="selectValue_sort" value={selectValue_sort} onChange={handleChangeSelectbox}>
                 <option value="recent">최근등록순</option>
+                <option value="pickup">픽업중</option>
+                <option value="done">진행확정</option>
                 <option value="alphabet">가나다순</option>
                 <option value="deadline">마감임박순</option>
                 <option value="number">상품번호순</option>
-                <option value="counts">조회수순</option>
               </select>
  
            </span>

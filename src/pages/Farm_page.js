@@ -17,12 +17,14 @@ function Farm_page  (){
   let[thumbnail,setThumbnail] = useState();
   let[main,setMain] = useState();
   let[detail,setDetail] = useState();
+  let[saleQty,setSaleQty] = useState();
  useEffect(() => {  
   axios
   .get(`http://localhost:5000/api/partner/read/farm/imgs/${body.farm_id}`)
   .then(({data }) => {
    // console.log(data);
     //console.log(data[0].farm_img.toString());
+    setSaleQty(data[0].farm_saleQty);
     setThumbnail(data[0].farm_thumbnail);
     setMain(data[0].farm_mainImg);
     setDetail(data[0].farm_detailImg);
@@ -82,7 +84,7 @@ function Farm_page  (){
             <tr><th>거래품목  </th><th> {body.farm_saleItem}</th></tr>
             <tr><th>계약기간  </th><th> {body.farm_contractTerm}</th></tr>
             <tr><th>계약여부  </th><th> {body.farm_isContract}</th></tr>
-            <tr><th>거래횟수  </th><th> {body.farm_saleQty}</th></tr>
+            <tr><th>거래횟수  </th><th> {saleQty}</th></tr>
             <tr><th>거래기간  </th><th> {functions.duration(body.farm_start,body.farm_end)}</th></tr>
            
             </tbody>

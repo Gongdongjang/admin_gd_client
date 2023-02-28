@@ -70,12 +70,14 @@ function ItemPage  (){
   const mdCancle=(e)=>{
    
     e.preventDefault();
-         axios
-         .post(`http://localhost:5000/api/md/cancle/${body.md_id}`)
-         .then((res) => console.log(res))
-         .then(alert("공동구매가 종료되었습니다"))
-         .then(window.location.href = '/mdPost/MDEnd'); 
-     
+    if (window.confirm('공동구매를 종료하시겠습니까?'))
+    {
+      axios
+      .post(`http://localhost:5000/api/md/cancle/${body.md_id}`)
+      .then((res) => console.log(res))
+      .then(alert("공동구매가 종료되었습니다"))
+      .then(window.location.href = '/main/mdPost/MDEnd'); 
+    }
   }
   return (
     <div className="section">
@@ -94,9 +96,9 @@ function ItemPage  (){
           
             <tbody>
             <tr><th>상품번호</th><th>{body.md_id}</th></tr>
-            <tr><th>등록일/수정일</th><th> {body.md_date}</th><th>조회수</th><th> {body.md_views}</th></tr>
+            <tr><th>등록일/수정일</th><th> {body.md_date}</th><th>냉장고 유무</th><th>{body.md_isFridge}</th></tr>
             <tr><th>시작 날짜  </th><th>  {body.md_start}</th><th>마감 날짜</th><th>{body.md_end}</th></tr>
-            <tr><th>픽업일  </th><th>{functions.duration(body.pu_start,body.pu_end)}</th><th>냉장고 유무</th><th>{body.md_isFridge}</th></tr>
+            <tr><th>픽업일  </th><th>{functions.duration(body.pu_start,body.pu_end)}</th><th>픽업 시간</th><th>{body.pu_timeStart}~{body.pu_timeEnd}</th></tr>
             <tr><th>농가</th><th> {farm}</th><th>스토어</th><th> {store}</th></tr>
             <tr><th>목표수량</th><th> {body.stk_goal}</th><th>상품종류  </th><th> {body.md_type}</th></tr>
             <tr><th>상품구성  </th><th>{body.pay_comp}</th></tr>

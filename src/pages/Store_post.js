@@ -118,7 +118,7 @@ const handleDeleteImage = () => {
       fri1 : datas[0].hours_fri1, fri2 : datas[0].hours_fri2,
       sat1 : datas[0].hours_sat1, sat2 : datas[0].hours_sat2,
       sun1 : datas[0].hours_sun1, sun2 : datas[0].hours_sun2,
-      week: datas[0].hours_week,
+      hours_week: datas[0].hours_week,
     };
     console.log(getData);
     setInput(getData);
@@ -192,7 +192,7 @@ const handleDeleteImage = () => {
          .post(`http://localhost:5000/api/partner/store/update/${store_id}`, body)
          .then((res) => console.log(res))
          .then(alert("수정이 완료되었습니다"))
-         .then(window.location.href = '/partner/storeRead');
+         .then(window.location.href = '/main/partner/storeRead');
          
        }
       

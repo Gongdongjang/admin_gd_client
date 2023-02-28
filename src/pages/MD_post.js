@@ -56,7 +56,7 @@ let [search_store, setSearch_Store] = useState([]);
   
 const {  
   md_name ,md_type ,md_start ,md_end , pay_price , pay_dc ,pay_comp ,md_isFridge,
-  farm_name ,stk_goal ,stk_confirm ,store_name ,pu_start ,pu_end , pu_waybill, } = input; //상품 정보
+  farm_name ,stk_goal ,stk_confirm ,store_name ,pu_start ,pu_end , pu_waybill, pu_timeStart,pu_timeEnd} = input; //상품 정보
 
 const{ thumbnail,  detail,} = photos; //이미지 정보
 
@@ -93,7 +93,7 @@ const getPostContent= async () => { //작성된 내용 가져오기_수정시
   axios.get(`http://localhost:5000/api/md/imgs/${md_id}`)
   .then(({data }) => {
     console.log(data);
-   console.log(data[0].mdimg_thumbnail.toString());
+   //console.log(data[0].mdimg_thumbnail.toString());
     setThumbImage(data[0].mdimg_thumbnail);
     
     setDetailImage(data[0].mdImg_detail);
@@ -125,6 +125,8 @@ const getPostContent= async () => { //작성된 내용 가져오기_수정시
     pu_start : datas[0].pu_start.substr(0, 10),
     pu_end : datas[0].pu_end.substr(0, 10),
     pu_waybill :datas[0].pu_waybill,
+    pu_timeStart :datas[0].pu_timeStart,
+    pu_timeEnd :datas[0].pu_timeEnd,
   };
   console.log(getData);
  
@@ -265,6 +267,8 @@ const  getDateDiff = (d1, d2) => { //d-day
         puStart : pu_start,
         puEnd : pu_end,
         puWaybill : pu_waybill,
+        puTimeStart : pu_timeStart,
+        puTimeEnd : pu_timeEnd,
        };
        console.log(body);
        const config = {
@@ -286,7 +290,7 @@ const  getDateDiff = (d1, d2) => { //d-day
          .post("http://localhost:5000/api/md/post", body)
          .then((res) => console.log(res))
          .then(alert("등록이 완료되었습니다"))
-         .then(window.location.href = '/mdPost');
+         .then(window.location.href = '/main/mdPost');
 
          axios
          .post(`http://localhost:5000/api/md/post/imgs`, formData,config);
@@ -297,7 +301,7 @@ const  getDateDiff = (d1, d2) => { //d-day
          .post(`http://localhost:5000/api/md/update/${md_id}`, body)
          .then((res) => console.log(res))
          .then(alert("수정이 완료되었습니다"))
-         .then(window.location.href = '/mdPost');
+         .then(window.location.href = '/main/mdPost');
        }
       //
     }
@@ -439,6 +443,14 @@ const  getDateDiff = (d1, d2) => { //d-day
               진행마감일 (필수)
               <input type="date" name="md_end" value={md_end} onChange={onDebounceChange} />
             </label><br/>
+            <label>
+              픽업 시작 시간
+              <input type="time" name="pu_timeStart" value={pu_timeStart} onChange={onDebounceChange} />
+            </label><br/>
+            <label>
+              픽업 마감시간
+              <input type="time" name="pu_timeEnd" value={pu_timeEnd} onChange={onDebounceChange} />
+            </label><br/>
             </div>
 
             <label>
@@ -510,7 +522,7 @@ const  getDateDiff = (d1, d2) => { //d-day
                   images.map((image, id) => (
                     <div  className="imgbox" key={id}>
                       
-                      <img className="selectedImg" src={url.pathname.includes('update')?img_url+image:image} alt={`${img_url+image}`} style={{width:'200px',height:'200px',float:'left'}}/>
+                      <img className="selectedImg" src={url.pathname.includes('update')?img_url+image:image} style={{width:'200px',height:'200px',float:'left'}}/>
                     </div>
                   ))
               }

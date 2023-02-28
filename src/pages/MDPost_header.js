@@ -6,8 +6,8 @@ const  MDPost_header = () => {
    
     return (
           <ul className='tab'>
-            <li  className={`${menu === 0? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(0)} ><Link to="/main/mdPost/MDRead">진행중</Link></li>
-            <li  className={`${menu === 1? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(1)} ><Link to="/main/mdPost/MDEnd">확정/실패/종료</Link></li>
+            <li  className={`${menu === 0? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(0)} ><Link to="/main/mdPost/MDRead">진행중/확정</Link></li>
+            <li  className={`${menu === 1? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(1)} ><Link to="/main/mdPost/MDEnd">실패/종료</Link></li>
             <li  className={`${menu === 2? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(2)} ><Link to="/main/mdPost/MDPost">공동구매 등록하기</Link></li>   
         </ul>
             

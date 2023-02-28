@@ -111,8 +111,6 @@ const [ style, setStyle ] = useState({display: 'none'});
               
               
               <select id="select"name="selectValue_sort" value={selectValue_sort} onChange={handleChangeSelectbox}>
-                <option value="pickup">픽업중</option>
-                <option value="done">진행확정</option>
                 <option value="cancle">진행실패</option>
                 <option value="out">진행종료</option>
                 <option value="recent">최근등록순</option>
