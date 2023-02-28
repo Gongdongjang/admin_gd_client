@@ -25,12 +25,10 @@ body{
     background-color: #ffffff;
     padding: 2% 1% 0% 0%;
     border-radius: 10px 10px 10px 10px;
-    
 }
 .tabBtn{/*세부탭*/
     width: auto;
     height: 30px;
-
     float: left;
     text-align: center;
     margin: 3% 25px;
@@ -42,15 +40,35 @@ body{
 
     display: flex;
     align-items: center;
-
-    color: #B4B4B4;
-/* Inside auto layout */
+    text-decoration: none;
+    
 
     flex: none;
     order: 0;
     flex-grow: 0;
 
 }
+.tabBtn a{color:  #b4b4b4;}
+.tabBtnActive a{
+    width: auto;
+    height: 30px;
+    float: left;
+    text-align: center;
+    margin: 3% 25px;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;color: #000000;}
 .postTabBtn{ /*파트너 세부탭*/
     width: 70px;
     height: 36px;
@@ -73,6 +91,7 @@ body{
     order: 0;
     flex-grow: 0;
 }
+.postTabBtn a {color: #000000;}
 .postTabBtn :hover{
     width: 70px;
 height: 36px;
@@ -97,6 +116,31 @@ line-height: 20px;
     flex-grow: 0;
     border-bottom: 4px solid #6765D6;
 }
+.postTabBtnActive{
+    width: 70px;
+height: 36px;
+display: inline-block;
+   
+text-align: center;
+    
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 500;
+font-size: 16px;
+line-height: 20px;
+
+    align-items: center;
+
+   
+
+/* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-bottom: 4px solid #6765D6;
+}
+.postTabBtnActive a { color: #6765D6;}
 hr{
     width: 100%;
     border: 2px solid #F4F4F4;

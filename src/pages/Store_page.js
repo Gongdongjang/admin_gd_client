@@ -63,7 +63,7 @@ function Store_page  (){
           
           <div className='page_title'>
             <p className="partner_name">{body.store_name}</p>
-            <Link to={`/partner/partner_post/storePost/update/${body.store_id}`} ><p className="updateBtn">수정하기</p></Link>
+            <Link to={`/main/partner/partner_post/storePost/update/${body.store_id}`} ><p className="updateBtn">수정하기</p></Link>
           </div>
     
           <table className="partnerPage_table">

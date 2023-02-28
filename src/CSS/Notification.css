@@ -80,14 +80,19 @@
 
 .Notification-inputPlace {
     display: flex;
-    flex-direction: column;
-    width: 98%;
-    background-color: white;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
+}
+.Notification-inputText {
+    width: 60% ;
 }
 
+.Notification-inputImage {
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    width: 40%;
+}
 .Notification-input {
     border: none;
     width: 690px;

@@ -14,6 +14,8 @@ function ContentsDetail() {
     const [category, setCategory] = useState('');
 
     const {content_id} = useParams();
+    const [isTmp, setIsTmp] = useState(0);
+    let[menu,setMenu] = useState(0);
 
     const getContentDetail = useCallback(async () => {
         const res = await axios.get('/api/content/' + content_id);
@@ -42,27 +44,50 @@ function ContentsDetail() {
     }, [getContentDetail]);
 
     return (
-        <div className={"Content-container"}>
-            <div>
-                <Link to={'/contents/update/' + content_id}>
-                    <button>수정</button>
-                </Link>
-                <button onClick={DeleteContent}>삭제</button>
-            </div>
-            <h3>{title}</h3>
-            <p>{category}</p>
-            <p>{date}</p>
-            {main &&
+        <div>
+            <ul className="tab">
+                <li className={`${isTmp === 0? 'tabBtnActive': 'tabBtn'}`}  onClick={() => {setMenu(0);setIsTmp(0)}}><Link to={'/main/contents'} >전체</Link></li>
+                <li className={`${isTmp === 1? 'tabBtnActive': 'tabBtn'}`} onClick={() => {setMenu(1);setIsTmp(1)}}><Link to={'/main/contents'} >임시저장 목록</Link></li>
+                <li className={`${menu === 2? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(2)}><Link to={'/main/contents/write'} >작성하기</Link></li>
+            </ul>
+            <div className="partnerSection">
+            <div className='farmPage_container'>
+                <div className="farmPageContent">
+                <div className='page_title'>
+                    <p className="partner_name">{title}</p>
+                    <Link to={'/main/contents/update/' + content_id}>
+                    <p className="updateBtn">수정하기</p>
+                    </Link>
+                </div>
+                <table className="partnerPage_table">
+                  <tbody>
+                    <tr><th>분류</th><th>{category}</th></tr>
+                    <tr><th>작성일자</th><th>{date}</th></tr>
+                    <tr><th>업로드일자</th><th></th></tr>
+                    <tr><th>이미지</th><th>{main &&
                 <img src={img_url + main} alt={'main'}/>
             }
             {photo &&
                 <img src={img_url + photo} alt='content'/>
-            }
-            <p>{context}</p>
-            {link &&
+            }</th></tr>
+                    <tr><th>내용</th><th>{context}</th></tr>
+                    
+                  </tbody>
+                </table>
+           
+                </div>
+                <div className="farmPageReport">
+                <h2>연결컨텐츠</h2>
+                {link &&
                 <a href={link}>바로가기 링크</a>
-            }
+                }
+                </div>
+            
+            </div>
+           
         </div>
+        </div>
+        
     )
 }
 

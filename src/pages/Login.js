@@ -23,7 +23,7 @@ function Login () {
             alert('모든 정보를 입력하세요');
             document.location = '/login';
         } else {
-            document.location = '/';
+            document.location = '/main';
         }
     }
 
@@ -39,16 +39,15 @@ function Login () {
 
     return (
         <div style={{position: "absolute"}}>
+            <div id="login_Logo" ></div>
             <form onSubmit={handleSubmit}>
-                <label>
-                    ID
-                    <input type="text" name="id" value={id || ''} onChange={handleChange} />
+                <label >
+                    <input id="login_id" type="text" name="id" value={id || ''} onChange={handleChange} placeholder="ID" />
                 </label>
-                <label>
-                    PASSWORD
-                    <input type="text" name="password" value={password || ''} onChange={handleChange} />
+                <label >
+                    <input id="login_pw" type="text" name="password" value={password || ''} onChange={handleChange} placeholder="PW" />
                 </label>
-                <input type='submit' value='제출' />
+                <input  id="login_btn"type='submit' value='로그인' />
             </form>
         </div>
     )

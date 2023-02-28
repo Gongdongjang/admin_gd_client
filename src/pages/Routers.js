@@ -12,7 +12,7 @@ import MD_post from './MD_post';
 import MD_read from './MD_read';
 import MDList from './MDList';
 import OrderList from './OrderList';
-
+import Main from './main.js';
 import MdPostOk from './MdPostOk';
 import MdEditOk from './MdEditOk';
 import Notification from './Notification/Notification';
@@ -22,8 +22,7 @@ class Routers extends React.Component{
         return (
             <div>
                 <Routes>
-                    <Route path="/" element={<Home />}/>
-                    <Route path="/home"  element={<Home />} />
+                    <Route path="/" element={<Partner />}/>
                     <Route path={'/notice/*'} element={<Notice />} />
                     <Route path="/contents/*" element={<Contents />} />
                     <Route path="/partner/*" element={<Partner />} />

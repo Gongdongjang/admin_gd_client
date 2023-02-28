@@ -260,3 +260,15 @@ border-radius: 10px;
     color: #000000;
 
 }
+.noticePageTXT{
+    position: absolute;
+    top: 80px;
+    right: 150px;
+    width: 700px;
+height: 610px;
+margin: 0;
+padding: 30px 40px;
+    background: #f8f8f8;
+border-radius: 10px;
+    float: left;
+}

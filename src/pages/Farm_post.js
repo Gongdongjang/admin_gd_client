@@ -218,7 +218,7 @@ const {
   }, []);
   function handleClick() {
     alert("작성중인 내용이 삭제됩니다");
-  window.location.href = '/partner/farmRead'; 
+  window.location.href = '/main/partner/farmRead'; 
   }
   const handleFileChange = (event) => { //이미지 업로드
 

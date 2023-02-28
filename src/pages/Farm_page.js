@@ -61,7 +61,7 @@ function Farm_page  (){
           
           <div className='page_title'>
             <p className="partner_name">{body.farm_name}</p>
-            <Link to={`/partner/partner_post/farmPost/update/${body.farm_id}`} ><p className="updateBtn">수정하기</p></Link>
+            <Link to={`/main/partner/partner_post/farmPost/update/${body.farm_id}`} ><p className="updateBtn">수정하기</p></Link>
           </div>
     
           <table className="partnerPage_table">

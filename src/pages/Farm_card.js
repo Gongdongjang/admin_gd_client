@@ -8,7 +8,7 @@ function Farm_card({  body ,farmId,style }) {
       
       <div>
         <li className="item_card"  >
-          <Link to={`/partner/farmRead/farmPage/${farmId}`} state={{ body:body}}>
+          <Link to={`/main/partner/farmRead/farmPage/${farmId}`} state={{ body:body}}>
           <table  >
             
             <tbody>

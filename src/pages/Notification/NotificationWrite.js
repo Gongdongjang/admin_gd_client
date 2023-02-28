@@ -78,7 +78,7 @@ function NotificationWrite() {
 
         const submitter = event.nativeEvent.submitter.name;
         if (submitter === 'cancel') {
-            if (window.confirm('작성을 취소하시겠습니까? 작성된 내용은 저장되지 않습니다.')) document.location.replace('/notification');
+            if (window.confirm('작성을 취소하시겠습니까? 작성된 내용은 저장되지 않습니다.')) document.location.replace('/main/notification');
         }
 
         const body = new FormData();
@@ -118,10 +118,11 @@ function NotificationWrite() {
     }
 
     return (
-        <form className={"Notification-container Notification-content"} onSubmit={(event) => handleSubmit(event, userIds)}>
+        <form className={"partnerSection"} onSubmit={(event) => handleSubmit(event, userIds)}>
             {loading ? <Loading /> : ""}
-            <div className={"Notification-content"}>
+            <div className={"MDformCase"}>
                 <div className={"Notification-inputPlace"}>
+                    <div className="Notification-inputText" >
                     <div>
                         <p className={"Notification-inputTitle"}>알림 분류</p>
                         <select className={"Notification-category"} name={'type'} onChange={handleChange}>
@@ -159,16 +160,19 @@ function NotificationWrite() {
                         <p className={"Notification-inputTitle"}>발송 일자</p>
                         <input type={"datetime-local"} name={"date"} value={date} onChange={handleChange} />
                     </div>
-                    <div>
+                    </div>
+                    
+                    <div className="Notification-inputImage">
                         <p className={"Notification-inputTitle"}>참고 이미지</p>
                         <input type={"file"} name={"image"} onChange={handleChange}/>
                     </div>
                 </div>
-                <div className={"Notification-btnPlace"}>
-                    <input className={"Notification-writeBtn"} type={"submit"} name={"submit"} value={"보내기"}/>
-                    <input className={"Notification-btn"} type={"submit"} name={"cancel"} value={"취소"}/>
-                </div>
+                
             </div>
+            <div className="postFooter">
+                    <input  id="submitBtn" type={"submit"} name={"submit"} value={"보내기"}/>
+                    <input  id="backBtn" type={"submit"} name={"cancel"} value={"취소"}/>
+                </div>
         </form>
     )
 }

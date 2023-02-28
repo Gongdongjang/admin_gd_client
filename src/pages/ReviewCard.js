@@ -11,7 +11,7 @@ function ReviewCard({  body,style }) {
       
       <div>
         <li className="item_card"  >
-          <Link to={`/review/reviewRead/ReviewPage/${body.rvw_id}`} state={{ body:body}}>
+          <Link to={`/main/review/reviewRead/ReviewPage/${body.rvw_id}`} state={{ body:body}}>
           <table  >
             
             <tbody>

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {useLocation, useParams} from "react-router-dom";
+import {Link,useLocation, useParams} from "react-router-dom";
 import axios from "axios";
 
 const img_url = 'https://ggdjang.s3.ap-northeast-2.amazonaws.com/';
@@ -18,6 +18,8 @@ function ContentsWrite() {
     const [exist_photo, setExistPhoto] = useState('');
     const [main, setMain] = useState(null);
     const [existMain, setExistMain] = useState('');
+    const [isTmp, setIsTmp] = useState(2);
+    let[menu,setMenu] = useState(2);
 
     const url = useLocation();
     const { content_id } = useParams();
@@ -44,6 +46,10 @@ function ContentsWrite() {
         else if(name === 'photo') setPhoto(file);
         else if(name === 'main') setMain(file);
     }
+    function handleClick() {
+        alert("작성중인 내용이 삭제됩니다");
+      window.location.href = '/main/contents'; 
+      }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -117,8 +123,15 @@ function ContentsWrite() {
     }, [getUpdateContent, url]);
 
     return (
-        <form className={"Content-container"} onSubmit={handleSubmit}>
-            <div className={"Content-content"}>
+        <div>
+            <ul className="tab">
+                <li className={`${isTmp === 0? 'tabBtnActive': 'tabBtn'}`}  onClick={() => {setMenu(0);setIsTmp(0)}}><Link to={'/main/contents'} >전체</Link></li>
+                <li className={`${isTmp === 1? 'tabBtnActive': 'tabBtn'}`} onClick={() => {setMenu(1);setIsTmp(1)}}><Link to={'/main/contents'} >임시저장 목록</Link></li>
+                <li className={`${menu === 2? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(2)}><Link to={'/main/contents/write'} >작성하기</Link></li>
+            </ul>
+            <form className={"partnerSection"} onSubmit={handleSubmit}>
+            
+            <div className={"MDformCase"}>
                 <div className={"Content-inputPlace"}>
                     <div className={"Content-inputText"}>
                         <div>
@@ -173,7 +186,7 @@ function ContentsWrite() {
                             }
                             <input type='file' name='main' onChange={handleFileChange} />
                         </div>
-                        <div>d
+                        <div>
                             <p className={"Content-inputTitle"}>본문 이미지</p>
                             {exist_photo &&
                                 <img src={img_url + exist_photo} alt={'photo'} />
@@ -182,12 +195,16 @@ function ContentsWrite() {
                         </div>
                     </div>
                 </div>
-                <div className={"Content-btnPlace"}>
-                    <input className={"Content-writeBtn"} type='submit' name={'upload_btn'} value={'보내기'}/>
-                    <input className={"Content-btn"} type={'submit'} name={'tmp_btn'} value={'임시저장'}/>
-                </div>
+                
+            </div>
+            <div  className="postFooter">
+                <input  id="tmpBtn"type={'submit'} name={'tmp_btn'} value={'임시저장'}/>
+                <input  id="submitBtn" type='submit' name={'upload_btn'} value={'보내기'}/>
+                <button id="backBtn" type="button" onClick={handleClick}>뒤로가기</button>      
             </div>
         </form>
+        </div>
+        
     )
 }
 

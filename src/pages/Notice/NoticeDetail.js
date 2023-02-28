@@ -19,26 +19,27 @@ function NoticeDetail() {
 
     const renderDetail = (detail) => {
         return (
-            <div>
-                <div style={{background: "#F8F8F8"}} className={"Notice-detailRow"}>
-                    <p className={"Notice-inputTitle"}>공지 제목</p>
-                    <p>{detail.notice_title}</p>
-                </div>
-                <div style={{background: "white"}} className={"Notice-detailRow"}>
-                    <p className={"Notice-inputTitle"}>작성 일자</p>
-                    <p>{detail.createdAt}</p>
-                </div>
-                <div style={{background: "#F8F8F8"}} className={"Notice-detailRow"}>
-                    <p className={"Notice-inputTitle"}>공지 일정</p>
-                    <p>{detail.notice_date}</p>
-                </div>
-                <div style={{background: "white"}} className={"Notice-detailRow"}>
-                    <p className={"Notice-inputTitle"}>이미지</p>
-                    <img src={img_url + detail.notice_photo} alt={"공지사항 이미지"}/>
-                </div>
-                <div style={{background: "#F8F8F8"}} className={"Notice-detailRow"}>
-                    <p className={"Notice-inputTitle"}>공지 내용</p>
-                    <p>{detail.notice_context}</p>
+            <div >
+                <div >
+                    <div className="farmPageContent">
+                        <div className='page_title'>
+                        <p className="partner_name">공지사항 상세보기</p>
+                        <p className="updateBtn">수정하기</p>
+                        </div>
+                        <table className="partnerPage_table">
+                        <tbody>
+                        <tr><th>공지제목</th><th>{detail.notice_title}</th></tr>
+                        <tr><th>작성일자</th><th>{detail.createdAt}</th></tr>
+                        <tr><th>공지일정</th><th>{detail.notice_date}</th></tr>
+                        <tr><th>이미지</th><th><img src={img_url + detail.notice_photo} alt={"공지사항 이미지"}/></th></tr>
+                        
+                        </tbody>
+                        </table>
+                    </div>
+                    <div className="noticePageTXT">
+                    공지내용
+                    <div id="rvw_txt">{detail.notice_context}</div>
+                    </div>
                 </div>
             </div>
         )
@@ -49,8 +50,7 @@ function NoticeDetail() {
     }, []);
 
     return (
-        <div className={"Notice-container Notice-content"}>
-            <h2>공지사항 상세보기</h2>
+        <div >
             {renderDetail(detail)}
         </div>
     )

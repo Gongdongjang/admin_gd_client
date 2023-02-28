@@ -153,7 +153,7 @@ useEffect(() => {
 
 function handleClick() {
   alert("작성중인 내용이 삭제됩니다");
-  window.location.href = '/mdPost'; 
+  window.location.href = '/main/mdPost'; 
  // navigate(-1)
 }
 const handleChange = (e) => { //기존 input 함수_호출빈도 줄이기 전

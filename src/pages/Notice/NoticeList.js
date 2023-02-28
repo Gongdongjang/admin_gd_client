@@ -55,12 +55,21 @@ function NoticeList() {
     const renderNoticeList = (list) => {
         return list.map((notice) => {
             return [
-                <div className={"Notice-detail"} key={notice.notice_id}>
-                    <input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                    <NavLink className={"Notice-detailRow"} to={'/notice/' + notice.notice_id}>
-                        <p>{notice.notice_title}</p>
-                        <p>{notice.createdAt}</p>
-                        <p>{notice.notice_date}</p>
+                <div className="item_card" key={notice.notice_id}>
+                    
+                    <NavLink to={'/main/notice/' + notice.notice_id}>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th><input type={"checkbox"} value={notice.notice_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/></th>
+                                <th style={{width:'300px'}}>{notice.notice_title}</th>
+                                <th style={{width:'300px'}}>{notice.createdAt}</th>
+                                <th style={{width:'300px'}}>{notice.notice_date}</th>
+                                <th style={{width:'600px'}}></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                     </NavLink>
                 </div>
             ]
@@ -72,19 +81,33 @@ function NoticeList() {
     }, [])
 
     return (
-        <div className={"Notice-container"}>
-            <div className={"Notice-content"}>
-                <div className={"Notice-row"}>
+        <div >
+            <div className="Read_container">
+                <div className={"readTop"}>
+                <span className="readLeft"/>
+                <span id="readRight">
                     <p>전체 {count}개</p>
                     <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>삭제하기</button>
+                </span>
                 </div>
-                <div className={"Notice-detailRow"}>
-                    <input type={"checkbox"}/>
-                    <p>공지 제목</p>
-                    <p>작성 일자</p>
-                    <p>공지 일정</p>
-                </div>
+                <div className="itemComponent">
+                <div  className={"itemList"}>
+                <table  className="itemListTitle">
+                    <thead>
+                        <tr>
+                        <th style={{width:'10px'}}><input type={"checkbox"}/></th>
+                        <th style={{width:'200px'}}>공지 제목</th>
+                        <th style={{width:'200px'}}>작성 일자</th>
+                        <th style={{width:'200px'}}>공지 일정</th>
+                        <th style={{width:'500px'}}></th>
+                        </tr>
+                    </thead>
+                </table>
+                <div className="list_itemview">
                 {renderNoticeList(list)}
+                </div>
+                </div>
+                </div>
             </div>
         </div>
     )

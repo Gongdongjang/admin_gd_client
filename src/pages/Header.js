@@ -3,25 +3,38 @@ import { Link } from "react-router-dom";
 import '../CSS/Header.css';
 class Header extends React.Component{
  
+    constructor(props) {
+        super();
+    
+        this.state = {
+          menu: 0,
+        };
+      }
+    
+      changeMenu = (menuIndex) =>{
+        this.setState({menu : menuIndex});
+      }
+    
+
     render(){
         return (
             <div className="menubar">
                 {/*로고,로그인*/}
                 <div className="menuTop">
                     <Link to="/home"><a id="Logo"></a></Link>
-                    <Link to="/login">로그인</Link>
+                    <Link to="/login" id="login">로그인</Link>
                 </div>
                 {/*메인메뉴*/}
                 <span className="menuLeft">
                     <ul  id="mainMenuUl">
                         <div id="topUl">관리</div>
-                        <Link to="/partner"><li>입점 업체 관리</li></Link>
-                        <Link to="/mdPost"><li>공동구매 관리</li></Link>
-                        <Link to="/contents"><li>컨텐츠 관리</li></Link>
-                        <Link to="/review"><li>리뷰 관리</li></Link>
-                        <Link to="/contents"><li>컨텐츠</li></Link>
-                        <Link to="/notification"><li>알림 관리</li></Link>
-                        <Link to="/notice"><li>공지사항 관리</li></Link>
+                        <Link to="/main/partner"><li className={`${this.state.menu === 0? 'active': ''}`} onClick={() => this.changeMenu(0)}>입점 업체 관리</li></Link>
+                        <Link to="/main/mdPost"><li className={`${this.state.menu === 1? 'active': ''}`} onClick={() => this.changeMenu(1)}>공동구매 관리</li></Link>
+                        <Link to="/main/contents"><li className={`${this.state.menu === 2? 'active': ''}`} onClick={() => this.changeMenu(2)}>컨텐츠 관리</li></Link>
+                        <Link to="/main/review"><li className={`${this.state.menu === 3? 'active': ''}`} onClick={() => this.changeMenu(3)}>리뷰 관리</li></Link>
+                        <Link to="/main/notification"><li className={`${this.state.menu === 4? 'active': ''}`} onClick={() => this.changeMenu(4)}>알림 관리</li></Link>
+                        <Link to="/main/notice"><li className={`${this.state.menu === 5? 'active': ''}`} onClick={() => this.changeMenu(5)}>공지사항 관리</li></Link>
+                        
                     </ul>
                     
                 </span>

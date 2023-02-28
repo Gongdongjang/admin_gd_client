@@ -19,7 +19,7 @@ const ReviewList =({Itemcard,ReviewCount,style })=>{
                   <th style={{width:'200px'}}>등록일</th>
                   <th style={{width:'100px'}}>별점</th>
                   <th style={{width:'350px'}}>내용</th>
-                  <th style={{width:'60px'}}></th>
+                  <th style={{width:'200px'}}></th>
               </tr>
             </thead>
             </table>

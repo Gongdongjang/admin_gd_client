@@ -23,6 +23,10 @@ function NoticeWrite() {
     const handleFileChange = (event) => {
         setPhoto(event.target.files[0]);
     }
+    function handleClick() {
+        alert("작성중인 내용이 삭제됩니다");
+      window.location.href = '/main/notice'; 
+      }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -46,8 +50,11 @@ function NoticeWrite() {
     }
 
     return (
-        <div className={"Notice-content"}>
-            <form className={"Notice-inputPlace"} onSubmit={handleSubmit}>
+        <div >
+            
+            <form  onSubmit={handleSubmit}>
+            <div className={"MDformCase"}>
+                <div className={"Notice-inputPlace"} >
                 <div onChange={handleChange}>
                     <p className={"Notice-inputTitle"}>업로드 유형</p>
                     <label className={"Notice-inputTitle"}>
@@ -75,10 +82,14 @@ function NoticeWrite() {
                     <p className={"Notice-inputTitle"}>이미지</p>
                     <input type={'file'} name={'photo'} onChange={handleFileChange}/>
                 </div>
-                <div className={"Notice-btnPlace"}>
-                    <input className={"Notice-writeBtn"} type={'submit'} value={'게시'} />
                 </div>
+                </div>
+                <div className="postFooter">
+                <button id="backBtn" type="button" onClick={handleClick}>뒤로가기</button>
+                <input  id="submitBtn" type={'submit'} value={'게시'} />
+            </div>
             </form>
+            
         </div>
     )
 }

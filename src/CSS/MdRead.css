@@ -49,9 +49,10 @@
     width: 178px; 
     height: 49px;
     padding: .8em .5em; 
+    border: none;
     font-family: inherit;  
     background: url('../imgs/gdg_admin_ic/ic_arrow_down.png') no-repeat 95% 50%; 
-    border-radius: 0px; 
+    border-radius: 10px; 
     -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;

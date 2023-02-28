@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
+import searchImg from "../../imgs/gdg_admin_ic/ic_search.png";
+
 import axios from "axios";
 
 function ContentsList() {
@@ -10,6 +12,7 @@ function ContentsList() {
     const [category, setCategory] = useState('등록순');
     const [isTmp, setIsTmp] = useState(0);
     const [bannerList, setBannerList] = useState([]);
+    let[menu,setMenu] = useState(0);
 
     const handleClickCheckbox = async (event, delete_list) => {
         const deleteIndex = event.target.value;
@@ -39,14 +42,22 @@ function ContentsList() {
     const renderContentList = (list) => {
         return list.map((content) => {
             return [
-                <div className={"Content-detail"}>
-                    <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                    <NavLink className={"Content-detailRow"} to={'/contents/' + content.content_id}>
-                        <p>{content.content_id}</p>
-                        <p>{content.content_title}</p>
-                        <p>{content.content_category}</p>
-                        <p>{content.content_date}</p>
-                        <p>{content.upload_date}</p>
+                <div className="item_card">
+                    
+                    <NavLink to={'/main/contents/' + content.content_id}>
+                        <table>
+                            <tbody>
+                            <tr>
+                            <th><input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/></th>
+                            <th style={{width:'250px'}}>{content.content_id}</th>
+                            <th style={{width:'450px'}}>{content.content_title}</th>
+                            <th style={{width:'350px'}}>{content.content_category}</th>
+                            <th style={{width:'550px'}}>{content.content_date}</th>
+                            <th style={{width:'550px'}}>{content.upload_date}</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                        
                     </NavLink>
                 </div>
             ]
@@ -56,14 +67,22 @@ function ContentsList() {
     const renderTmpList = (list) => {
         return list.map((content) => {
             return [
-                <div className={"Content-detail"}>
-                    <input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/>
-                    <NavLink className={"Content-detailRow"} to={'/contents/update/' + content.content_id}>
-                        <p>{content.content_id}</p>
-                        <p>{content.content_title}</p>
-                        <p>{content.content_category}</p>
-                        <p>{content.content_date}</p>
-                        <p>{content.upload_date}</p>
+                <div className="item_card">
+                    
+                    <NavLink    to={'/main/contents/update/' + content.content_id}>
+                       <table>
+                        <tbody>
+                            <tr>
+                            <th style={{width:'20px'}}><input type={"checkbox"} value={content.content_id} onClick={(event) => handleClickCheckbox(event, delete_list)}/></th>
+                            <th style={{width:'250px'}}>{content.content_id}</th>
+                            <th style={{width:'450px'}}>{content.content_title}</th>
+                            <th style={{width:'350px'}}>{content.content_category}</th>
+                            <th style={{width:'550px'}}>{content.content_date}</th>
+                            <th style={{width:'550px'}}>{content.upload_date}</th>
+                            </tr>
+                        </tbody>
+                       </table>
+                        
                     </NavLink>
                 </div>
             ]
@@ -141,31 +160,34 @@ function ContentsList() {
     }
 
     return (
-        <div className="Content-container">
-            <div className={"Content-row"}>
-                <button className={isTmp === 0 ? "Content-menuBtn-clicked" : "Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(0)}}>전체</button>
-                <button className={isTmp === 1 ? "Content-menuBtn-clicked" : "Content-menuBtn"} type={"button"} onClick={(e) => { e.preventDefault(); setIsTmp(1) }}>임시저장 목록</button>
-                <Link to={'/contents/write'} >
-                    <button className={"Content-menuBtn"}>작성하기</button>
-                </Link>
-            </div>
-            <div className={"Content-content"}>
-                <div className={"Content-row"}>
-                    <form onSubmit={handleSearchSubmit}>
-                        <input className={"Content-searchBox"} type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
-                        <input type='submit' value='검색' />
+        <div>
+            <ul className="tab">
+                <li className={`${isTmp === 0? 'tabBtnActive': 'tabBtn'}`}  onClick={() => {setMenu(0);setIsTmp(0)}}><Link to={'/main/contents'} >전체</Link></li>
+                <li className={`${isTmp === 1? 'tabBtnActive': 'tabBtn'}`} onClick={() => {setMenu(1);setIsTmp(1)}}><Link to={'/main/contents'} >임시저장 목록</Link></li>
+                <li className={`${menu === 2? 'tabBtnActive': 'tabBtn'}`} onClick={() => setMenu(2)}><Link to={'/main/contents/write'} >작성하기</Link></li>
+            </ul>
+            <div className="partnerSection">
+            
+                <div className={"readTop"}>
+                <span className="readLeft">
+                <form  id="search" onSubmit={handleSearchSubmit}>
+                        <input  id="searchBar" type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
+                        <input id="searchBtn" type='submit' src={searchImg} />
                     </form>
-                    <select className={"Content-category"} name={'category'} onChange={handleChange}>
+                    <select  id="select" name={'category'} onChange={handleChange}>
                         <option value={'등록순'} selected={category === '등록순'}>등록순</option>
                         <option value={'공동장 소식'} selected={category === '공동장 소식'}>공동장 소식</option>
                         <option value={'상품 홍보'} selected={category === '상품 홍보'}>상품 홍보</option>
                         <option value={'스토어 홍보'} selected={category === '스토어 홍보'}>스토어 홍보</option>
                         <option value={'이벤트'} selected={category === '이벤트'}>이벤트</option>
                     </select>
+                </span>
+                <span id="readRight">
                     <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
                     <p className={"Content-count"}>전체 {count}개</p>
+                </span>
                 </div>
-                <form className={"Content-row"} onSubmit={handleBannerSubmit}>
+                <form className={"Content-selected"} onSubmit={handleBannerSubmit}>
                     <p>1번 콘텐츠</p>
                     <input type={"number"} name={"banner1"} value={bannerList[0]} onChange={(event) => handleBannerChange(event, bannerList)}/>
                     <p>2번 콘텐츠</p>
@@ -174,19 +196,30 @@ function ContentsList() {
                     <input type={"number"} name={"banner3"} value={bannerList[2]} onChange={(event) => handleBannerChange(event, bannerList)}/>
                     <input type={'submit'} value={'홍보용 배너 변경하기'}/>
                 </form>
-                <div className={"Content-row"}>
-                    <input type={"checkbox"}/>
-                    <div className={"Content-detailRow"}>
-                        <p>등록 번호</p>
-                        <p>컨텐츠 명</p>
-                        <p>분류</p>
-                        <p>작성 일자</p>
-                        <p>업로드 일정</p>
+                <div className={"itemList"}>
+                    
+                    <table  className="itemListTitle">
+                        <thead>
+                        <tr>
+                        <th style={{width:'20px'}}><input type={"checkbox"}/></th>
+                        <th style={{width:'70px'}}>등록 번호</th>
+                        <th style={{width:'200px'}}>컨텐츠 명</th>
+                        <th style={{width:'100px'}}>분류</th>
+                        <th style={{width:'200px'}}>작성 일자</th>
+                        <th style={{width:'200px'}}>업로드 일정</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div className="list_itemview_content">
+                    {isTmp === 0 ? renderContentList(list) : renderTmpList(list)}
                     </div>
+                   
                 </div>
-                {isTmp === 0 ? renderContentList(list) : renderTmpList(list)}
+                
             </div>
+        
         </div>
+        
     )
 }
 

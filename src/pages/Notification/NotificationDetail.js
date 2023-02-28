@@ -20,43 +20,34 @@ function NotificationDetail() {
 
     const renderNotificationDetail = (detail) => {
         return (
-            <div>
-                <div className={"Notification-row"}>
-                    <p className={"Notification-inputTitle"}>알림 제목</p>
-                    <p>{detail.notification_title}</p>
-                </div>
-                <div style={{background: "white"}} className={"Notification-row"}>
-                    <p className={"Notification-inputTitle"}>알림 분류</p>
-                    <p>{detail.notification_type}</p>
-                </div>
-                <div className={"Notification-row"}>
-                    <p className={"Notification-inputTitle"}>대상자</p>
-                    <p>{detail.notification_target}</p>
-                </div>
-                <div style={{background: "white"}} className={"Notification-row"}>
-                    <p className={"Notification-inputTitle"}>작성 일자</p>
-                    <p>{detail.createdAt}</p>
-                </div>
-                <div className={"Notification-row"}>
-                    <p className={"Notification-inputTitle"}>발송 일자</p>
-                    <p>{detail.notification_date}</p>
-                </div>
-                <div style={{background: "white"}} className={"Notification-row"}>
-                    <p className={"Notification-inputTitle"}>알림 내용</p>
-                    <p>{detail.notification_content}</p>
-                </div>
-                <div className={"Notification-row"}>
-                    <p className={"Notification-inputTitle"}>이미지</p>
-                    <p>{detail.notification_img}</p>
+            <div >
+            <div className='farmPage_container'>
+                <div className="farmPageContent">
+                    <div className='page_title'>
+                    <p className="partner_name">알림 상세보기</p>
+                    </div>
+                    <table className="partnerPage_table">
+                    <tbody>
+                    <tr><th>알림제목</th><th>{detail.notification_title}</th></tr>
+                    <tr><th>알림분류</th><th>{detail.notification_type}</th></tr>
+                    <tr><th>대상자</th><th>{detail.notification_target}</th></tr>
+                    <tr><th>작성일자</th><th>{detail.createdAt}</th></tr>
+                    <tr><th>발송일정</th><th>{detail.notification_date}</th></tr>
+                    <tr><th>알림내용</th><th>{detail.notification_content}</th></tr>
+                    <tr><th>이미지</th><th>{detail.notification_img}</th></tr>
+                    
+                    </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+           
         )
     }
 
     return (
-        <div className={"Notification-container Notification-content"}>
-            <h3>알림 상세보기</h3>
-            <p>{renderNotificationDetail(detail)}</p>
+        <div className="partnerSection">
+           {renderNotificationDetail(detail)}
         </div>
     )
 }

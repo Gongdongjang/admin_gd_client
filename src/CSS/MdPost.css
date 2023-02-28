@@ -143,6 +143,29 @@ color: #000000;
     background-color: #444444;
     height: 100px;
 }
+#tmpBtn{
+    position: absolute;
+    width: 180px;
+    height: 60px;
+    left: 1030px;
+    top: 20px;
+    
+    /* gb/0 */
+    
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 0px;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 60px;
+
+    text-align: center;
+
+    color:  #444444;
+
+}
 #backBtn{ /*뒤로가기*/
     position: absolute;
     width: 180px;
@@ -167,7 +190,7 @@ color: #000000;
     position: absolute;
     width: 180px;
     height: 60px;
-    left: 1258px;
+    left: 1230px;
     top: 20px;
 
     border: 0px;

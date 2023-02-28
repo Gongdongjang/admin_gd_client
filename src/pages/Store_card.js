@@ -8,7 +8,7 @@ function Store_card({  body ,storeId}) {
       
       <div>
         <li className="item_card"  >
-          <Link to={`/partner/storeRead/storePage/${storeId}`} state={{ body:body}}>
+          <Link to={`/main/partner/storeRead/storePage/${storeId}`} state={{ body:body}}>
           <table  >
             
             <tbody>

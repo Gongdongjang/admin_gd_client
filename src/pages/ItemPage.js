@@ -85,9 +85,9 @@ function ItemPage  (){
           
           <div className='page_title'>
             <p className="partner_name">{body.md_name}</p>
-            <Link to={`/MDPost/mdPost/update/${body.md_id}`} ><p className="updateBtn">수정하기</p></Link>
+            <Link to={`/main/MDPost/mdPost/update/${body.md_id}`} ><p className="updateBtn">수정하기</p></Link>
           </div>
-          <Link to={`/orderList/${body.md_id}`} state={{md_id : body.md_id}}>
+          <Link to={`/main/orderList/${body.md_id}`} state={{md_id : body.md_id}}>
         <h4>픽업리스트 확인하기</h4>  
         </Link>
           <table className="partnerPage_table">

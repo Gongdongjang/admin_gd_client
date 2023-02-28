@@ -9,6 +9,8 @@ function OrderList() {
     const md_id = useLocation().state.md_id;
     const headers = [
       { label: "주문번호", key: "order_id" },
+      { label: "유저이름", key: "user_name" },
+      { label: "주문자이름", key: "order_name" },
       { label: "주문 수량", key: "order_select_qty" },
       { label: "수령일", key: "order_pu_date" },
       { label: "주문일", key: "order_date" },
@@ -47,7 +49,9 @@ function OrderList() {
             <thead>
               <tr>
                 <th>픽업자ID</th>
-                <th>상태</th>
+                <th>닉네임</th>
+                <th>주문자이름</th>
+                <th>픽업상태</th>
                 <th>개수</th>
                 <th>날짜</th>
                 <th>시간</th>
@@ -57,6 +61,8 @@ function OrderList() {
               {pickupList && pickupList.map((itemdata) => (
                 <tr>
                   <th>{itemdata.user_id}</th>
+                  <th>{itemdata.user_name}</th>
+                  <th>{itemdata.order_name}</th>
                   <th>{itemdata.order_md_status}</th>
                   <th>{itemdata.order_select_qty}</th>
                   <th>{itemdata.order_pu_date}</th>

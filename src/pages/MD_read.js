@@ -104,7 +104,7 @@ const [ style, setStyle ] = useState({display: 'none'});
               </select>
               <div id="search">
               <input id="searchBar" type="text" name="md_search" value={md_search} onChange={handleChange}/>
-                <button id="searchBtn"onClick={searchItem}><img src={searchImg}></img></button>
+                <button id="searchBtn"onClick={searchItem}><img src={searchImg}/></button>
               </div>
                 
               </label>

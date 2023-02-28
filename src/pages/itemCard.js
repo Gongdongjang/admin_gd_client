@@ -28,7 +28,7 @@ function ItemCard({  body , farmName ,storeName,style }) {
       
       <div>
         <li className="item_card"  >
-          <Link to={`/mdPost/MDRead/ItemPage/${body.md_id}`} state={{ body:body}}>
+          <Link to={`/main/mdPost/MDRead/ItemPage/${body.md_id}`} state={{ body:body}}>
           <table  >
             
             <tbody>

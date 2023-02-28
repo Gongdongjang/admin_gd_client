@@ -28,13 +28,20 @@ function NotificationList() {
     const renderNotificationList = (list) => {
         return list.map((notification) => {
             return [
-                <div className={"Notification-detail"}>
-                    <NavLink className={"Notification-row"} to={'/notification/' + notification.notification_id}>
-                        <p>{notification.notification_title}</p>
-                        <p>{notification.notification_target}</p>
-                        <p>{notification.notification_type}</p>
-                        <p>{notification.createdAt}</p>
-                        <p>{notification.notification_date}</p>
+                <div className="item_card">
+                    <NavLink  to={'/main/notification/' + notification.notification_id}>
+                    <table>
+                        <tbody>
+                            <tr>
+                            <th style={{width:'300px'}}>{notification.notification_title}</th>
+                            <th style={{width:'250px'}}>{notification.notification_target}</th>
+                            <th style={{width:'250px'}}>{notification.notification_type}</th>
+                            <th style={{width:'300px'}}>{notification.createdAt}</th>
+                            <th style={{width:'300px'}}>{notification.notification_date}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                        
                     </NavLink>
                 </div>
             ]
@@ -49,24 +56,43 @@ function NotificationList() {
     }
 
     return (
-        <div className={"Notification-container Notification-content"}>
-            <div className={"Notification-row"}>
-                <select className={"Notification-category"} name={'filter'} onChange={handleChange}>
+        <div className="partnerSection">
+            <div className={"readTop"}>
+            <span className="readLeft">
+                <select id="select"name={'filter'} onChange={handleChange}>
                     <option value={'등록순'}>등록순</option>
                     <option value={'소비자'}>소비자 전체</option>
                     <option value={'개인'}>소비자 개별</option>
                     <option value={'스토어'}>스토어</option>
                 </select>
+            </span>
+                
+                <span id="readRight">
                 <p className={"Notification-count"}>전체 {count}개</p>
+                </span>
+               
             </div>
-            <div className={"Notification-row"}>
-                <p>알림 제목</p>
-                <p>대상자</p>
-                <p>분류</p>
-                <p>작성 일자</p>
-                <p>공지 일정</p>
-            </div>
+            <div className="itemComponent">
+            <div className={"itemList"}>
+            <table  className="itemListTitle">
+                <thead>
+                    <tr>
+                    <th  style={{width:'250px'}}>알림 제목</th>
+                    <th style={{width:'150px'}}>대상자</th>
+                    <th style={{width:'150px'}}>분류</th>
+                    <th style={{width:'300px'}}>작성 일자</th>
+                    <th style={{width:'300px'}}>공지 일정</th>
+                    </tr>
+                </thead>
+            </table>
+            <div className="list_itemview">
             {renderNotificationList(list)}
+            </div>
+            
+            </div>
+            </div>
+            
+            
         </div>
     )
 }

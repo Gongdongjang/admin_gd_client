@@ -61,7 +61,21 @@
 .Content-menuBtn:hover {
     color: #444444;
 }
-
+.Content-selected{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    height: 100px;
+}
+.Content-selected p,input{
+    margin-left: 30px;
+    font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 30px;
+}
 .Content-searchBox {
     background: #FFFFFF;
     border-radius: 10px;
@@ -100,11 +114,9 @@
 
 .Content-inputPlace {
     display: flex;
-    width: 95%;
-    background-color: white;
-    margin: 20px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    padding: 20px;
 }
 
 .Content-inputText {

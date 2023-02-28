@@ -203,7 +203,7 @@ const handleDeleteImage = () => {
 
 function handleClick() { //뒤로가기
   alert("작성중인 내용이 삭제됩니다");
-  window.location.href = '/partner/storeRead';  
+  window.location.href = '/main/partner/storeRead';  
   //navigate(-1)
   }
 const handleCheck = (e) => {//체크된것만 get

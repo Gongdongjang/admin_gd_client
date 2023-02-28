@@ -1,4 +1,141 @@
 a { text-decoration: none; color: black;}
+#mainLogo{
+    
+    /* 공동장 로고 */
+ position: absolute;
+ width: 235px;
+ height: 123px;
+ left: 843px;
+ top: 350px;
+ background: url('../imgs/gdg_admin_ic/ic_logo1.png') no-repeat ; 
+ background-size: 235px 123px;
+ background-position: center;
+ font-family: 'Spoqa Han Sans Neo';
+ font-style: normal;
+ font-weight: 700;
+ font-size: 28px;
+ line-height: 35px;
+ /* identical to box height */
+ 
+ display: flex;
+ align-items: center;
+ 
+ /* gg/600 */
+ 
+ color: #05D287;
+ }
+ #mainLogin{
+position: absolute;
+width: 416px;
+height: 80px;
+left: 752px;
+top: 635px;
+
+
+background: #05D287;
+border-radius: 10px;
+    border:none;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 80px;
+
+    color: #FFFFFF;
+ }
+ #login_Logo{
+    position: absolute;
+ width: 150px;
+ height: 78px;
+ left: 873px;
+ top: 250px;
+ background: url('../imgs/gdg_admin_ic/ic_logo1.png') no-repeat ; 
+ background-size: 150px 78px;
+ background-position: center;
+ font-family: 'Spoqa Han Sans Neo';
+ font-style: normal;
+ font-weight: 700;
+ font-size: 28px;
+ line-height: 35px;
+ /* identical to box height */
+ 
+ display: flex;
+ align-items: center;
+ 
+ /* gg/600 */
+ 
+ color: #05D287;
+ }
+ #login_id{
+    box-sizing: border-box;
+
+position: absolute;
+width: 416px;
+height: 50px;
+left: 722px;
+top: 471px;
+
+/* gb/200 */
+
+border: 2px solid #ECECEC;
+padding-left: 16px;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 25px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+
+/* gb/500 */
+
+color: #8E8E8E;
+ }
+ #login_btn{
+    position: absolute;
+width: 416px;
+height: 80px;
+left: 722px;
+top: 655px;
+border: none;
+background: #05D287;
+border-radius: 10px;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 28px;
+line-height: 35px;
+color: #FFFFFF;
+ }
+ #login_pw{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 416px;
+    height: 50px;
+    left: 722px;
+    top: 537px;
+
+/* gb/200 */
+
+border: 2px solid #ECECEC;
+padding-left: 16px;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 25px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+
+/* gb/500 */
+
+color: #8E8E8E;
+ }
 .menuTop{ /*로고,로그인*/
     position: absolute;
     width: 1920px;
@@ -35,7 +172,7 @@ color: #05D287;
     position: absolute;
     width: 60px;
     height: 23px;
-    left: 1777px;
+    right: 0;
     top: 30px;
     
     font-family: 'Spoqa Han Sans Neo';
@@ -57,6 +194,7 @@ color: #05D287;
     float: left;
     width: 242px;
     height:100vh;
+    margin-left: 10px;
     background-color: white;
 }
 .menuLeft ul{
@@ -77,14 +215,22 @@ color: #05D287;
 }
 
 
+
 #mainMenuUl li{
     width: 230px;
     height: 64px;
     float: right;
     line-height: 64px;
+    padding-left: 10px;
     background-color: rgb(255, 255, 255);
 }
+#mainMenuUl a{color: black;}
 #mainMenuUl li:hover{
+    background: #F4F4F4;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#mainMenuUl li.active{
     background: #F4F4F4;
     border-radius: 10px 0px 0px 10px;
 }
