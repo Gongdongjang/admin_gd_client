@@ -86,17 +86,17 @@ function ContentsWrite() {
                     alert('모든 입력창에 입력해야 합니다.');
                 }  else {
                     const res = await axios.post('/api/content', data);
-                    document.location.replace('/contents/' + res.data.id);
+                    document.location.replace('/main/contents/' + res.data.id);
                 }
             }
         } else {
             data.append('is_tmp', 'true');
             if (is_update) {
                 await axios.patch('/api/content/' + content_id, data);
-                document.location.replace('/contents');
+                document.location.replace('/main/contents');
             } else {
                 await axios.post('/api/content', data);
-                document.location.replace('/contents');
+                document.location.replace('/main/contents');
             }
         }
     }
