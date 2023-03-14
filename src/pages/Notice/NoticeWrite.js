@@ -40,7 +40,7 @@ function NoticeWrite() {
             data.append('photo', photo);
 
             const res = await axios.post('/api/notice', data);
-            document.location.replace('/notice/' + res.data.id);
+            document.location.replace('/main/notice/' + res.data.id);
             for (let value of data.values()) {
                 console.log(value);
             }
