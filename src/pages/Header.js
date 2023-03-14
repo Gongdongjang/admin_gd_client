@@ -1,12 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import '../CSS/Header.css';
+import Cookies from "universal-cookie";
+import axios from "axios";
 
 function Header() {
+    const cookies = new Cookies();
+
     const [menu, setMenu] = useState(0);
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {
+        setIsLogin(cookies.get('access_token') !== undefined);
+    }, [])
 
     const changeMenu = (menu) => {
         setMenu(menu);
+    }
+
+    const handleLoginClick = async (event, isLogin) => {
+        await axios.post('/api/login/logout');
     }
 
     return (
@@ -14,7 +27,7 @@ function Header() {
                 {/*로고,로그인*/}
                 <div className="menuTop">
                     <Link to="/home"><a id="Logo"></a></Link>
-                    <Link to="/login" id="login">로그인</Link>
+                    <Link to="/login" id="login" onClick={(e) => handleLoginClick(e, isLogin)}>{isLogin ? '로그아웃' : '로그인'}</Link>
                 </div>
                 {/*메인메뉴*/}
                 <span className="menuLeft">
