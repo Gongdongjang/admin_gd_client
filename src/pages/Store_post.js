@@ -321,29 +321,90 @@ const getNum=()=>{ //스토어 고유번호 발급
             <form  className='store_form' onSubmit={handleSubmit}>
             <div className="formCase">
               <div className="PartnerFormLeft">
-              <h3>스토어 정보</h3>
+              
             <label>
-              스토어 이름 (필수)
-              <input type="text" name="store_name" value={store_name} onChange={onDebounceChange} />
+              스토어명 (필수)
+              <input type="text"  id="longText"name="store_name" value={store_name} onChange={onDebounceChange} />
             </label><br/>
             <label>
-              한줄 소개
-              <textarea name="store_info" value={store_info} onChange={onDebounceChange} />
+              스토어 소개
+              <input type="text" id="longText"name="store_info" value={store_info} onChange={onDebounceChange} />
             </label><br/>
+
+            <div className="postLabel">
+            <label>
+              스토어대표 (필수)<br/>
+              <input type="text"  id="shortText"name="store_owner" value={store_owner} onChange={onDebounceChange} />
+            </label>
+            </div>
+            <div className="postLabel">
+            <label>
+              사업자 등록번호 <br/>
+              <input type="text" id="shortText" name="store_businessNum" value={store_businessNum} onChange={onDebounceChange} />
+            </label>
+            </div><br/><br/><br/>
+            <div className="postLabel">
+            <label>
+              전화번호 (필수) <br/>
+              <input type="text"  id="shortText"name="store_phone" value={store_phone} onChange={onDebounceChange} />
+            </label>
+            </div>
+            <div className="postLabel">
+            <label>
+              이메일<br/>
+              <input type="text"  id="shortText"name="store_email" value={store_email} onChange={onDebounceChange} />*30자제한
+            </label>
+            </div><br/><br/><br/>
+            <div className="postLabel">
+            <label>
+              업체 종류 
+              <select name="store_type" value={store_type} onChange={changeSelectOptionHandler}>
+                <option value="선택하기">선택하기</option>
+			          <option value="제로웨이스트샵">제로웨이스트샵</option>
+			          <option value="식료품점">식료품점</option>
+			          <option value="카페">카페</option>
+                <option value="기타">기타</option>
+              </select>
+            </label></div>
+            <div className="postLabel">
+            <label id="fridgeLabel">
+              냉장고 유무 (필수)
+              <input type="checkbox" name="store_fridge" value={"냉장"}  onChange={handleCheck}/>냉장고
+              <input type="checkbox" name="store_fridge" value={"냉동"}  onChange={handleCheck}/>냉동고
+              <input type="checkbox" name="store_fridge" value={"시설없음"}  onChange={handleCheck}/>없음
+              </label></div>
+              <br/><br/><br/>
             <label>
               스토어 위치 (필수)
               <MapTest loc={store_loc} setLoc={setStore_loc} detailLoc={store_detailLoc} setDetailLoc={setStore_detailLoc} zonecode={store_zonecode} setZonecode={setStore_zonecode}/>
             </label><br/>
-            
             <label>
-              운영 시간
-              월 <input type="time" name="mon1" value={mon1} onChange={changeHours}/> ~ <input type="time" name="mon2" value={mon2}onChange={changeHours}/>
-              화 <input type="time" name="tue1"value={tue1} onChange={changeHours}/> ~ <input type="time" name="tue2"value={tue2} onChange={changeHours}/>
-              수 <input type="time" name="wed1"value={wed1} onChange={changeHours}/> ~<input type="time" name="wed2"value={wed2} onChange={changeHours}/> 
-              목 <input type="time" name="thu1"value={thu1} onChange={changeHours}/> ~<input type="time" name="thu2"value={thu2} onChange={changeHours}/> 
-              금 <input type="time" name="fri1"value={fri1} onChange={changeHours}/>  ~<input type="time" name="fri2"value={fri2} onChange={changeHours}/> 
-              토 <input type="time" name="sat1"value={sat1} onChange={changeHours}/>~<input type="time" name="sat2"value={sat2} onChange={changeHours}/> 
-              일 <input type="time" name="sun1"value={sun1} onChange={changeHours}/> ~ <input type="time" name="sun2"value={sun2} onChange={changeHours}/> 
+              특이사항<br/>
+              <textarea id="longText"name="store_memo" value={store_memo} onChange={onDebounceChange} />
+            </label><br/>
+
+            
+              </div>
+              <div className="PartnerFormRight">
+              <label>
+              고유번호
+              <input type="text" id="shortText" name=" store_number" value={ store_number} onChange={onDebounceChange} />
+              <button type="button" onClick={getNum}>발급하기</button><br/>
+            </label><br/>
+            <label>
+              스토어 규모
+              <input type="text"  id="longText"name="store_size" value={store_size} onChange={onDebounceChange} />
+            </label><br/>
+            
+              <label>
+              운영 시간<br/>
+              월 <input type="time" name="mon1" value={mon1} onChange={changeHours}/> - <input type="time" name="mon2" value={mon2}onChange={changeHours}/>
+              화 <input type="time" name="tue1"value={tue1} onChange={changeHours}/> - <input type="time" name="tue2"value={tue2} onChange={changeHours}/><br/>
+              수 <input type="time" name="wed1"value={wed1} onChange={changeHours}/> - <input type="time" name="wed2"value={wed2} onChange={changeHours}/> 
+              목 <input type="time" name="thu1"value={thu1} onChange={changeHours}/> - <input type="time" name="thu2"value={thu2} onChange={changeHours}/> <br/>
+              금 <input type="time" name="fri1"value={fri1} onChange={changeHours}/> - <input type="time" name="fri2"value={fri2} onChange={changeHours}/> 
+              토 <input type="time" name="sat1"value={sat1} onChange={changeHours}/> - <input type="time" name="sat2"value={sat2} onChange={changeHours}/> <br/>
+              일 <input type="time" name="sun1"value={sun1} onChange={changeHours}/> - <input type="time" name="sun2"value={sun2} onChange={changeHours}/> 
             </label><br/>
             <label>
             운영 요일 
@@ -352,46 +413,18 @@ const getNum=()=>{ //스토어 고유번호 발급
               <input type="checkbox"name="hours_week" value={'금'} onChange={handleCheck}/>금 <input type="checkbox"name="hours_week" value={'토'} onChange={handleCheck}/>토 
               <input type="checkbox"name="hours_week" value={'일'} onChange={handleCheck}/>일
               
-            </label><br/>
-             <label>
-              스토어 규모
-              <input type="text" name="store_size" value={store_size} onChange={onDebounceChange} />
-            </label><br/>
-            
-            <h3>대표님 정보</h3>
-            <div>
-            <label>
-              대표님 성함 (필수)
-              <input type="text" name="store_owner" value={store_owner} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              전화번호 (필수)
-              <input type="text" name="store_phone" value={store_phone} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              사업자 등록번호 
-              <input type="text" name="store_businessNum" value={store_businessNum} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              이메일
-              <input type="text" name="store_email" value={store_email} onChange={onDebounceChange} />*30자제한
-            </label><br/>
-            </div>
-              </div>
-              <div className="PartnerFormRight">
-              <h3>거래정보</h3>
+            </label><br/><br/>
+             
+              
             <label>
               거래기간 (필수)
               <input type="date" name="store_start" value={store_start} onChange={onDebounceChange} />~
               <input type="date" name="store_end" value={store_end} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              계약기간
-              <input type="text" name="store_contractTerm" value={store_contractTerm} onChange={onDebounceChange} />
-            </label><br/>
+            </label><br/><br/>
+            
             
             <label>
-              거래상태 (필수)
+              협업여부 (필수)
               <select name="store_isContract" value={store_isContract}onChange={changeSelectOptionHandler}>
               <option value="선택하기">선택하기</option>
 			     <option value="협업기획중">협업기획중</option>
@@ -400,7 +433,7 @@ const getNum=()=>{ //스토어 고유번호 발급
               </select>
             </label><br/>
 
-            <h3>이미지 첨부</h3>
+           
             <label className="imgs">
               썸네일
               <div>
@@ -418,34 +451,7 @@ const getNum=()=>{ //스토어 고유번호 발급
                 <input type="file" name="detail"  accept='image/*' onChange={handleFileChange} />
               </div>
             </label><br/> 
-            <label>
-              업체 종류 
-              <select name="store_type" value={store_type} onChange={changeSelectOptionHandler}>
-                <option value="선택하기">선택하기</option>
-			          <option value="제로웨이스트샵">제로웨이스트샵</option>
-			          <option value="식료품점">식료품점</option>
-			          <option value="카페">카페</option>
-                <option value="기타">기타</option>
-              </select>
-            </label><br/>
-            <label>
-              냉장고 유무 (필수)
-              <input type="checkbox" name="store_fridge" value={"냉장"}  onChange={handleCheck}/>냉장고
-              <input type="checkbox" name="store_fridge" value={"냉동"}  onChange={handleCheck}/>냉동고
-              <input type="checkbox" name="store_fridge" value={"시설없음"}  onChange={handleCheck}/>없음
-              </label>
-              <br/>
 
-            <label>
-              부여번호
-              <input type="text" name=" store_number" value={ store_number} onChange={onDebounceChange} />
-            </label>
-            <button type="button" onClick={getNum}>발급하기</button><br/>
-            
-            <label>
-              비고
-              <textarea name="store_memo" value={store_memo} onChange={onDebounceChange} />
-            </label><br/>
               </div>
             
             </div>

@@ -26,9 +26,9 @@ const MapTest = (props) => {
     }
     return(
         <div>
-        	<input type='text' name="loc" value={props.loc}/>
-            <input type='text' name="detailLoc" value={props.detailLoc} onChange={handleChange}/>
-            <input type='text' name="zonecode" value={props.zonecode}/>
+        	<input type='text'id="shortText" name="loc" value={props.loc}/>
+            <input type='text'id="shortText" name="detailLoc" value={props.detailLoc} onChange={handleChange} placeholder="상세주소"/>
+            <input type='text'id="shortText" name="zonecode" value={props.zonecode}/>
             <button type='button' onClick={openPostCode}>우편번호 검색</button>
             
             <div id='popupDom'>

@@ -27,8 +27,6 @@
     height: 600px;
     
     float: left;
-    overflow-y:scroll;
-    overflow-x: hidden;
     background: #ffffff;
 }
 .MDFormRight{/*공구폼내 우측파트*/
@@ -41,19 +39,13 @@
     overflow-y:scroll;
     overflow-x: hidden;
 }
-.MDformCase input[type=text]{
-    width: 690px;
-    height: 30px;
-    border: none;
-    border-bottom: 2px solid  #ECECEC;
-
-    font-family: 'Spoqa Han Sans Neo';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 23px;
-    color: #8E8E8E;
+.MDformCase input[type=date]{
+  margin:  15px 15px 15px 0;
 }
+#dateLabel{
+    width:360px;
+}
+
 input:focus {outline:none;}
 .MDformCase label{
     font-family: 'Spoqa Han Sans Neo';
@@ -67,8 +59,6 @@ color: #8E8E8E;
     width: 790px;
     height: 530px;
     float: left;
-    overflow-y:scroll;
-    overflow-x: hidden;
     background: #ffffff;
 }
 .PartnerFormRight{/*협업체폼내 우측파트*/
@@ -81,6 +71,58 @@ color: #8E8E8E;
     overflow-y:scroll;
     overflow-x: hidden;
 }
+#longText{
+    width: 690px;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid  #ECECEC;
+margin-left: 0px;
+margin-bottom: 8px;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    color: #8E8E8E;
+}
+#shortText{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid  #ECECEC;
+    margin-left: 0px;
+    margin-right: 10px;
+    margin-bottom: 8px;
+    font-family: 'Spoqa Han Sans Neo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    color: #8E8E8E;
+}
+ input[type=time]{
+    border-radius: 5px;
+    border-color:#8E8E8E;
+    margin: 3px 5px;
+}
+.postLabel input[type=time]{
+    border-radius: 5px;
+    border-color:#8E8E8E;
+    margin: 3px 5px 30px 5px;
+}
+#postRadio{
+    width: 700px;
+}
+.formCase select{
+   margin: 0 10px;
+}
+.MDformCase select{
+   margin: 0 10px;
+}
+#fridgeLabel{
+    margin-left: 100px;
+}
+/*
 .formCase input[type=text]{
     width: 690px;
     height: 30px;
@@ -93,6 +135,10 @@ color: #8E8E8E;
     font-size: 18px;
     line-height: 23px;
     color: #8E8E8E;
+}*/
+.postLabel{
+    float: left;
+    margin-right: 20px;
 }
 .formCase label{
     font-family: 'Spoqa Han Sans Neo';

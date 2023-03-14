@@ -115,7 +115,7 @@ const [ style, setStyle ] = useState({display: 'none'});
            </span>
            <span id="readRight">
               <p>전체 {farmCount}개</p>
-              <button  onClick={()=>deleteBtn()} >편집</button>
+             
             </span>
             </div>
               

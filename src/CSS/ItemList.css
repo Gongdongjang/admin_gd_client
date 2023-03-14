@@ -7,6 +7,7 @@
 
 .itemListTitle { /*리스트 타이틀*/
     width: 1598px;
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -86,6 +87,7 @@ height: 160px;
     float: left;
     padding: 0px;
     position: relative;
+    margin-right: 10px;
 }
 #confirmLabel{
     position:absolute;
@@ -116,7 +118,20 @@ text-align: center;
 .cardBtn button{
     display: inline-block;
 }
+#contractImgBox{
+    width: 40px;
+    height: 40px;
+    line-height:40px;
+    padding: 5px;
+}
 
+#contractImg{
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    object-fit: cover;
+    vertical-align:middle;
+}
 .paging {
     width:750px;height:50px;
     margin: 0 auto;

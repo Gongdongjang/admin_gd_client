@@ -325,92 +325,97 @@ const {
             <div className="PartnerFormLeft">
             
             <label>
-              농가 이름 (필수)
-              <input type="text" name="farm_name" value={farm_name} onChange={onDebounceChange} />
+              농가 이름 (필수)<br/>
+              <input type="text" id="longText" name="farm_name" value={farm_name} onChange={onDebounceChange} />
             </label><br/>
             <label>
-              한줄 소개
-              <textarea name="farm_info" value={farm_info} onChange={onDebounceChange} />
+              농가 소개<br/>
+              <input type="text" id="longText" name="farm_info" value={farm_info} onChange={onDebounceChange} />
             </label><br/>
+            <div className="postLabel">
+            <label>재배품목<br/>
+               <input type="text" id="shortText" name="farm_mainItem" value={farm_mainItem} onChange={onDebounceChange} />
+              </label> 
+            </div>
+            <div className="postLabel">
+            <label>거래품목 (필수)<br/>
+            <input type="text" id="shortText"name="farm_saleItem" value={farm_saleItem} onChange={onDebounceChange} />
+              </label> 
+            </div>
+            <br/><br/><br/>
+            <div className="postLabel">
             <label>
-              농가 위치 (필수)
+              농가대표 (필수)<br/>
+              <input type="text" id="shortText" name="farm_farmer" value={farm_farmer} onChange={onDebounceChange} />
+            </label>
+            </div>
+            <div className="postLabel">
+            <label>
+              사업자 등록번호 <br/>
+              <input type="text" id="shortText" name="farm_businessNum" value={farm_businessNum} onChange={onDebounceChange} />
+            </label>
+            </div><br/><br/><br/>
+            <div className="postLabel">
+            <label>
+              전화번호 (필수) <br/>
+              <input type="text" id="shortText" name="farm_phone" value={farm_phone} onChange={onDebounceChange} />
+            </label>
+            </div>
+            <div className="postLabel">
+            <label>
+              이메일<br/>
+              <input type="text"  id="shortText"name="farm_email" value={farm_email} onChange={onDebounceChange} />*30자제한
+            </label>
+            </div><br/><br/><br/>
+            <label>
+              농가 위치 (필수)<br/>
               <MapTest loc={farm_loc} setLoc={setFarm_loc} detailLoc={farm_detailLoc} setDetailLoc={setFarm_detailLoc} zonecode={farm_zonecode} setZonecode={setFarm_zonecode}/>
             </label><br/>
-            
             <label>
-              운영 시간
-              월 <input type="time" name="mon1" value={mon1} onChange={changeHours}/> ~ <input type="time" name="mon2" value={mon2}onChange={changeHours}/>
-              화 <input type="time" name="tue1"value={tue1} onChange={changeHours}/> ~ <input type="time" name="tue2"value={tue2} onChange={changeHours}/>
-              수 <input type="time" name="wed1"value={wed1} onChange={changeHours}/> ~<input type="time" name="wed2"value={wed2} onChange={changeHours}/> 
-              목 <input type="time" name="thu1"value={thu1} onChange={changeHours}/> ~<input type="time" name="thu2"value={thu2} onChange={changeHours}/> 
-              금 <input type="time" name="fri1"value={fri1} onChange={changeHours}/>  ~<input type="time" name="fri2"value={fri2} onChange={changeHours}/> 
-              토 <input type="time" name="sat1"value={sat1} onChange={changeHours}/>~<input type="time" name="sat2"value={sat2} onChange={changeHours}/> 
-              일 <input type="time" name="sun1"value={sun1} onChange={changeHours}/> ~ <input type="time" name="sun2"value={sun2} onChange={changeHours}/> 
+              특이사항<br/>
+              <input type="text" id="longText"  name="farm_memo" value={farm_memo} onChange={onDebounceChange} />
+            </label><br/>
+            
+            </div>
+            <div className="PartnerFormRight">
+
+            <label>
+              농가 규모<br/>
+              <input type="text"  id="longText"name="farm_size" value={farm_size} onChange={onDebounceChange} />
             </label><br/>
             <label>
-            운영 요일 
+              운영 시간<br/><br/>
+              월 <input type="time" name="mon1" value={mon1} onChange={changeHours}/> - <input type="time" name="mon2" value={mon2}onChange={changeHours}/>
+              화 <input type="time" name="tue1"value={tue1} onChange={changeHours}/> - <input type="time" name="tue2"value={tue2} onChange={changeHours}/><br/>
+              수 <input type="time" name="wed1"value={wed1} onChange={changeHours}/> - <input type="time" name="wed2"value={wed2} onChange={changeHours}/> 
+              목 <input type="time" name="thu1"value={thu1} onChange={changeHours}/> - <input type="time" name="thu2"value={thu2} onChange={changeHours}/> <br/>
+              금 <input type="time" name="fri1"value={fri1} onChange={changeHours}/> - <input type="time" name="fri2"value={fri2} onChange={changeHours}/> 
+              토 <input type="time" name="sat1"value={sat1} onChange={changeHours}/> - <input type="time" name="sat2"value={sat2} onChange={changeHours}/> <br/>
+              일 <input type="time" name="sun1"value={sun1} onChange={changeHours}/> - <input type="time" name="sun2"value={sun2} onChange={changeHours}/> 
+            </label><br/>
+            <label>
+            휴무일
               <input type="checkbox"name="hours_week" value={'월'} onChange={handleCheck}/>월 <input type="checkbox"name="hours_week" value={'화'}  onChange={handleCheck}/>화 
               <input type="checkbox"name="hours_week" value={'수'} onChange={handleCheck}/>수 <input type="checkbox"name="hours_week" value={'목'}  onChange={handleCheck}/>목
               <input type="checkbox"name="hours_week" value={'금'} onChange={handleCheck}/>금 <input type="checkbox"name="hours_week" value={'토'} onChange={handleCheck}/>토 
               <input type="checkbox"name="hours_week" value={'일'}  onChange={handleCheck}/>일
               
-            </label><br/>
-             <label>
-              농가 규모
-              <input type="text" name="farm_size" value={farm_size} onChange={onDebounceChange} />
-            </label><br/>
+            </label><br/><br/>
             
-            <div>
-            <label>
-              대표님 성함 (필수)
-              <input type="text" name="farm_farmer" value={farm_farmer} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              전화번호 (필수)
-              <input type="text" name="farm_phone" value={farm_phone} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              이메일
-              <input type="text" name="farm_email" value={farm_email} onChange={onDebounceChange} />*30자제한
-            </label><br/>
-            <label>
-              사업자 등록번호 
-              <input type="text" name="farm_businessNum" value={farm_businessNum} onChange={onDebounceChange} />
-            </label><br/>
-            </div>
-            <label>
-              재배품목
-              <input type="text" name="farm_mainItem" value={farm_mainItem} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              거래품목 (필수)
-              <input type="text" name="farm_saleItem" value={farm_saleItem} onChange={onDebounceChange} />
-            </label><br/>
-            </div>
-            <div className="PartnerFormRight">
-            <h3>거래정보</h3>
             <label>
               거래기간 (필수)
               <input type="date" name="farm_start" value={farm_start} onChange={onDebounceChange} />~
               <input type="date" name="farm_end" value={farm_end} onChange={onDebounceChange} />
-            </label><br/>
+            </label><br/><br/>
             <label>
-              계약기간
-              <input type="text" name="farm_contractTerm" value={farm_contractTerm} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              거래횟수
-              <input type="text" name="farm_saleQty" value={farm_saleQty} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              거래상태 (필수)
+              협업여부 (필수) 
               <select name="farm_isContract" value={farm_isContract}onChange={changeSelectOptionHandler}>
               <option value="선택하기">선택하기</option>
               <option value="협업기획중">협업기획중</option>
 			        <option value="공동구매진행">공동구매진행</option>
 			        <option value="미활동">미활동</option>
               </select>
-            </label>
+            </label><br/><br/>
             
             <label className="imgs">
               썸네일
@@ -429,10 +434,7 @@ const {
                 <input type="file" name="detail"  accept='image/*' onChange={handleFileChange} />
               </div>
             </label><br/> 
-            <label>
-              비고
-              <textarea name="farm_memo" value={farm_memo} onChange={onDebounceChange} />
-            </label><br/>
+            
             </div>
             
             </div>

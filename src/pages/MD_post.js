@@ -381,21 +381,35 @@ const  getDateDiff = (d1, d2) => { //d-day
             <div className="MDformCase">
               <div className="MDFormLeft">
               <label>
-              상품이름 (필수)
-              <input type="text" name="md_name" value={md_name} onChange={onDebounceChange} />
+              제품명 (필수)<br/>
+              <input type="text"id="longText" name="md_name" value={md_name} onChange={onDebounceChange} />
             </label><br/>
+            
+            <div className="postLabel"id="dateLabel">
+            <label >
+              진행시작일 (필수)<br/>
+              <input type="date" name="md_start" value={md_start} onChange={onDebounceChange} />
+            </label></div>
+            <div className="postLabel"id="dateLabel">
             <label>
-              상품가격 (필수)
-              <input type="text" name="pay_price" value={pay_price} onChange={onDebounceChange} />원
-            </label><br/>
+              진행마감일 (필수)<br/>
+              <input type="date" name="md_end" value={md_end} onChange={onDebounceChange} />
+            </label></div>
+            <div className="postLabel"id="dateLabel">
             <label>
-              상품종류
-              <input type="text" name="md_type" value={md_type} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              상품구성
-              <textarea name="pay_comp" value={pay_comp} onChange={onDebounceChange} placeholder="ex.사과 4~7개"/>
-            </label><br/>
+              픽업날짜 (필수)<br/>
+              <input type="date" name="pu_start" value={pu_start} onChange={onDebounceChange} /> ~  <input type="date" name="pu_end" value={pu_end} onChange={onDebounceChange} />
+            </label>
+            
+            </div>
+            <div className="postLabel"id="dateLabel">
+              <label>
+              픽업 시간<br/>
+              <input type="time" name="pu_timeStart" value={pu_timeStart} onChange={onDebounceChange} /> ~ <input type="time" name="pu_timeEnd" value={pu_timeEnd} onChange={onDebounceChange} />
+            </label></div><br/><br/><br/>
+            
+            <div id="postRadio">
+            
             <label>
               냉장고 필요 여부 (필수)
               <label htmlFor="radio01"className="label_radio">
@@ -407,13 +421,13 @@ const  getDateDiff = (d1, d2) => { //d-day
               <label htmlFor="radio03"className="label_radio">
               <input id="radio03"className="inputRadio"type="radio" value="없음" checked ={md_isFridge=="없음"} onChange={handleRadio}/>없음
               </label>
-            </label><br/>
-
-
+            </label><br/><br/>
+            </div>
+            <div className="postLabel"id="dateLabel">
             <label>
               진행농가 (필수)
               <span>
-              <input type="text" name="farm_name" value={farm_name}  onChange={(e) => (onDebounceChange(e))}/>
+              <input type="text"  id="shortText" name="farm_name" value={farm_name}  onChange={(e) => (onDebounceChange(e))}/>
               <div className="search_box">
               {search.map((item) => {
                 if(item.farm_name){
@@ -428,43 +442,12 @@ const  getDateDiff = (d1, d2) => { //d-day
               })}
               </div>
               </span>
-            </label><br/>
-            <label>
-              할인정보
-              <textarea name="pay_dc" value={pay_dc} onChange={onDebounceChange} />
-            </label><br/>
-            
-            <div>
-            <label>
-              진행시작일 (필수)
-              <input type="date" name="md_start" value={md_start} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              진행마감일 (필수)
-              <input type="date" name="md_end" value={md_end} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              픽업 시작 시간
-              <input type="time" name="pu_timeStart" value={pu_timeStart} onChange={onDebounceChange} />
-            </label><br/>
-            <label>
-              픽업 마감시간
-              <input type="time" name="pu_timeEnd" value={pu_timeEnd} onChange={onDebounceChange} />
-            </label><br/>
+            </label>
             </div>
-
-            <label>
-              목표수량 (필수)
-              <input type="text" name="stk_goal" value={stk_goal} onChange={onDebounceChange} />세트
-            </label><br/>
-            
-            
-              </div>
-              <div className="MDFormRight">
-              
+            <div className="postLabel"id="dateLabel">
             <label>
               가게이름 (필수)
-              <input type="text" name="store_name" value={store_name} onChange={onDebounceChange} />
+              <input type="text" id="shortText"name="store_name" value={store_name} onChange={onDebounceChange} />
               <div className="search_box">
               {search.map((item) => {
                 if(item.store_name){
@@ -479,18 +462,43 @@ const  getDateDiff = (d1, d2) => { //d-day
                 
               })}
               </div>
-            </label><br/>
-            <label>
-              픽업시작일 (필수)
-              <input type="date" name="pu_start" value={pu_start} onChange={onDebounceChange} />
             </label>
+            </div>
+            <div className="postLabel"id="dateLabel">
             <label>
-              픽업마감일 (필수)
-              <input type="date" name="pu_end" value={pu_end} onChange={onDebounceChange} />
+              목표수량 (필수)<br/>
+              <input type="text" id="shortText"name="stk_goal" value={stk_goal} onChange={onDebounceChange} />세트
+            </label></div>
+            <div className="postLabel"id="dateLabel">
+            <label>
+              상품종류<br/>
+              <input type="text" id="shortText"name="md_type" value={md_type} onChange={onDebounceChange} />
+            </label></div>
+
+              </div>
+
+              <div className="MDFormRight">
+              
+              <label>
+              상품구성<br/>
+              <input type="text"id="longText" name="pay_comp" value={pay_comp} onChange={onDebounceChange} />
             </label><br/>
+            
+
+
             <label>
-              운송장 번호 
-              <input type="text" name="pu_waybill" value={pu_waybill} onChange={onDebounceChange} />
+              상품가격 (필수)<br/>
+              <input type="text"  id="shortText"name="pay_price" value={pay_price} onChange={onDebounceChange} />원
+            </label><br/>
+            
+            <label>
+              할인정보<br/>
+              <textarea id="longText"name="pay_dc" value={pay_dc} onChange={onDebounceChange} />
+            </label><br/>
+            
+            <label>
+              운송장 번호 <br/>
+              <input type="text" id="shortText" name="pu_waybill" value={pu_waybill} onChange={onDebounceChange} />
             </label>
             <br/>
             <label>
@@ -506,7 +514,7 @@ const  getDateDiff = (d1, d2) => { //d-day
                 
 		          </select>
             </label>
-            <br/>
+            <br/><br/>
             <label className="postImgs">
               썸네일 (필수)
               <div>
@@ -515,9 +523,9 @@ const  getDateDiff = (d1, d2) => { //d-day
               </div>
             </label><br/>
             <label className="postImgs">
-              슬라이드 이미지 (최소 1장,최대5장)
+              메인 이미지 (최소 1장,최대5장) <button type="button" className="deleteImg" value ="전체삭제"onClick={handleDeleteImage} >전체삭제</button>
               <div className="multipleImgs">
-              <button type="button" className="deleteImg" value ="전체삭제"onClick={handleDeleteImage} >전체삭제</button>
+              <input type="file" name="slide01" multiple accept='image/*' onChange={handleImages} />
               {
                   images.map((image, id) => (
                     <div  className="imgbox" key={id}>
@@ -527,11 +535,11 @@ const  getDateDiff = (d1, d2) => { //d-day
                   ))
               }
               </div>
-              <input type="file" name="slide01" multiple accept='image/*' onChange={handleImages} />
+              
             </label><br/>
               <div>
             <label className="postImgs">
-              상품설명 (필수)
+              본문이미지 (필수)
               <div>
                 <img className={detail ? 'selectedImg' : 'noneImg'}  alt="이미지 없음" src={detailImage.preview_URL|| img_url+detailImage}style={{width:'200px',height:'400px'}}/>
                 <input type="file" name="detail"  accept='image/*' onChange={handleFileChange} />
