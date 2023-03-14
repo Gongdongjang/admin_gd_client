@@ -110,10 +110,10 @@ function NotificationWrite() {
         setLoading(false);
         if (msg === 'NOTIFICATION_SEND_SUCCESS') {
             alert('알림이 성공적으로 전송됐습니다.');
-            document.location.replace('/notification');
+            document.location.replace('/main/notification');
         } else if (msg === 'NOTIFICATION_RESERVE_SUCCESS') {
             alert('알림이 성공적으로 예약됐습니다.');
-            document.location.replace('/notification');
+            document.location.replace('/main/notification');
         }
     }
 
