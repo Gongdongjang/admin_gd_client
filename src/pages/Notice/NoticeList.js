@@ -35,6 +35,7 @@ function NoticeList() {
     }
 
     const handleClickCheckbox = async (event, delete_list) => {
+        event.stopPropagation();
         const deleteIndex = event.target.value;
 
         if (delete_list.includes(deleteIndex)) {
@@ -42,8 +43,6 @@ function NoticeList() {
         } else {
             setDeleteList([...delete_list, deleteIndex]);
         }
-
-        console.log(delete_list);
     }
 
     const fetchNoticeList = async () => {
