@@ -15,6 +15,7 @@ function ContentsList() {
     let[menu,setMenu] = useState(0);
 
     const handleClickCheckbox = async (event, delete_list) => {
+        event.stopPropagation();
         const deleteIndex = event.target.value;
 
         if (delete_list.includes(deleteIndex)) {
@@ -22,8 +23,6 @@ function ContentsList() {
         } else {
             setDeleteList([...delete_list, deleteIndex]);
         }
-
-        console.log(delete_list);
     }
 
     const fetchContentList = async (category, isTmp) => {
@@ -170,9 +169,9 @@ function ContentsList() {
             
                 <div className={"readTop"}>
                 <span className="readLeft">
-                <form  id="search" onSubmit={handleSearchSubmit}>
+                    <form  id="search" onSubmit={handleSearchSubmit}>
                         <input  id="searchBar" type="text" name="search_word" value={search_word || ''} onChange={handleSearchChange} />
-                        <input id="searchBtn" type='submit' src={searchImg} />
+                        <input id="searchBtn" type='submit' src={searchImg}/>
                     </form>
                     <select  id="select" name={'category'} onChange={handleChange}>
                         <option value={'등록순'} selected={category === '등록순'}>등록순</option>
@@ -183,8 +182,8 @@ function ContentsList() {
                     </select>
                 </span>
                 <span id="readRight">
-                    <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>편집</button>
                     <p className={"Content-count"}>전체 {count}개</p>
+                    <button onClick={(event) => handleDeleteClick(event, list, delete_list)}>삭제하기</button>
                 </span>
                 </div>
                 <form className={"Content-selected"} onSubmit={handleBannerSubmit}>

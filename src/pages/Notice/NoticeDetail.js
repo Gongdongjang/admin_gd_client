@@ -24,7 +24,6 @@ function NoticeDetail() {
                     <div className="farmPageContent">
                         <div className='page_title'>
                         <p className="partner_name">공지사항 상세보기</p>
-                        <p className="updateBtn">수정하기</p>
                         </div>
                         <table className="partnerPage_table">
                         <tbody>
