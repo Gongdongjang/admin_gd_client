@@ -2,8 +2,8 @@ import React ,{useState}from "react";
 import ReviewCard from './ReviewCard';
 import '../CSS/ItemList.css';
 
-const ReviewList =({Itemcard,ReviewCount,style })=>{
- 
+const ReviewList =({Itemcard,ReviewCount,style ,handleClickCheckbox, delete_list})=>{
+  
     return (
         <div className="itemList">
           
@@ -32,6 +32,8 @@ const ReviewList =({Itemcard,ReviewCount,style })=>{
                 body={itemdata}
                 
                 style={style}
+                handleClickCheckbox={handleClickCheckbox}
+                delete_list={delete_list}
               />
             );
           })}

@@ -24,7 +24,7 @@ function OrderList() {
     useEffect(() => { // 상품 구매자 리스트
     
     axios
-      .get(`http://localhost:5000/api/md/pickup/${md_id}`)
+      .get(`/api/md/pickup/${md_id}`)
       .then(({data }) => {
         console.log(data);
         setPickupList( data);

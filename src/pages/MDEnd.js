@@ -20,7 +20,7 @@ const [ style, setStyle ] = useState({display: 'none'});
     //let sort=selectValue_sort;
  
     axios
-      .get(`http://localhost:5000/api/md/MDResult/${selectValue_sort}`)
+      .get(`/api/md/MDResult/${selectValue_sort}`)
       .then(({ data }) => {
         console.log(data);
         setLoding(true);
@@ -39,7 +39,7 @@ const [ style, setStyle ] = useState({display: 'none'});
     let search_value=md_search;
  
     axios
-      .get(`http://localhost:5000/api/md/MDResult/${search}/${search_value}`)
+      .get(`/api/md/MDResult/${search}/${search_value}`)
       .then(( {data }) => {
         console.log(data);
         setLoding(true);

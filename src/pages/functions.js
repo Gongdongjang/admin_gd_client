@@ -7,7 +7,7 @@ export const  removeMD = async function(mdId) {
     if(window.confirm('해당 게시물을 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.')) {
      
         axios
-        .delete(`http://localhost:5000/api/md/delete/${mdId}`,  {params: {md_id: mdId}})
+        .delete(`/api/md/delete/${mdId}`,  {params: {md_id: mdId}})
         .then((res) => console.log(res));
   
         alert('게시물이 삭제되었습니다.');

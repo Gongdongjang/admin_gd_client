@@ -137,17 +137,17 @@ const {
        if(!farm_id)
        {
          axios
-         .post("http://localhost:5000/api/partner/post/farm", body)
+         .post("/api/partner/post/farm", body)
          .then((res) => console.log(res))
          .then(alert("등록이 완료되었습니다"))
          .then(window.location.href = '/main/partner/farmRead'); //농가버전
          axios
-         .post(`http://localhost:5000/api/partner/post/farm/img`, formData,config);
+         .post(`/api/partner/post/farm/img`, formData,config);
        }
        else{
         console.log(hours_week);
          axios
-         .post(`http://localhost:5000/api/partner/farm/update/${farm_id}`, body)
+         .post(`/api/partner/farm/update/${farm_id}`, body)
          .then((res) => console.log(body))
          .then(alert("수정이 완료되었습니다"))
          .then(window.location.href = '/main/partner/farmRead'); //농가 버전
@@ -159,7 +159,7 @@ const {
 
   const getPostContent= async () => { //작성된 내용 가져오기_수정시
   
-    const res = await axios.get(`http://localhost:5000/api/partner/read/farm/${farm_id}`);
+    const res = await axios.get(`/api/partner/read/farm/${farm_id}`);
     const datas= res.data;
    // console.log(datas[0].hours_week);
     

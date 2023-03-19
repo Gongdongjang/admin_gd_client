@@ -71,26 +71,26 @@ const debounce = (callback,delay)=>{ //api 호출 빈도 줄이기
 const load=()=>{ //등록된 농가,상점 load
   
   axios
-    .get(`http://localhost:5000/api/md/all/farm`)
+    .get(`/api/md/all/farm`)
     .then(({ data }) => {
       setSearch_farm(data);
     })
 
     axios
-    .get(`http://localhost:5000/api/md/all/store`)
+    .get(`/api/md/all/store`)
     .then(({ data }) => {
       setSearch_Store(data);
     })
 }
 const getPostContent= async () => { //작성된 내용 가져오기_수정시
   
-  const res = await axios.get(`http://localhost:5000/api/read/${md_id}`);
+  const res = await axios.get(`/api/read/${md_id}`);
   const datas= res.data;
   console.log(datas);
-  const res2 = await axios.get(`http://localhost:5000/api/read/name/${md_id}`);
+  const res2 = await axios.get(`/api/read/name/${md_id}`);
   const data_names= res2.data;
   console.log(data_names);
-  axios.get(`http://localhost:5000/api/md/imgs/${md_id}`)
+  axios.get(`/api/md/imgs/${md_id}`)
   .then(({data }) => {
     console.log(data);
    //console.log(data[0].mdimg_thumbnail.toString());
@@ -287,18 +287,18 @@ const  getDateDiff = (d1, d2) => { //d-day
        if(!md_id)
        {
          axios
-         .post("http://localhost:5000/api/md/post", body)
+         .post("/api/md/post", body)
          .then((res) => console.log(res))
          .then(alert("등록이 완료되었습니다"))
          .then(window.location.href = '/main/mdPost');
 
          axios
-         .post(`http://localhost:5000/api/md/post/imgs`, formData,config);
+         .post(`/api/md/post/imgs`, formData,config);
          
        }
        else{
          axios
-         .post(`http://localhost:5000/api/md/update/${md_id}`, body)
+         .post(`/api/md/update/${md_id}`, body)
          .then((res) => console.log(res))
          .then(alert("수정이 완료되었습니다"))
          .then(window.location.href = '/main/mdPost');

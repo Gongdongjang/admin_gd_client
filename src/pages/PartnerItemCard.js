@@ -10,7 +10,7 @@ function PartnerItemCard({  body ,mdId, mdName,confirm, style }) {
   useEffect(() => { //상점,농가 id로 이름 검색해서 넣기 
     
     axios
-      .get(`http://localhost:5000/api/md/imgs/${mdId}`)
+      .get(`/api/md/imgs/${mdId}`)
       .then(({data }) => {
         
         setThumbnail(data[0].mdimg_thumbnail);

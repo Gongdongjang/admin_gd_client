@@ -83,7 +83,7 @@ const handleDeleteImage = () => {
   const getPostContent= async () => { //작성된 내용 가져오기_수정시
     //  hours에서도 읽어오기
   
-    const res = await axios.get(`http://localhost:5000/api/partner/read/store/${store_id}`);
+    const res = await axios.get(`/api/partner/read/store/${store_id}`);
     const datas= res.data;
     console.log(datas);
     
@@ -178,18 +178,18 @@ const handleDeleteImage = () => {
        if(!store_id)
        {
          axios
-         .post("http://localhost:5000/api/partner/post/store", body)
+         .post("/api/partner/post/store", body)
          .then((res) => console.log(res) )
          .then(alert("등록이 완료되었습니다"))
          .then(window.location.href = '/partner/storeRead');
          axios   // 이미지 추가
-         .post(`http://localhost:5000/api/partner/post/store/popo`, formData,config)
+         .post(`/api/partner/post/store/popo`, formData,config)
          .then((res) => console.log(res))
         
        }
        else{
          axios
-         .post(`http://localhost:5000/api/partner/store/update/${store_id}`, body)
+         .post(`/api/partner/store/update/${store_id}`, body)
          .then((res) => console.log(res))
          .then(alert("수정이 완료되었습니다"))
          .then(window.location.href = '/main/partner/storeRead');

@@ -94,6 +94,7 @@ margin: 0px;
     width: 100px;
     padding: 5px;
 }
+
 .partnerPage_table tr:nth-child(even){
  
         background-color: #ffffff;
@@ -229,11 +230,39 @@ color: #7D7D7D;
     padding-right: 7px;
     float: left;
 }
+.reviewPage_table{
+    width: 760px;
+    font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 23px;
+/* identical to box height */
+
+color: #7D7D7D;
+margin: 0px;
+}
+.reviewPage_table tr:nth-child(even){
+ 
+        background-color: #ffffff;
+
+}
+.reviewPage_table tr:nth-child(odd){
+ 
+    background-color: #F8F8F8;
+
+}
+.reviewPage_table th:nth-child(even){
+ 
+   color: #000000;
+
+}
 #rvwImg{
     width: 193px;
     height: 225px;
     margin: 2px;
     object-fit: cover;
+    border-radius: 15px;
 }
 #rvw_isDelete{
     position: absolute;
@@ -287,6 +316,33 @@ border-radius: 10px;
     
     color: #000000;
 
+}
+#rvwBtn{
+    position: absolute;
+width: 190px;
+height: 60px;
+right:40px;
+top: 0px;
+
+/* go/700 */
+border: 0px;
+background: #F75D2D;
+border-radius: 10px;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 60px;
+padding: 30px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+/* gb/0 */
+
+color: #FFFFFF;
 }
 .noticePageTXT{
     position: absolute;

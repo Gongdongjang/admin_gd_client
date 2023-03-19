@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import axios from "axios";
 import { Link ,useLocation} from "react-router-dom";
 import * as functions from './functions.js';
-import noImg from "../imgs/gdg_admin_ic/image_not_supported_48.png";
+import noImg from "../imgs/gdg_admin_ic/ic_imgx.png";
 import '../CSS/MdRead.css';
 
 function ItemPage  (){
@@ -35,7 +35,7 @@ function ItemPage  (){
   useEffect(() => { //상점,농가 id로 이름 검색해서 넣기 
     
     axios
-      .get(`http://localhost:5000/api/md/name/${body.farm_id}/${body.store_id}`)
+      .get(`/api/md/name/${body.farm_id}/${body.store_id}`)
       .then(({data }) => {
         //console.log(data);
         setFarm(data.farm_name);
@@ -48,7 +48,7 @@ function ItemPage  (){
       });
   
       axios
-      .get(`http://localhost:5000/api/md/imgs/${body.md_id}`)
+      .get(`/api/md/imgs/${body.md_id}`)
       .then(({data }) => {
         console.log(data);
        console.log(data[0].mdimg_thumbnail.toString());
@@ -73,7 +73,7 @@ function ItemPage  (){
     if (window.confirm('공동구매를 종료하시겠습니까?'))
     {
       axios
-      .post(`http://localhost:5000/api/md/cancle/${body.md_id}`)
+      .post(`/api/md/cancle/${body.md_id}`)
       .then((res) => console.log(res))
       .then(alert("공동구매가 종료되었습니다"))
       .then(window.location.href = '/main/mdPost/MDEnd'); 
@@ -126,7 +126,7 @@ function ItemPage  (){
             <div className="pageSlide">
               {images.map((image, id) => (
                 <span   key={id}>
-                  <img className="selectedImg" src={img_url+image} />
+                  <img className="selectedImg" src={image=='null'?noImg:(img_url + image)} />
                 </span>
               ))}
             </div>

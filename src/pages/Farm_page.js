@@ -25,7 +25,7 @@ function Farm_page  (){
  useEffect(() => {  
   
   axios
-  .get(`http://localhost:5000/api/partner/read/farm/imgs/${body.farm_id}`)
+  .get(`/api/partner/read/farm/imgs/${body.farm_id}`)
   .then(({data }) => {
    // console.log(data);
     //console.log(data[0].farm_img.toString());
@@ -40,7 +40,7 @@ function Farm_page  (){
     console.error(e);  // 에러표시 
   });
   axios
-      .get(`http://localhost:5000/api/partner/md/farm/${body.farm_id}`)
+      .get(`/api/partner/md/farm/${body.farm_id}`)
       .then(({ data }) => {
         //console.log(data);
         setLoding(true);

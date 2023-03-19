@@ -15,12 +15,14 @@ let[ReviewCount,setReviewCount]=useState(0);
 let[deleteClicked,setDeleteClicked] =useState(false);
 const [ style, setStyle ] = useState({display: 'none'});
    
+const [list, setList] = useState([]);
+
   const loadItem = async () => { //정렬
     console.log(selectValue_sort);
     //let sort=selectValue_sort;
  
     axios
-      .get(`http://localhost:5000/api/review`)
+      .get(`/api/review`)
       .then(({ data }) => {
         console.log(data);
         setLoding(true);
@@ -39,7 +41,7 @@ const [ style, setStyle ] = useState({display: 'none'});
     let search_value=md_search;
  
     axios
-      .get(`http://localhost:5000/api/md/${search}/${search_value}`)
+      .get(`/api/md/${search}/${search_value}`)
       .then(( {data }) => {
         console.log(data);
         setLoding(true);
@@ -80,7 +82,40 @@ const [ style, setStyle ] = useState({display: 'none'});
     }
    }
 
-     // const { ItemList } = this.state;
+   const [delete_list, setDeleteList] = useState([]);
+
+   const handleClickCheckbox = async (event, delete_list) => {
+     const deleteIndex = event.target.value;
+ 
+     if (delete_list.includes(deleteIndex)) {
+         setDeleteList(delete_list.filter((index) => deleteIndex !== index));
+     } else {
+         setDeleteList([...delete_list, deleteIndex]);
+     }
+ 
+     console.log(delete_list);
+ }
+ 
+ const handleDeleteClick = async (event, list, delete_list) => {
+   event.preventDefault();
+ 
+   let body = []
+   delete_list.forEach(id => {
+       body.push({
+           id: id
+       })
+   })
+ 
+   if (window.confirm('정말 삭제하시겠습니까?')) {
+       const res = await axios.post('/api/review/delete', {
+           rvw_ids: body
+       });
+       alert(res.data.rvw_id + '를 삭제했습니다.');
+       window.location.reload();
+   } else {
+       alert('삭제를 취소했습니다.');
+   }
+ }
       
     return (
         <div >
@@ -101,11 +136,11 @@ const [ style, setStyle ] = useState({display: 'none'});
            </span>
            <span id="readRight">
               <p>전체 {ReviewCount}개</p>
-              <button  onClick={()=>deleteBtn()} >편집</button>
+              <button  onClick={(event) => handleDeleteClick(event, list, delete_list)} >편집</button>
             </span>
             </div>
           <div className="itemComponent">
-             <ReviewList Itemcard={ItemList} ReviewCount={ReviewCount} style={style}/>
+             <ReviewList Itemcard={ItemList} ReviewCount={ReviewCount} style={style} handleClickCheckbox={handleClickCheckbox} delete_list={delete_list} />
           </div>
          </div>
        </div>

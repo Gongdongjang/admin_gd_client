@@ -13,7 +13,7 @@ function EndItemCard({  body , farmName ,storeName,style }) {
   useEffect(() => { //상점,농가 id로 이름 검색해서 넣기 
     
     axios
-      .get(`http://localhost:5000/api/md/name/${farmName}/${storeName}`)
+      .get(`/api/md/name/${farmName}/${storeName}`)
       .then(({data }) => {
         //console.log(data);
         setFarm(data.farm_name);

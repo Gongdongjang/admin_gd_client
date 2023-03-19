@@ -23,7 +23,7 @@ function Store_page  (){
   let[detail,setDetail] = useState();
  useEffect(() => {  
   axios
-  .get(`http://localhost:5000/api/partner/read/store/imgs/${body.store_id}`)
+  .get(`/api/partner/read/store/imgs/${body.store_id}`)
   .then(({data }) => {
     console.log(data);
     setThumbnail(data[0].store_thumbnail);
@@ -34,7 +34,7 @@ function Store_page  (){
     console.error(e);  // 에러표시 
   });
   axios
-      .get(`http://localhost:5000/api/partner/md/store/${body.store_id}`)
+      .get(`/api/partner/md/store/${body.store_id}`)
       .then(({ data }) => {
         console.log(data);
         setLoding(true);
