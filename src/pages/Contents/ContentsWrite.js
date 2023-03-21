@@ -10,7 +10,9 @@ function ContentsWrite() {
     const [upload_date, setUpload_date] = useState('');
     const [upload_type, setUpload_type] = useState('');
     const [context, setContext] = useState('');
-    const [link, setLink] = useState('');
+    // const [link, setLink] = useState('');
+    const [md1, setMd1] = useState();
+    const [md2, setMd2] = useState();
     const [category, setCategory] = useState('공동장 소식')
     const [thumbnail, setThumbnail] = useState(null);
     const [exist_thumbnail, setExistThumbnail] = useState('');
@@ -34,7 +36,9 @@ function ContentsWrite() {
             case 'upload_date': setUpload_date(value); break;
             case 'upload_type': setUpload_type(value); break;
             case 'category': setCategory(value); break;
-            case 'link': setLink(value); break;
+            // case 'link': setLink(value); break;
+            case 'md1': setMd1(value); break;
+            case 'md2': setMd2(value); break;
         }
     }
 
@@ -69,7 +73,9 @@ function ContentsWrite() {
             if (thumbnail) data.append('thumbnail', thumbnail);
             if (main) data.append('main', main);
         }
-        data.append('link', link);
+        // data.append('link', link);
+        data.append('md1', md1);
+        data.append('md2', md2);
         data.append('category', category);
         data.append('upload_type', upload_type);
         data.append('upload_date', upload_date);
@@ -106,7 +112,9 @@ function ContentsWrite() {
         const content = res.data;
         setTitle(content.content_title);
         setContext(content.content_context);
-        setLink(content.content_link);
+        // setLink(content.content_link);
+        setMd1(content.content_md_id1);
+        setMd2(content.content_md_id2);
         setDate(content.content_date.split('T')[0]);
         setUpload_type(content.upload_type);
         setCategory(content.content_category);
@@ -153,7 +161,9 @@ function ContentsWrite() {
                         </div>
                         <div>
                             <p className={"Content-inputTitle"}>관련 URL 입력</p>
-                            <input className={"Content-input"} type='text' name={"link"} onChange={handleChange} placeholder='http://' value={link} />
+                            {/*<input className={"Content-input"} type='text' name={"link"} onChange={handleChange} placeholder='http://' value={link} />*/}
+                            <input className={"Content-input"} type='text' name={"md1"} onChange={handleChange} placeholder='공동구매의 ID' value={md1} />
+                            <input className={"Content-input"} type='text' name={"md2"} onChange={handleChange} placeholder='공동구매의 ID' value={md2} />
                         </div>
                         <div>
                             <p className={"Content-inputTitle"}>발행 유형</p>
