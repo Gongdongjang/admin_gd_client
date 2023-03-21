@@ -10,7 +10,8 @@ function ContentsDetail() {
     const [date, setDate] = useState('');
     const [photo, setPhoto] = useState('');
     const [main, setMain] = useState('');
-    const [link, setLink] = useState('');
+    const [md1, setMd1] = useState();
+    const [md2, setMd2] = useState();
     const [category, setCategory] = useState('');
 
     const {content_id} = useParams();
@@ -25,7 +26,8 @@ function ContentsDetail() {
         setDate(content.content_date.replace('T', ' ').split('.')[0]);
         setPhoto(content.content_photo);
         setMain(content.content_main);
-        setLink(content.content_link);
+        setMd1(content.content_md_id1);
+        setMd2(content.content_md_id2);
         setCategory(content.content_category);
     }, [content_id]);
 
@@ -78,9 +80,7 @@ function ContentsDetail() {
                 </div>
                 <div className="farmPageReport">
                 <h2>연결컨텐츠</h2>
-                {link &&
-                <a href={link}>바로가기 링크</a>
-                }
+                    <p>{md1} {md2}</p>
                 </div>
             
             </div>
