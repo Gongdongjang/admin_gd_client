@@ -46,7 +46,7 @@ function NoticeList() {
     }
 
     const fetchNoticeList = async () => {
-        const res = await axios.get('/api/notice');
+        const res = await axios.get('/api/notice?aspect=admin');
         setList(res.data);
         setCount(res.data.length)
     }
