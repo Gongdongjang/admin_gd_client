@@ -97,7 +97,7 @@ function ItemPage  (){
             <tbody>
             <tr><th>상품번호</th><th>{body.md_id}</th></tr>
             <tr><th>등록일/수정일</th><th> {body.md_date}</th><th>냉장고 유무</th><th>{body.md_isFridge}</th></tr>
-            <tr><th>시작 날짜  </th><th>  {body.md_start}</th><th>마감 날짜</th><th>{body.md_end}</th></tr>
+            <tr><th>시작 날짜  </th><th>  {body.md_start.substr(0, 10)}</th><th>마감 날짜</th><th>{body.md_end.substr(0, 10)}</th></tr>
             <tr><th>픽업일  </th><th>{functions.duration(body.pu_start,body.pu_end)}</th><th>픽업 시간</th><th>{body.pu_timeStart}~{body.pu_timeEnd}</th></tr>
             <tr><th>농가</th><th> {farm}</th><th>스토어</th><th> {store}</th></tr>
             <tr><th>목표수량</th><th> {body.stk_goal}</th><th>상품종류  </th><th> {body.md_type}</th></tr>
@@ -113,11 +113,11 @@ function ItemPage  (){
           <div>
             <div className="pageImg">
               <p>썸네일이미지</p>
-              <img src={ img_url + thumbnail} alt={`${thumbnail}`}/>
+              <img src={ img_url + thumbnail} alt={`${thumbnail}`} />
             </div>
             <div className="pageImg">
               <p>본문 이미지</p>
-              <img src={ img_url+ detail} alt={`${detail}`} />
+              <img src={ img_url+ detail} alt={`${detail}`}  />
             </div>
           </div>
           

@@ -95,9 +95,9 @@ function Store_page  (){
           </div>
 
           <p>썸네일</p>
-          <img src={ img_url+ thumbnail} alt={`${thumbnail}`} />
+          <img src={ img_url+ thumbnail} alt={`${thumbnail}`} height="280" width="280"/>
           <p>상세이미지</p>
-          <img src={ img_url+ detail} alt={`${detail}`} />
+          <img src={ img_url+ detail} alt={`${detail}`}height="580" width="280" />
 
         </div>
         <div className="farmPageReport">

@@ -293,7 +293,7 @@ const  getDateDiff = (d1, d2) => { //d-day
          .then(window.location.href = '/main/mdPost');
 
          axios
-         .post(`/api/md/post/imgs`, formData,config);
+         .post(`/api/md/post/imgs`, formData,config) ;
          
        }
        else{
@@ -319,12 +319,14 @@ const  getDateDiff = (d1, d2) => { //d-day
       fileReader.readAsDataURL(event.target.files[0])
     }
     fileReader.onload = () => {
+     
       if(name=="thumbnail")
         setThumbImage(
         {
           image_file: event.target.files[0],
           preview_URL: fileReader.result
         }
+       
       )
       else
         setDetailImage(

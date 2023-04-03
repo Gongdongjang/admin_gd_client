@@ -9,6 +9,7 @@ function ContentsDetail() {
     const [context, setContext] = useState('');
     const [date, setDate] = useState('');
     const [photo, setPhoto] = useState('');
+    const [thumbnail, setThumbnail] = useState('');
     const [main, setMain] = useState('');
     const [md1, setMd1] = useState();
     const [md2, setMd2] = useState();
@@ -25,6 +26,7 @@ function ContentsDetail() {
         setContext(content.content_context);
         setDate(content.content_date.replace('T', ' ').split('.')[0]);
         setPhoto(content.content_photo);
+        setThumbnail(content.content_thumbnail);
         setMain(content.content_main);
         setMd1(content.content_md_id1);
         setMd2(content.content_md_id2);
@@ -61,17 +63,12 @@ function ContentsDetail() {
                     <p className="updateBtn">수정하기</p>
                     </Link>
                 </div>
-                <table className="partnerPage_table">
+                <table className="partnerPage_table" >
                   <tbody>
                     <tr><th>분류</th><th>{category}</th></tr>
                     <tr><th>작성일자</th><th>{date}</th></tr>
                     <tr><th>업로드일자</th><th></th></tr>
-                    <tr><th>이미지</th><th>{main &&
-                <img src={img_url + main} alt={'main'}/>
-            }
-            {photo &&
-                <img src={img_url + photo} alt='content'/>
-            }</th></tr>
+                    
                     <tr><th>내용</th><th>{context}</th></tr>
                     
                   </tbody>
@@ -79,6 +76,16 @@ function ContentsDetail() {
            
                 </div>
                 <div className="farmPageReport">
+                이미지
+                {main &&
+                <img src={img_url + main} alt={'main'} height="280" width="280"/>
+            }
+            {photo &&
+                <img src={img_url + photo} alt='content'height="280" width="280"/>
+            }
+            {thumbnail &&
+                <img src={img_url +thumbnail} alt='content'height="280" width="280"/>
+            }
                 <h2>연결컨텐츠</h2>
                     <p>{md1} {md2}</p>
                 </div>
